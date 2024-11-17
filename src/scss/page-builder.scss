@@ -1,0 +1,142 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+
+.page-builder {
+
+  .content {
+    display: flex;
+  }
+
+  .main-sidebar {
+    height: 100vh;
+    border-right: 1px solid lighten(black, 70%);
+
+    .item {
+      padding: 20px;
+
+
+      &:hover {
+        background-color: lighten(orangered, 10%);
+
+        svg {
+          fill: white;
+        }
+      }
+
+      svg {
+      }
+    }
+  }
+
+  .blocks-sidebar {
+
+    border-right: 1px solid lighten(black, 70%);
+    width: 400px;
+
+    .blocks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 10px;
+
+      .block {
+        width: 100px;
+        padding: 8px;
+        border: 1px solid lighten(black, 70%);
+        text-align: center;
+        border-radius: 3px;
+      }
+    }
+  }
+
+  .preview {
+    width: 100%;
+
+    .header {
+      height: 45px;
+      width: 100%;
+      border-bottom: 1px solid lighten(black, 70%);
+      padding: 5px;
+      display: flex;
+
+      .item {
+        flex: 1;
+        text-align: center;
+
+        .devices {
+          button {
+            padding: 2px 10px;
+            outline: none;
+            border: 1px solid lighten(black, 70%);
+            border-right: transparent;
+            background-color: #fff;
+
+            &:last-child {
+              border-right: 1px solid lighten(black, 70%);
+              border-top-right-radius: 4px;
+              border-bottom-right-radius: 4px;
+            }
+
+            &:first-child {
+              border-top-left-radius: 4px;
+              border-bottom-left-radius: 4px;
+            }
+          }
+        }
+
+        .save-btn {
+          padding: 5px 25px;
+          border: 1px solid lighten(black, 70%);
+          background-color: #fff;
+          border-radius: 4px;
+          font-size: 14px;
+          font-weight: 600;
+          transition: all .2s;
+          margin-right: 30px;
+
+          &:hover {
+            background-color: orangered;
+            color: white;
+            border-color: orangered;
+          }
+        }
+      }
+    }
+
+    .drop-zone {
+      height: calc(100vh - 50px);
+      background-color: #fff;
+      background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.01) 25%, transparent 25%), linear-gradient(-45deg, rgba(0, 0, 0, 0.01) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, rgba(0, 0, 0, 0.01) 75%), linear-gradient(-45deg, transparent 75%, rgba(0, 0, 0, 0.01) 75%);
+      background-size: 20px 20px;
+      background-position: 0px 0px, 0px 10px, 10px -10px, -10px 0px;
+      border: 1px solid transparent;
+      &.drag-over{
+        border: 1px dashed blue;
+      }
+
+      .drag-over {
+        border: 1px dashed blue;
+      }
+
+      .no-item {
+        font-size: 24px;
+        color: gray;
+        text-align: center;
+        position: absolute;
+        top: 30%;
+        width: 80%;
+      }
+    }
+  }
+}
