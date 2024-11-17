@@ -13,6 +13,8 @@ export function usePageBuilder() {
     const renderList: Ref<Array<Block>> = ref([])
     const dragOverIndex: Ref<number | null> = ref(null)
     const dragOverDropZone: Ref<boolean> = ref(false)
+    const innerDragElement: Ref<Block | null> = ref(null)
+    const innerDragElementIndex: Ref<number | null> = ref(null)
 
     const blocks: Ref<Array<Block>> = ref([
         new ButtonBlock(),
@@ -29,42 +31,61 @@ export function usePageBuilder() {
     const onDrop = (event: DragEvent) => {
         event.preventDefault();
         dragOverDropZone.value = false;
-        const droppedItem = event.dataTransfer?.getData('text/plain');
-        if (droppedItem) {
-            const _droppedItem = JSON.parse(droppedItem);
-            if (dragOverIndex.value === null) {
-                renderList.value.push(_droppedItem)
-            } else {
-                renderList.value.splice(dragOverIndex.value, 0, _droppedItem);
+        if (innerDragElement.value) {
+            if (innerDragElementIndex.value !== null) {
+                renderList.value.splice(innerDragElementIndex.value, 1)
             }
+
+            if (dragOverIndex.value === null) {
+                renderList.value.push(innerDragElement.value)
+            } else {
+                renderList.value.splice(dragOverIndex.value, 0, innerDragElement.value);
+            }
+
+            innerDragElement.value = null;
+            dragOverIndex.value = null;
+        } else {
+            const droppedItem = event.dataTransfer?.getData('text/plain');
+            if (droppedItem) {
+                const _droppedItem = JSON.parse(droppedItem);
+                if (dragOverIndex.value === null) {
+                    renderList.value.push(_droppedItem)
+                } else {
+                    renderList.value.splice(dragOverIndex.value, 0, _droppedItem);
+                }
+            }
+            draggedItem.value = null;
+            dragOverIndex.value = null;
         }
-        draggedItem.value = null;
-        dragOverIndex.value = null;
+
     }
 
     const onDragLeave = ($event: DragEvent) => {
-        console.log('onDragLeave', $event)
+        // console.log('onDragLeave', $event)
         // dragOverIndex.value = null;
         dragOverDropZone.value = false;
         dragOverIndex.value = null;
     }
 
     const startDragItem = (item: Block, index: number) => {
-        console.log(item);
-        console.log(index)
+        innerDragElement.value = item
+        innerDragElementIndex.value = index
+        // renderList.value.splice(index, 1)
+        // console.log(item);
+        // console.log(index)
     }
 
     const onDragOverItem = ($event: DragEvent, index: number) => {
         $event.preventDefault();
         $event.stopPropagation();
-        console.log('onDragOverItem', $event)
+        // console.log('onDragOverItem', $event)
         dragOverIndex.value = index;
     }
 
     const onDragOver = ($event: DragEvent) => {
         dragOverIndex.value = null;
         dragOverDropZone.value = true;
-        console.log("on drag over");
+        // console.log("on drag over");
         $event.stopPropagation();
     }
 
