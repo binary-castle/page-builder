@@ -1,0 +1,17 @@
+// Mixin for applying borders
+@mixin border-style {
+  border: 1px solid $secondary-color;
+}
+
+
+
+
+
+// Button hover effect
+@mixin button-hover($color: $primary-color) {
+  &:hover {
+    background-color: $color;
+    color: white;
+    border-color: $color;
+  }
+}

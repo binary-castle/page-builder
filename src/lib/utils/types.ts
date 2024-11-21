@@ -11,6 +11,3 @@ export interface Block {
     icon: string;
     previewImg?: string;
 }
-
-export interface Widget {
-}
