@@ -5,6 +5,7 @@ import {registerBlock} from "../registry.ts";
 import ButtonOptionComponent from "../../block-components/button/ButtonOptionComponent.vue";
 
 export class ButtonBlock implements Block {
+    name: string = 'button';
     component: VueComponent = markRaw(ButtonComponent);
     optionComponent: VueComponent = markRaw(ButtonOptionComponent);
     options: Record<string, any> = {

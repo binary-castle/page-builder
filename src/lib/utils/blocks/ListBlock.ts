@@ -1,10 +1,13 @@
 import {Block, VueComponent} from "../types.ts";
 import {markRaw} from "vue";
-import ListComponent from "../../block-components/ListComponent.vue";
+import ListComponent from "../../block-components/list/ListComponent.vue";
 import {registerBlock} from "../registry.ts";
 
 export class ListBlock implements Block {
+    name: string = 'list';
     component: VueComponent = markRaw(ListComponent);
+    optionComponent: VueComponent = markRaw(ListComponent);
+    options: Record<string, any> = {}
     description: string = '';
     icon: string = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ol" viewBox="0 0 16 16">\n' +
         '  <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5"/>\n' +

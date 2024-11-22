@@ -16,6 +16,14 @@ const props = defineProps<Props>()
     <option-widget title="Columns">
       <input type="number" v-model="blockInfo.options.columns" min="1" max="12" width="100%">
     </option-widget>
+    <div>
+      <div v-for="column of blockInfo.options.columns">
+        Column {{ column }}
+        <option-widget title="Style Class">
+          <input type="text" value="col">
+        </option-widget>
+      </div>
+    </div>
   </BaseOption>
 </template>
 

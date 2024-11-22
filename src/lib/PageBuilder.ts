@@ -1,10 +1,10 @@
 import {ref, Ref} from "vue";
 import {ButtonBlock} from "./utils/blocks/ButtonBlock.ts";
-import {ParagraphBlock} from "./utils/blocks/ParagraphBlock.ts";
 import {ColumnBlock} from "./utils/blocks/ColumnBlock.ts";
 import {ListBlock} from "./utils/blocks/ListBlock.ts";
-import {ButtonGroupBlock} from "./utils/blocks/ButtonGroupBlock.ts";
 import {Block} from "./utils/types.ts";
+import {HtmlBlock} from "./utils/blocks/HtmlBlock.ts";
+import {TextBlock} from "./utils/blocks/TextBlock.ts";
 
 
 export function usePageBuilder() {
@@ -18,10 +18,10 @@ export function usePageBuilder() {
 
     const blocks: Ref<Array<Block>> = ref([
         new ButtonBlock(),
-        new ParagraphBlock(),
+        new TextBlock(),
         new ColumnBlock(),
         new ListBlock(),
-        new ButtonGroupBlock()
+        new HtmlBlock()
     ])
 
     const startDrag = ($event: DragEvent, item: Block) => {
@@ -60,7 +60,7 @@ export function usePageBuilder() {
 
     }
 
-    const onDragLeave = ($event: DragEvent) => {
+    const onDragLeave = () => {
         // console.log('onDragLeave', $event)
         // dragOverIndex.value = null;
         dragOverDropZone.value = false;

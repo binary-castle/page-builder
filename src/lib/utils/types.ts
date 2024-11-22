@@ -3,9 +3,10 @@ export type VueComponent = {
 }
 
 export interface Block {
-    component: VueComponent;
-    optionComponent?: VueComponent;
-    options?: Record<string, any>;
+    name: string; // Must be alphanumeric and unique
+    component: VueComponent; 
+    optionComponent: VueComponent;
+    options: Record<string, any>;
     title: string;
     description: string;
     icon: string;

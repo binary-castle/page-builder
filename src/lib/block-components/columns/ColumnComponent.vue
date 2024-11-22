@@ -9,23 +9,23 @@ interface Props {
   blockInfo: ColumnBlock
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 const emit = defineEmits<{
   (event: 'blockSelectFromChildElement', value: Block): void;
 }>();
 
-const renderList: Ref<Record<number, Array<Block>>> = ref({})
+// const renderList: Ref<Record<number, Array<Block>>> = ref({})
 
 const onDrop = ($event: DragEvent, index: number): void => {
   $event.stopPropagation();
   const droppedItem = $event.dataTransfer?.getData('text/plain')
   if (droppedItem) {
     const parsedItem: Block = JSON.parse(droppedItem);
-    if (!renderList.value[index]) {
-      renderList.value[index] = [];
+    if (!props.blockInfo.options.renderList[index]) {
+      props.blockInfo.options.renderList[index] = [];
     }
-    renderList.value[index].push(parsedItem);
+    props.blockInfo.options.renderList[index].push(parsedItem);
   }
 }
 
@@ -44,8 +44,8 @@ const onRenderItemClick = ($event: Event, block: Block): void => {
       <div v-for="(index) in blockInfo.options.columns" class="col-md-4 column-item" @drop="onDrop($event, index)"
            @dragenter.prevent @dragleave.prevent @dragover="onDragOver($event)">
 
-        <template v-for="item of renderList[index]">
-          <component :is="previewComponentMap[item.title]" :blockInfo="item"
+        <template v-for="item of blockInfo.options.renderList[index]">
+          <component :is="previewComponentMap[item.name]" :blockInfo="item"
                      @click="onRenderItemClick($event,item)"></component>
         </template>
 

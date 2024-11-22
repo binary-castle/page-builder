@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ListBlock} from "../utils/blocks/ListBlock.ts";
+import {ListBlock} from "../../utils/blocks/ListBlock.ts";
 
 interface Props {
   blockInfo: ListBlock

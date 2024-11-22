@@ -10,6 +10,6 @@ export const previewOptionMap: Ref<Record<string, VueComponent | null>> = ref({}
 // Function to register a new block
 export function registerBlock(block: Block) {
     blockRegistry.value.push(block);
-    previewComponentMap.value[block.title] = block.component;
-    previewOptionMap.value[block.title] = block.optionComponent || null
+    previewComponentMap.value[block.name] = block.component;
+    previewOptionMap.value[block.name] = block.optionComponent || null
 }
