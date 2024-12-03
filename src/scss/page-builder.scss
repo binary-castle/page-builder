@@ -1,3 +1,4 @@
+@import "./icons/icomoon";
 // Import variables and mixins first
 @import './variables/colors';
 @import './mixins/utilities';
@@ -10,3 +11,26 @@
 
 // Import layout
 @import './layout/builder';
+
+
+.tiptap {
+  padding: 15px;
+
+  outline: none;
+
+  p.is-editor-empty:first-child::before {
+    color: #adb5bd;
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+  }
+
+  p.is-empty::before {
+    color: #adb5bd;
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+  }
+}

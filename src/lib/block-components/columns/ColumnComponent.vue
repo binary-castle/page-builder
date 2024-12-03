@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {ColumnBlock} from "../../utils/blocks/ColumnBlock.ts";
-import {Ref, ref} from "vue";
 import {previewComponentMap} from "../../utils/registry.ts";
 import {Block} from "../../utils/types.ts";
 import BasePreview from "../BasePreview.vue";
@@ -33,8 +32,8 @@ const onDragOver = ($event: DragEvent): void => {
   console.log("Drag over", $event)
 }
 
-const onRenderItemClick = ($event: Event, block: Block): void => {
-  emit('blockSelectFromChildElement', $event, block)
+const onRenderItemClick = (block: Block): void => {
+  emit('blockSelectFromChildElement', block)
 }
 </script>
 
@@ -46,7 +45,7 @@ const onRenderItemClick = ($event: Event, block: Block): void => {
 
         <template v-for="item of blockInfo.options.renderList[index]">
           <component :is="previewComponentMap[item.name]" :blockInfo="item"
-                     @click="onRenderItemClick($event,item)"></component>
+                     @click="onRenderItemClick(item)"></component>
         </template>
 
       </div>

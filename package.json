@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@tiptap/extension-bubble-menu": "^2.10.3",
+    "@tiptap/extension-placeholder": "^2.10.3",
     "@tiptap/pm": "^2.10.3",
     "@tiptap/starter-kit": "^2.10.3",
     "@tiptap/vue-3": "^2.10.3",

@@ -9,7 +9,7 @@ interface Props {
   blockInfo: ColumnBlock
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 const selectedColumn = ref(1);
 
@@ -17,9 +17,22 @@ const selectedColumn = ref(1);
 
 <template>
   <BaseOption title="Column">
+    <option-widget title="Has Container">
+      <input type="checkbox">
+    </option-widget>
+    <option-widget title="Background Color">
+      <input type="color">
+    </option-widget>
+    <option-widget title="Background image" align="vertical">
+      <input type="url" class="form-control" placeholder="Apply Image URL">
+    </option-widget>
+
+
     <option-widget title="Columns">
       <input type="number" v-model="blockInfo.options.columns" min="1" max="12" class="form-control">
     </option-widget>
+
+
     <div class="columns-tab">
       <div v-for="column of blockInfo.options.columns" class="tab"
            :class="{'selected': selectedColumn === column}"
@@ -30,7 +43,12 @@ const selectedColumn = ref(1);
     </div>
 
     <div class="column-content">
-
+      <option-widget title="CSS Class" align="vertical">
+        <textarea class="form-control"></textarea>
+      </option-widget>
+      <option-widget title="Background Color">
+        <input type="color">
+      </option-widget>
     </div>
 
 

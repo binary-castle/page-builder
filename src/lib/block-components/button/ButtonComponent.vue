@@ -6,7 +6,7 @@ interface Props {
   blockInfo: ButtonBlock
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 
 
 </script>
