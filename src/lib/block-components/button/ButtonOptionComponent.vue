@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import {ButtonBlock} from "../../utils/blocks/ButtonBlock.ts";
-import OptionWidget from "../widgets/OptionWidget.vue";
+import OptionWidget from "../../widgets/OptionWidget.vue";
 import BaseOption from "../BaseOption.vue";
+import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 
 interface Props {
   blockInfo: ButtonBlock
@@ -15,10 +16,10 @@ const props = defineProps<Props>()
   <BaseOption title="Button">
     <div class="options">
       <option-widget title="Text">
-        <input type="text" class="" v-model="blockInfo.options.text">
+        <input type="text" class="form-control" v-model="blockInfo.options.text">
       </option-widget>
 
-      <option-widget title="Style Class">
+      <option-widget title="Style Class" align="vertical">
         <textarea class="form-control" v-model="blockInfo.options.styleClass">
 
         </textarea>
@@ -29,7 +30,7 @@ const props = defineProps<Props>()
       </option-widget>
 
       <option-widget title="Styles" align="vertical">
-        <textarea class="form-control" v-model="blockInfo.options.styles"></textarea>
+        <CodeMirrorEditor v-model="blockInfo.options.styles" language="text/css"></CodeMirrorEditor>
       </option-widget>
 
       <option-widget title="Has Container">
@@ -37,6 +38,7 @@ const props = defineProps<Props>()
           <input type="checkbox">
         </div>
       </option-widget>
+
     </div>
   </BaseOption>
 

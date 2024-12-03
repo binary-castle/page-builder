@@ -10,7 +10,20 @@ export class ColumnBlock implements Block {
     optionComponent: VueComponent = markRaw(ColumnOptionComponent);
     options: Record<string, any> = {
         columns: 3,
-        renderList: {}
+        renderList: {},
+        styleClass: '',
+        styles: '',
+        columnStyles: {
+            0: {
+                padding: '5px'
+            },
+            1: {
+                padding: '5px'
+            },
+            2: {
+                padding: '5px'
+            }
+        }
     }
     description: string = '';
     icon: string = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-layout-three-columns" viewBox="0 0 16 16">

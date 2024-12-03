@@ -41,7 +41,7 @@ const onRenderItemClick = ($event: Event, block: Block): void => {
 <template>
   <BasePreview>
     <div class="row">
-      <div v-for="(index) in blockInfo.options.columns" class="col-md-4 column-item" @drop="onDrop($event, index)"
+      <div v-for="(index) in blockInfo.options.columns" class="col column-item" @drop="onDrop($event, index)"
            @dragenter.prevent @dragleave.prevent @dragover="onDragOver($event)">
 
         <template v-for="item of blockInfo.options.renderList[index]">
@@ -59,8 +59,6 @@ const onRenderItemClick = ($event: Event, block: Block): void => {
 .column-item {
   min-height: 40px;
   border: none;
-  border-bottom: 1px dashed blue;
-  border-top: 1px dashed blue;
   padding: 10px 0;
 
   &:not(:last-child) {

@@ -19,8 +19,13 @@
     "vue": "^3.5.12"
   },
   "devDependencies": {
+    "@tiptap/extension-bubble-menu": "^2.10.3",
+    "@tiptap/pm": "^2.10.3",
+    "@tiptap/starter-kit": "^2.10.3",
+    "@tiptap/vue-3": "^2.10.3",
     "@types/node": "^22.9.0",
     "@vitejs/plugin-vue": "^5.0.4",
+    "codemirror-editor-vue3": "^2.8.0",
     "rollup-plugin-scss": "^4.0.0",
     "sass": "^1.77.1",
     "typescript": "^5.2.2",
