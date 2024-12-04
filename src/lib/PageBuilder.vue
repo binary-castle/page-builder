@@ -2,8 +2,7 @@
 
 import {usePageBuilder} from "./PageBuilder.ts";
 import {previewComponentMap, previewOptionMap} from "./utils/registry.ts";
-import {onMounted, ref, Ref} from "vue";
-import {Block} from "./utils/types.ts";
+import {onMounted} from "vue";
 import {useLoadCSS} from "./useLoadCSS.ts";
 import SideBar from "./layouts/SideBar.vue";
 
@@ -18,66 +17,23 @@ const {
   renderList,
   dragOverIndex,
   dragOverDropZone,
+  selectedOptionComponent,
   onDrop,
   onDragLeave,
   onDragOver,
   startDragItem,
   onDragOverItem,
+  onItemSelect,
+  onSelectFormChildElement,
+  onDelete
 } = usePageBuilder()
 
 const {loadCSS} = useLoadCSS()
 
-const optionsComponent: Ref<Block | null> = ref(null)
-
-const onSelectFormChildElement = (block: Block) => {
-  console.log('Parent index', block)
-  if (block) {
-    console.log(block)
-    optionsComponent.value = block
-  }
-}
-
-
-const onItemClick = (block: Block): void => {
-  optionsComponent.value = block
-}
 
 onMounted(() => {
   loadCSS(props.cssUrl)
 })
-
-const onDelete = ($event: boolean) => {
-  if (optionsComponent.value?.id && $event) {
-    const index = renderList.value.findIndex((block) => block.id === optionsComponent.value?.id);
-    if (index !== -1) {
-      renderList.value.splice(index, 1);
-      optionsComponent.value = null
-      return
-    }
-
-    renderList.value.forEach((block: Block) => {
-      if (block.children) {
-        if (Array.isArray(block.children)) {
-          const childIndex = block.children.findIndex((block) => block.id === optionsComponent.value?.id);
-          if (childIndex !== -1) {
-            block.children.splice(childIndex, 1); // Remove the block
-            optionsComponent.value = null
-            return true;
-          }
-        } else if (typeof block.children === 'object') {
-          for (const key in block.children) {
-            const childIndex = block.children[key].findIndex((block) => block.id === optionsComponent.value?.id);
-            if (childIndex !== -1) {
-              block.children[key].splice(childIndex, 1); // Remove the block
-              optionsComponent.value = null
-              return true;
-            }
-          }
-        }
-      }
-    })
-  }
-}
 
 const exportPage = ($event: Event) => {
   $event.preventDefault();
@@ -134,7 +90,7 @@ const exportPage = ($event: Event) => {
               <component :is="previewComponentMap[block.name]"
                          :blockInfo="block"
                          @onSelectChildElement="onSelectFormChildElement"
-                         @click="onItemClick(block)"></component>
+                         @click="onItemSelect(block)"></component>
             </div>
 
 
@@ -149,11 +105,11 @@ const exportPage = ($event: Event) => {
             </div>
 
           </div>
-          <div class="bc-page-builder--preview--builder--options" :class="{'open': optionsComponent}">
-            <component v-if="optionsComponent"
-                       :is="previewOptionMap[optionsComponent.name]"
-                       :blockInfo="optionsComponent"
-                       @onClose="optionsComponent = null"
+          <div class="bc-page-builder--preview--builder--options" :class="{'open': selectedOptionComponent}">
+            <component v-if="selectedOptionComponent"
+                       :is="previewOptionMap[selectedOptionComponent.name]"
+                       :blockInfo="selectedOptionComponent"
+                       @onClose="selectedOptionComponent = null"
                        @onDelete="onDelete"
             ></component>
           </div>

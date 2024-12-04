@@ -2,11 +2,12 @@ import {Block, VueComponent} from "../types.ts";
 import {markRaw} from "vue";
 import ListComponent from "../../block-components/list/ListComponent.vue";
 import {registerBlock} from "../registry.ts";
+import ListOptionComponent from "../../block-components/list/ListOptionComponent.vue";
 
 export class ListBlock implements Block {
     name: string = 'list';
     component: VueComponent = markRaw(ListComponent);
-    optionComponent: VueComponent = markRaw(ListComponent);
+    optionComponent: VueComponent = markRaw(ListOptionComponent);
     options: Record<string, any> = {}
     description: string = '';
     icon: string = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ol" viewBox="0 0 16 16">\n' +

@@ -55,7 +55,7 @@ const onDragStart = ($event: DragEvent, block: Block): void => {
 
 <template>
   <BasePreview>
-    <div class="row" style="height: 200px; margin: 20px 0">
+    <div class="row" style="min-height: 200px; margin: 20px 0">
       <div v-for="(index) in blockInfo.options.columns" class="col column-item"
            @drop="onDrop($event, index)"
            @dragenter.prevent

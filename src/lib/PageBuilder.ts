@@ -16,6 +16,7 @@ export function usePageBuilder() {
     const dragOverDropZone: Ref<boolean> = ref(false)
     const innerDragElement: Ref<Block | null> = ref(null)
     const innerDragElementIndex: Ref<number | null> = ref(null)
+    const selectedOptionComponent: Ref<Block | null> = ref(null)
 
     const blocks: Ref<Array<Block>> = ref([
         new ButtonBlock(),
@@ -96,6 +97,49 @@ export function usePageBuilder() {
         $event.stopPropagation();
     }
 
+    const onItemSelect = (block: Block) => {
+        selectedOptionComponent.value = block
+    }
+
+    const onSelectFormChildElement = (block: Block) => {
+        if (block) {
+            selectedOptionComponent.value = block
+        }
+    }
+
+    const onDelete = ($event: boolean) => {
+        if (selectedOptionComponent.value?.id && $event) {
+            const index = renderList.value.findIndex((block) => block.id === selectedOptionComponent.value?.id);
+            if (index !== -1) {
+                renderList.value.splice(index, 1);
+                selectedOptionComponent.value = null
+                return
+            }
+
+            renderList.value.forEach((block: Block) => {
+                if (block.children) {
+                    if (Array.isArray(block.children)) {
+                        const childIndex = block.children.findIndex((block) => block.id === selectedOptionComponent.value?.id);
+                        if (childIndex !== -1) {
+                            block.children.splice(childIndex, 1); // Remove the block
+                            selectedOptionComponent.value = null
+                            return true;
+                        }
+                    } else if (typeof block.children === 'object') {
+                        for (const key in block.children) {
+                            const childIndex = block.children[key].findIndex((block) => block.id === selectedOptionComponent.value?.id);
+                            if (childIndex !== -1) {
+                                block.children[key].splice(childIndex, 1); // Remove the block
+                                selectedOptionComponent.value = null
+                                return true;
+                            }
+                        }
+                    }
+                }
+            })
+        }
+    }
+
 
     return {
         blocks,
@@ -103,11 +147,15 @@ export function usePageBuilder() {
         draggedItem,
         dragOverIndex,
         dragOverDropZone,
+        selectedOptionComponent,
         startDrag,
         onDrop,
         startDragItem,
         onDragOverItem,
         onDragOver,
-        onDragLeave
+        onDragLeave,
+        onItemSelect,
+        onSelectFormChildElement,
+        onDelete
     }
 }
