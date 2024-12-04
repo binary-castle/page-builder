@@ -5,6 +5,7 @@ import {previewComponentMap, previewOptionMap} from "./utils/registry.ts";
 import {onMounted, ref, Ref} from "vue";
 import {useLoadCSS} from "./useLoadCSS.ts";
 import SideBar from "./layouts/SideBar.vue";
+import PagePreview from "./PagePreview.vue";
 
 const props = defineProps({
   cssUrl: {
@@ -38,6 +39,12 @@ onMounted(() => {
 const exportPage = ($event: Event) => {
   $event.preventDefault();
   console.log(renderList.value)
+}
+
+const isPreview: Ref<boolean> = ref(false);
+
+const onPreview = ($event: Event) => {
+  $event.preventDefault();
 }
 
 const dragOverChildElement: Ref<boolean> = ref(false)
@@ -74,6 +81,9 @@ const onDragOverChildElement = (value: boolean) => {
           </div>
 
           <div class="item" style="text-align: right">
+            <button class="bc-button" style="margin-right: 10px" @click="isPreview = true">
+              <span class="icon-eye"></span>
+            </button>
             <button class="save-btn bc-button" @click="exportPage($event)">
               <span class="icon-floppy"></span> &nbsp; Save
             </button>
@@ -95,6 +105,7 @@ const onDragOverChildElement = (value: boolean) => {
               </div>
               <component :is="previewComponentMap[block.name]"
                          :blockInfo="block"
+                         :inEditor="true"
                          @onSelectChildElement="onSelectFormChildElement"
                          @onDragOverChildElement="onDragOverChildElement"
                          @click="onItemSelect(block)"></component>
@@ -128,8 +139,34 @@ const onDragOverChildElement = (value: boolean) => {
 
     </div>
   </div>
+
+  <div v-if="isPreview" class="preview-popup">
+    <button class="bc-button close-button" @click="isPreview = false">
+      <span class="icon-x-lg"></span>
+    </button>
+    <PagePreview :renderList="renderList"></PagePreview>
+  </div>
 </template>
 
 <style scoped lang="scss">
+.preview-popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #ffffff;
+  z-index: 1000;
 
+  .close-button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      box-shadow: -7px 3px 28px -10px rgba(0, 0, 0, 0.75);
+    }
+  }
+}
 </style>

@@ -7,6 +7,7 @@ import {v4 as uuidv4} from "uuid";
 
 interface Props {
   blockInfo: ColumnBlock
+  inEditor?: boolean
 }
 
 const props = defineProps<Props>()
@@ -55,9 +56,10 @@ const onDragStart = ($event: DragEvent, block: Block): void => {
 </script>
 
 <template>
-  <BasePreview>
+  <BasePreview :inEditor="inEditor">
     <div class="row" style="min-height: 200px; margin: 20px 0">
-      <div v-for="(index) in blockInfo.options.columns" class="col column-item"
+      <div v-for="(index) in blockInfo.options.columns" class="col"
+           :class="{'column-item': inEditor}"
            @drop="onDrop($event, index)"
            @dragenter.prevent
            @dragleave="onDragLeave"

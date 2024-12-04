@@ -1,10 +1,16 @@
 <script setup lang="ts">
+interface Props {
+  inEditor?: boolean
+}
 
+withDefaults(defineProps<Props>(), {
+  inEditor: true
+})
 
 </script>
 
 <template>
-  <div class="base-preview-item preview">
+  <div class="base-preview-item" :class="{'editor': inEditor}">
     <slot></slot>
   </div>
 
@@ -15,7 +21,7 @@
   background-color: white;
 }
 
-.preview {
+.editor {
   border: 1px dashed rgba(0, 0, 255, 0.38);
 
   &:hover {

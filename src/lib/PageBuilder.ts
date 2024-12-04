@@ -79,7 +79,7 @@ export function usePageBuilder() {
         // renderList.value.splice(index, 1)
         // console.log(item);
         // console.log(index)
-        // $event.dataTransfer?.setData('text/plain', JSON.stringify(item));
+        $event.dataTransfer?.setData('text/plain', JSON.stringify(item));
     }
 
     const onDragOverItem = ($event: DragEvent, index: number) => {

@@ -4,13 +4,14 @@ import BasePreview from "../BasePreview.vue";
 
 interface Props {
   blockInfo: ListBlock
+  inEditor?: boolean
 }
 
 defineProps<Props>()
 </script>
 
 <template>
-  <BasePreview>
+  <BasePreview :inEditor="inEditor">
     <div class="container">
       <ol>
         <li>One</li>
