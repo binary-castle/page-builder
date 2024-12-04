@@ -13,7 +13,7 @@ defineProps<Props>()
 </script>
 
 <template>
-  <BasePreview draggable="false">
+  <BasePreview>
     <RichTextEditor v-model="blockInfo.options.text"></RichTextEditor>
   </BasePreview>
 </template>

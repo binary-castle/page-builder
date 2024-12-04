@@ -2,7 +2,7 @@
 
 import {ref, Ref} from "vue";
 
-defineProps<{ title: string }>()
+defineProps<{ title: string, hasContainer?: boolean, backgroundColor?: string, backgroundImage?: string }>()
 
 const emit = defineEmits<{
   (event: 'onClose', state: boolean): void,

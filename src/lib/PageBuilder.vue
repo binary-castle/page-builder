@@ -29,12 +29,23 @@ const {loadCSS} = useLoadCSS()
 
 const optionsComponent: Ref<Block | null> = ref(null)
 
-const onSelectFormChildElement = ($event: Event, block: Block) => {
-  $event.stopPropagation();
+const onSelectFormChildElement = (block: Block) => {
   if (block) {
+    console.log(block)
     optionsComponent.value = block
   }
 }
+
+// const dragOverChildElement: Ref<boolean> = ref(false)
+//
+// const onDragOverFromChildElement = (value: boolean) => {
+//   dragOverChildElement.value = true
+//   console.log('drag over at child', value)
+// }
+//
+// const onDropChildElement = (value: boolean) => {
+//   console.log('dropped over at child', value)
+// }
 
 const onItemClick = (block: Block): void => {
   optionsComponent.value = block
@@ -45,7 +56,7 @@ onMounted(() => {
 })
 
 const onDelete = ($event: Event) => {
-  console.log('onDelete', $event)
+  // $event.preventDefault();
   if (optionsComponent.value) {
     const indexToRemove = renderList.value.indexOf(optionsComponent.value);
     if (indexToRemove != -1) {
@@ -107,16 +118,17 @@ const onDelete = ($event: Event) => {
           <div class="bc-page-builder--preview--builder--drop-zone"
                :class="{'drag-over': dragOverDropZone}"
                @drop="onDrop($event)"
-               @dragenter.prevent @dragleave.prevent="onDragLeave()"
+               @dragenter.prevent
+               @dragleave.prevent="onDragLeave()"
                @dragover.prevent="onDragOver($event)">
 
             <div v-for="(block, index) of renderList" draggable="true" :key="`r_item_${index}`"
                  @dragover="onDragOverItem($event, index)"
-                 @dragstart="startDragItem(block, index)">
+                 @dragstart="startDragItem($event, block, index)">
               <div :class="{'drag-over': dragOverIndex == index}">
               </div>
               <component :is="previewComponentMap[block.name]" :blockInfo="block"
-                         @blockSelectFromChildElement="onSelectFormChildElement"
+                         @onSelectChildElement="onSelectFormChildElement"
                          @click="onItemClick(block)"></component>
             </div>
 

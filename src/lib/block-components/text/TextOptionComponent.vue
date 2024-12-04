@@ -3,6 +3,14 @@
 import BaseOption from "../BaseOption.vue";
 import OptionWidget from "../../widgets/OptionWidget.vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
+import {TextBlock} from "../../utils/blocks/TextBlock.ts";
+
+interface Props {
+  blockInfo: TextBlock
+}
+
+defineProps<Props>()
+
 </script>
 
 <template>

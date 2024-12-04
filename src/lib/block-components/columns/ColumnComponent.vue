@@ -11,13 +11,17 @@ interface Props {
 const props = defineProps<Props>()
 
 const emit = defineEmits<{
-  (event: 'blockSelectFromChildElement', value: Block): void;
+  (event: 'onSelectChildElement', value: Block): void;
+  (event: 'onDragOverChildElement', value: boolean): void;
+  (event: 'onDropChildElement', value: boolean): void;
 }>();
 
 // const renderList: Ref<Record<number, Array<Block>>> = ref({})
 
 const onDrop = ($event: DragEvent, index: number): void => {
+  $event.preventDefault();
   $event.stopPropagation();
+  console.log('Dropped on child component', $event)
   const droppedItem = $event.dataTransfer?.getData('text/plain')
   if (droppedItem) {
     const parsedItem: Block = JSON.parse(droppedItem);
@@ -26,26 +30,39 @@ const onDrop = ($event: DragEvent, index: number): void => {
     }
     props.blockInfo.options.renderList[index].push(parsedItem);
   }
+  emit('onDropChildElement', true)
 }
 
 const onDragOver = ($event: DragEvent): void => {
-  console.log("Drag over", $event)
+  // $event.stopPropagation();
+  console.log('onDragOver child', $event)
+  emit('onDragOverChildElement', true)
 }
 
-const onRenderItemClick = (block: Block): void => {
-  emit('blockSelectFromChildElement', block)
+const onRenderItemClick = ($event: Event, block: Block): void => {
+  $event.stopPropagation();
+  emit('onSelectChildElement', block)
+}
+
+const onDragStart = ($event: DragEvent, block: Block): void => {
+  $event.stopPropagation();
+  $event.preventDefault();
 }
 </script>
 
 <template>
   <BasePreview>
-    <div class="row">
-      <div v-for="(index) in blockInfo.options.columns" class="col column-item" @drop="onDrop($event, index)"
-           @dragenter.prevent @dragleave.prevent @dragover="onDragOver($event)">
+    <div class="row" style="height: 200px; margin: 20px 0">
+      <div v-for="(index) in blockInfo.options.columns" class="col column-item"
+           @drop="onDrop($event, index)"
+           @dragenter.prevent
+           @dragleave.prevent
+           @dragover="onDragOver($event)">
 
         <template v-for="item of blockInfo.options.renderList[index]">
           <component :is="previewComponentMap[item.name]" :blockInfo="item"
-                     @click="onRenderItemClick(item)"></component>
+                     @dragstart="onDragStart($event, item)"
+                     @click="onRenderItemClick($event, item)"></component>
         </template>
 
       </div>
@@ -59,6 +76,8 @@ const onRenderItemClick = (block: Block): void => {
   min-height: 40px;
   border: none;
   padding: 10px 0;
+  position: relative;
+  z-index: 10;
 
   &:not(:last-child) {
     border-right: 1px dashed blue;

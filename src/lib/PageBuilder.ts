@@ -29,6 +29,7 @@ export function usePageBuilder() {
     }
 
     const onDrop = (event: DragEvent) => {
+        console.log('on drop', event)
         event.preventDefault();
         dragOverDropZone.value = false;
         if (innerDragElement.value) {
@@ -60,6 +61,8 @@ export function usePageBuilder() {
 
     }
 
+    // const onDragEnterZone
+
     const onDragLeave = () => {
         // console.log('onDragLeave', $event)
         // dragOverIndex.value = null;
@@ -67,15 +70,17 @@ export function usePageBuilder() {
         dragOverIndex.value = null;
     }
 
-    const startDragItem = (item: Block, index: number) => {
+    const startDragItem = ($event: DragEvent, item: Block, index: number) => {
         innerDragElement.value = item
         innerDragElementIndex.value = index
         // renderList.value.splice(index, 1)
         // console.log(item);
         // console.log(index)
+        // $event.dataTransfer?.setData('text/plain', JSON.stringify(item));
     }
 
     const onDragOverItem = ($event: DragEvent, index: number) => {
+        console.log('on drag over parent')
         $event.preventDefault();
         $event.stopPropagation();
         // console.log('onDragOverItem', $event)
@@ -88,8 +93,6 @@ export function usePageBuilder() {
         // console.log("on drag over");
         $event.stopPropagation();
     }
-
-
 
 
     return {
