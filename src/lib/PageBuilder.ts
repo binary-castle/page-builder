@@ -11,10 +11,13 @@ export function usePageBuilder() {
 
     const draggedItem: Ref<Block | null> = ref(null)
     const renderList: Ref<Array<Block>> = ref([])
+    const meta: Ref<Array<Record<string, string>>> = ref([])
+    const singleMeta: Ref<Object<Record<string, string>>> = ref({})
     const dragOverIndex: Ref<number | null> = ref(null)
     const dragOverDropZone: Ref<boolean> = ref(false)
     const innerDragElement: Ref<Block | null> = ref(null)
     const innerDragElementIndex: Ref<number | null> = ref(null)
+    const sidebarActiveComp: Ref<String | null> = ref('meta')
 
     const blocks: Ref<Array<Block>> = ref([
         new ButtonBlock(),
@@ -94,18 +97,31 @@ export function usePageBuilder() {
         $event.stopPropagation();
     }
 
+    const onSidebarCompActive = (type) => {
+        sidebarActiveComp.value = type;
+    }
+
+    const addMeta = () => {
+        meta.value.push(singleMeta.value);
+        singleMeta.value = {}
+    }
 
     return {
         blocks,
         renderList,
+        meta,
+        singleMeta,
         draggedItem,
         dragOverIndex,
         dragOverDropZone,
+        sidebarActiveComp,
         startDrag,
         onDrop,
         startDragItem,
         onDragOverItem,
         onDragOver,
-        onDragLeave
+        onDragLeave,
+        onSidebarCompActive,
+        addMeta
     }
 }
