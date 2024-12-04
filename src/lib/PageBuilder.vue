@@ -2,7 +2,7 @@
 
 import {usePageBuilder} from "./PageBuilder.ts";
 import {previewComponentMap, previewOptionMap} from "./utils/registry.ts";
-import {onMounted} from "vue";
+import {onMounted, ref, Ref} from "vue";
 import {useLoadCSS} from "./useLoadCSS.ts";
 import SideBar from "./layouts/SideBar.vue";
 
@@ -38,6 +38,12 @@ onMounted(() => {
 const exportPage = ($event: Event) => {
   $event.preventDefault();
   console.log(renderList.value)
+}
+
+const dragOverChildElement: Ref<boolean> = ref(false)
+
+const onDragOverChildElement = (value: boolean) => {
+  dragOverChildElement.value = value
 }
 </script>
 
@@ -76,7 +82,7 @@ const exportPage = ($event: Event) => {
 
         <div class="bc-page-builder--preview--builder">
           <div class="bc-page-builder--preview--builder--drop-zone"
-               :class="{'drag-over': dragOverDropZone}"
+               :class="{'drag-over': dragOverDropZone && !dragOverChildElement}"
                @drop="onDrop($event)"
                @dragenter.prevent
                @dragleave.prevent="onDragLeave()"
@@ -85,11 +91,12 @@ const exportPage = ($event: Event) => {
             <div v-for="(block, index) of renderList" draggable="true" :key="`r_item_${index}`"
                  @dragover="onDragOverItem($event, index)"
                  @dragstart="startDragItem($event, block, index)">
-              <div :class="{'drag-over': dragOverIndex == index}">
+              <div :class="{'drag-over': dragOverIndex == index && !dragOverChildElement}">
               </div>
               <component :is="previewComponentMap[block.name]"
                          :blockInfo="block"
                          @onSelectChildElement="onSelectFormChildElement"
+                         @onDragOverChildElement="onDragOverChildElement"
                          @click="onItemSelect(block)"></component>
             </div>
 

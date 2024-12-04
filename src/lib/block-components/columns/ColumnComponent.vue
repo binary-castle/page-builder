@@ -26,7 +26,6 @@ const onDrop = ($event: DragEvent, index: number): void => {
   if (droppedItem) {
     const parsedItem: Block = JSON.parse(droppedItem);
     parsedItem.id = uuidv4()
-    // console.log(props.blockInfo.children)
     if (!props.blockInfo.children[index]) {
       props.blockInfo.children[index] = [];
     }
@@ -35,10 +34,12 @@ const onDrop = ($event: DragEvent, index: number): void => {
   emit('onDropChildElement', true)
 }
 
-const onDragOver = ($event: DragEvent): void => {
-  // $event.stopPropagation();
-  console.log('onDragOver child', $event)
+const onDragOver = (): void => {
   emit('onDragOverChildElement', true)
+}
+
+const onDragLeave = (): void => {
+  emit('onDragOverChildElement', false)
 }
 
 const onRenderItemClick = ($event: Event, block: Block): void => {
@@ -59,8 +60,8 @@ const onDragStart = ($event: DragEvent, block: Block): void => {
       <div v-for="(index) in blockInfo.options.columns" class="col column-item"
            @drop="onDrop($event, index)"
            @dragenter.prevent
-           @dragleave.prevent
-           @dragover="onDragOver($event)">
+           @dragleave="onDragLeave"
+           @dragover="onDragOver">
 
         <template v-for="item of blockInfo.children[index]">
           <component :is="previewComponentMap[item.name]" :blockInfo="item"
