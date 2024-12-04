@@ -1,4 +1,5 @@
 import {ref, Ref} from "vue";
+import {v4 as uuidv4} from 'uuid';
 import {ButtonBlock} from "./utils/blocks/ButtonBlock.ts";
 import {ColumnBlock} from "./utils/blocks/ColumnBlock.ts";
 import {ListBlock} from "./utils/blocks/ListBlock.ts";
@@ -38,6 +39,7 @@ export function usePageBuilder() {
             }
 
             if (dragOverIndex.value === null) {
+                innerDragElement.value.id = uuidv4()
                 renderList.value.push(innerDragElement.value)
             } else {
                 renderList.value.splice(dragOverIndex.value, 0, innerDragElement.value);
@@ -49,6 +51,7 @@ export function usePageBuilder() {
             const droppedItem = event.dataTransfer?.getData('text/plain');
             if (droppedItem) {
                 const _droppedItem = JSON.parse(droppedItem);
+                _droppedItem.id = uuidv4();
                 if (dragOverIndex.value === null) {
                     renderList.value.push(_droppedItem)
                 } else {
@@ -61,7 +64,6 @@ export function usePageBuilder() {
 
     }
 
-    // const onDragEnterZone
 
     const onDragLeave = () => {
         // console.log('onDragLeave', $event)

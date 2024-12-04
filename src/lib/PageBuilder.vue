@@ -30,22 +30,13 @@ const {loadCSS} = useLoadCSS()
 const optionsComponent: Ref<Block | null> = ref(null)
 
 const onSelectFormChildElement = (block: Block) => {
+  console.log('Parent index', block)
   if (block) {
     console.log(block)
     optionsComponent.value = block
   }
 }
 
-// const dragOverChildElement: Ref<boolean> = ref(false)
-//
-// const onDragOverFromChildElement = (value: boolean) => {
-//   dragOverChildElement.value = true
-//   console.log('drag over at child', value)
-// }
-//
-// const onDropChildElement = (value: boolean) => {
-//   console.log('dropped over at child', value)
-// }
 
 const onItemClick = (block: Block): void => {
   optionsComponent.value = block
@@ -55,17 +46,42 @@ onMounted(() => {
   loadCSS(props.cssUrl)
 })
 
-const onDelete = ($event: Event) => {
-  // $event.preventDefault();
-  if (optionsComponent.value) {
-    const indexToRemove = renderList.value.indexOf(optionsComponent.value);
-    if (indexToRemove != -1) {
-      renderList.value.splice(indexToRemove, 1);
+const onDelete = ($event: boolean) => {
+  if (optionsComponent.value?.id && $event) {
+    const index = renderList.value.findIndex((block) => block.id === optionsComponent.value?.id);
+    if (index !== -1) {
+      renderList.value.splice(index, 1);
       optionsComponent.value = null
+      return
     }
+
+    renderList.value.forEach((block: Block) => {
+      if (block.children) {
+        if (Array.isArray(block.children)) {
+          const childIndex = block.children.findIndex((block) => block.id === optionsComponent.value?.id);
+          if (childIndex !== -1) {
+            block.children.splice(childIndex, 1); // Remove the block
+            optionsComponent.value = null
+            return true;
+          }
+        } else if (typeof block.children === 'object') {
+          for (const key in block.children) {
+            const childIndex = block.children[key].findIndex((block) => block.id === optionsComponent.value?.id);
+            if (childIndex !== -1) {
+              block.children[key].splice(childIndex, 1); // Remove the block
+              optionsComponent.value = null
+              return true;
+            }
+          }
+        }
+      }
+    })
   }
+}
 
-
+const exportPage = ($event: Event) => {
+  $event.preventDefault();
+  console.log(renderList.value)
 }
 </script>
 
@@ -78,39 +94,27 @@ const onDelete = ($event: Event) => {
 
         <div class="bc-page-builder--preview--header">
           <div class="main-title" style="text-align: left">
-            Page builder
+            BC - Page builder
           </div>
 
           <div class="item">
             <div class="devices bc-button-group">
               <button>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-laptop"
-                     viewBox="0 0 16 16">
-                  <path
-                      d="M13.5 3a.5.5 0 0 1 .5.5V11H2V3.5a.5.5 0 0 1 .5-.5zm-11-1A1.5 1.5 0 0 0 1 3.5V12h14V3.5A1.5 1.5 0 0 0 13.5 2zM0 12.5h16a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 12.5"/>
-                </svg>
+                <span class="icon-laptop"></span>
               </button>
               <button>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tablet"
-                     viewBox="0 0 16 16">
-                  <path
-                      d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                  <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
-                </svg>
+                <span class="icon-tablet"></span>
               </button>
               <button>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-phone"
-                     viewBox="0 0 16 16">
-                  <path
-                      d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-                  <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
-                </svg>
+                <span class="icon-phone"></span>
               </button>
             </div>
           </div>
 
           <div class="item" style="text-align: right">
-            <button class="save-btn bc-button">Save</button>
+            <button class="save-btn bc-button" @click="exportPage($event)">
+              <span class="icon-floppy"></span> &nbsp; Save
+            </button>
           </div>
         </div>
 
@@ -127,7 +131,8 @@ const onDelete = ($event: Event) => {
                  @dragstart="startDragItem($event, block, index)">
               <div :class="{'drag-over': dragOverIndex == index}">
               </div>
-              <component :is="previewComponentMap[block.name]" :blockInfo="block"
+              <component :is="previewComponentMap[block.name]"
+                         :blockInfo="block"
                          @onSelectChildElement="onSelectFormChildElement"
                          @click="onItemClick(block)"></component>
             </div>

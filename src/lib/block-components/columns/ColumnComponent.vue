@@ -3,6 +3,7 @@ import {ColumnBlock} from "../../utils/blocks/ColumnBlock.ts";
 import {previewComponentMap} from "../../utils/registry.ts";
 import {Block} from "../../utils/types.ts";
 import BasePreview from "../BasePreview.vue";
+import {v4 as uuidv4} from "uuid";
 
 interface Props {
   blockInfo: ColumnBlock
@@ -16,7 +17,6 @@ const emit = defineEmits<{
   (event: 'onDropChildElement', value: boolean): void;
 }>();
 
-// const renderList: Ref<Record<number, Array<Block>>> = ref({})
 
 const onDrop = ($event: DragEvent, index: number): void => {
   $event.preventDefault();
@@ -25,10 +25,12 @@ const onDrop = ($event: DragEvent, index: number): void => {
   const droppedItem = $event.dataTransfer?.getData('text/plain')
   if (droppedItem) {
     const parsedItem: Block = JSON.parse(droppedItem);
-    if (!props.blockInfo.options.renderList[index]) {
-      props.blockInfo.options.renderList[index] = [];
+    parsedItem.id = uuidv4()
+    // console.log(props.blockInfo.children)
+    if (!props.blockInfo.children[index]) {
+      props.blockInfo.children[index] = [];
     }
-    props.blockInfo.options.renderList[index].push(parsedItem);
+    props.blockInfo.children[index].push(parsedItem);
   }
   emit('onDropChildElement', true)
 }
@@ -41,6 +43,7 @@ const onDragOver = ($event: DragEvent): void => {
 
 const onRenderItemClick = ($event: Event, block: Block): void => {
   $event.stopPropagation();
+  // const parentIndex = props.parentIndex
   emit('onSelectChildElement', block)
 }
 
@@ -59,7 +62,7 @@ const onDragStart = ($event: DragEvent, block: Block): void => {
            @dragleave.prevent
            @dragover="onDragOver($event)">
 
-        <template v-for="item of blockInfo.options.renderList[index]">
+        <template v-for="item of blockInfo.children[index]">
           <component :is="previewComponentMap[item.name]" :blockInfo="item"
                      @dragstart="onDragStart($event, item)"
                      @click="onRenderItemClick($event, item)"></component>

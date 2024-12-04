@@ -68,6 +68,7 @@ const onDeleteItem = ($event: Event) => {
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 1000;
 
   .content {
     position: relative;
