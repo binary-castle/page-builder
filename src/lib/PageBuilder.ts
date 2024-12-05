@@ -6,7 +6,6 @@ import {Block} from "./utils/types.ts";
 import {HtmlBlock} from "./utils/blocks/HtmlBlock.ts";
 import {TextBlock} from "./utils/blocks/TextBlock.ts";
 
-
 export function usePageBuilder() {
 
     const draggedItem: Ref<Block | null> = ref(null)
@@ -17,7 +16,7 @@ export function usePageBuilder() {
     const dragOverDropZone: Ref<boolean> = ref(false)
     const innerDragElement: Ref<Block | null> = ref(null)
     const innerDragElementIndex: Ref<number | null> = ref(null)
-    const sidebarActiveComp: Ref<String | null> = ref('meta')
+    const activeComponent: Ref<String | null> = ref('MetaComponent')
 
     const blocks: Ref<Array<Block>> = ref([
         new ButtonBlock(),
@@ -97,13 +96,21 @@ export function usePageBuilder() {
         $event.stopPropagation();
     }
 
-    const onSidebarCompActive = (type) => {
-        sidebarActiveComp.value = type;
+    const setActiveComponent = (component: string) => {
+        activeComponent.value = component;
     }
 
-    const addMeta = () => {
+    const addMoreMeta = () => {
         meta.value.push(singleMeta.value);
         singleMeta.value = {}
+    }
+
+    const editMeta = () => {
+        //TODO::working
+    }
+
+    const deleteMeta = () => {
+        //TODO::working
     }
 
     return {
@@ -114,14 +121,16 @@ export function usePageBuilder() {
         draggedItem,
         dragOverIndex,
         dragOverDropZone,
-        sidebarActiveComp,
+        activeComponent,
         startDrag,
         onDrop,
         startDragItem,
         onDragOverItem,
         onDragOver,
         onDragLeave,
-        onSidebarCompActive,
-        addMeta
+        setActiveComponent,
+        addMoreMeta,
+        editMeta,
+        deleteMeta,
     }
 }
