@@ -4,6 +4,7 @@ import {previewComponentMap} from "../../utils/registry.ts";
 import {Block} from "../../utils/types.ts";
 import BasePreview from "../BasePreview.vue";
 import {v4 as uuidv4} from "uuid";
+import {ref, Ref} from "vue";
 
 interface Props {
   blockInfo: ColumnBlock
@@ -18,6 +19,8 @@ const emit = defineEmits<{
   (event: 'onDropChildElement', value: boolean): void;
 }>();
 
+const dragOverRow: Ref<number | null> = ref(null)
+const dragOverColumn: Ref<number | null> = ref(null)
 
 const onDrop = ($event: DragEvent, index: number): void => {
   $event.preventDefault();
@@ -29,18 +32,32 @@ const onDrop = ($event: DragEvent, index: number): void => {
     if (parsedItem.children) {
       return
     }
+
     parsedItem.id = uuidv4()
     if (!props.blockInfo.children[index]) {
       props.blockInfo.children[index] = [];
     }
-    props.blockInfo.children[index].push(parsedItem);
+    if (dragOverColumn.value === null) {
+      props.blockInfo.children[index].push(parsedItem);
+    } else {
+      props.blockInfo.children[index].splice(dragOverColumn.value, 0, parsedItem);
+    }
   }
+  dragOverRow.value = null;
+  dragOverColumn.value = null;
   emit('onDropChildElement', true)
   emit('onDragOverChildElement', false)
 }
 
-const onDragOver = (): void => {
+const onDragOverRow = (index: number): void => {
+  dragOverRow.value = index
   emit('onDragOverChildElement', true)
+}
+
+const onDragOverColumn = ($event: DragEvent, index: number): void => {
+  console.log('onDragOverColumn', $event)
+  console.log('onDragOverColumn', index)
+  dragOverColumn.value = index
 }
 
 const onDragLeave = (): void => {
@@ -66,17 +83,20 @@ const onDragStart = ($event: DragEvent, block: Block): void => {
   <BasePreview :inEditor="inEditor">
     <div class="row" style="min-height: 200px; margin: 20px 0">
       <div v-for="(index) in blockInfo.options.columns" class="col"
-           :class="{'column-item': inEditor}"
+           :class="{'column-item': inEditor, 'column-dragged-over':  dragOverRow === index}"
            @drop="onDrop($event, index)"
            @dragenter.prevent
            @dragleave="onDragLeave"
-           @dragover="onDragOver">
+           @dragover="onDragOverRow(index)">
 
-        <template v-for="item of blockInfo.children[index]">
+        <template v-for="(item, columnIndex) of blockInfo.children[index]">
+          <div style="height: 10px; width: 100%"
+               :class="{'bg-secondary': dragOverRow === index && dragOverColumn === columnIndex}"></div>
           <component :is="previewComponentMap[item.name]"
                      :blockInfo="item"
                      :inEditor="inEditor"
-                     draggable="true"
+                     :draggable="!!inEditor"
+                     @dragover="onDragOverColumn($event, columnIndex)"
                      @dragstart="onDragStart($event, item)"
                      @click="onRenderItemClick($event, item)"></component>
         </template>
@@ -95,9 +115,15 @@ const onDragStart = ($event: DragEvent, block: Block): void => {
   position: relative;
   z-index: 10;
 
+
+
   &:not(:last-child) {
     border-right: 1px dashed blue;
   }
 
+}
+
+.column-dragged-over {
+  border: 1px dashed blue;
 }
 </style>

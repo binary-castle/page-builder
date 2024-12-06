@@ -17,6 +17,7 @@ export function usePageBuilder() {
     const innerDragElement: Ref<Block | null> = ref(null)
     const innerDragElementIndex: Ref<number | null> = ref(null)
     const selectedOptionComponent: Ref<Block | null> = ref(null)
+    const dragOverChildElement: Ref<boolean> = ref(false)
 
     const blocks: Ref<Array<Block>> = ref([
         new ButtonBlock(),
@@ -72,6 +73,8 @@ export function usePageBuilder() {
             dragOverIndex.value = null;
             innerDragElement.value = null;
             innerDragElementIndex.value = null;
+            dragOverDropZone.value = false;
+            dragOverChildElement.value = false;
         }
     }
 
@@ -97,6 +100,10 @@ export function usePageBuilder() {
         dragOverIndex.value = null;
         dragOverDropZone.value = true;
         $event.stopPropagation();
+    }
+
+    const onDragOverChildElement = (value: boolean) => {
+        dragOverChildElement.value = value
     }
 
     const onItemSelect = (block: Block) => {
@@ -150,11 +157,13 @@ export function usePageBuilder() {
         dragOverIndex,
         dragOverDropZone,
         selectedOptionComponent,
+        dragOverChildElement,
         startDrag,
         onDrop,
         onDropChildElement,
         startDragItem,
         onDragOverItem,
+        onDragOverChildElement,
         onDragOver,
         onDragLeave,
         onItemSelect,

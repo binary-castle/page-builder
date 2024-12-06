@@ -19,12 +19,14 @@ const {
   dragOverIndex,
   dragOverDropZone,
   selectedOptionComponent,
+  dragOverChildElement,
   onDrop,
   onDropChildElement,
   onDragLeave,
   onDragOver,
   startDragItem,
   onDragOverItem,
+  onDragOverChildElement,
   onItemSelect,
   onSelectFormChildElement,
   onDelete
@@ -44,11 +46,7 @@ const exportPage = ($event: Event) => {
 
 const isPreview: Ref<boolean> = ref(false);
 
-const dragOverChildElement: Ref<boolean> = ref(false)
 
-const onDragOverChildElement = (value: boolean) => {
-  dragOverChildElement.value = value
-}
 </script>
 
 <template>
