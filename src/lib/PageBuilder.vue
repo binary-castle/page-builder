@@ -20,6 +20,7 @@ const {
   dragOverDropZone,
   selectedOptionComponent,
   onDrop,
+  onDropChildElement,
   onDragLeave,
   onDragOver,
   startDragItem,
@@ -42,10 +43,6 @@ const exportPage = ($event: Event) => {
 }
 
 const isPreview: Ref<boolean> = ref(false);
-
-const onPreview = ($event: Event) => {
-  $event.preventDefault();
-}
 
 const dragOverChildElement: Ref<boolean> = ref(false)
 
@@ -108,6 +105,7 @@ const onDragOverChildElement = (value: boolean) => {
                          :inEditor="true"
                          @onSelectChildElement="onSelectFormChildElement"
                          @onDragOverChildElement="onDragOverChildElement"
+                         @onDropChildElement="onDropChildElement"
                          @click="onItemSelect(block)"></component>
             </div>
 

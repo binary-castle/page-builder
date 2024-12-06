@@ -26,6 +26,9 @@ const onDrop = ($event: DragEvent, index: number): void => {
   const droppedItem = $event.dataTransfer?.getData('text/plain')
   if (droppedItem) {
     const parsedItem: Block = JSON.parse(droppedItem);
+    if (parsedItem.children) {
+      return
+    }
     parsedItem.id = uuidv4()
     if (!props.blockInfo.children[index]) {
       props.blockInfo.children[index] = [];
@@ -33,6 +36,7 @@ const onDrop = ($event: DragEvent, index: number): void => {
     props.blockInfo.children[index].push(parsedItem);
   }
   emit('onDropChildElement', true)
+  emit('onDragOverChildElement', false)
 }
 
 const onDragOver = (): void => {
@@ -51,7 +55,10 @@ const onRenderItemClick = ($event: Event, block: Block): void => {
 
 const onDragStart = ($event: DragEvent, block: Block): void => {
   $event.stopPropagation();
-  $event.preventDefault();
+  if (block) {
+    console.log('drag start inner element')
+    $event.dataTransfer?.setData('text/plain', JSON.stringify(block))
+  }
 }
 </script>
 
@@ -66,7 +73,10 @@ const onDragStart = ($event: DragEvent, block: Block): void => {
            @dragover="onDragOver">
 
         <template v-for="item of blockInfo.children[index]">
-          <component :is="previewComponentMap[item.name]" :blockInfo="item"
+          <component :is="previewComponentMap[item.name]"
+                     :blockInfo="item"
+                     :inEditor="inEditor"
+                     draggable="true"
                      @dragstart="onDragStart($event, item)"
                      @click="onRenderItemClick($event, item)"></component>
         </template>

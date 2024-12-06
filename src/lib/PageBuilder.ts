@@ -65,10 +65,18 @@ export function usePageBuilder() {
 
     }
 
+    const onDropChildElement = () => {
+        if (innerDragElementIndex.value != null) {
+            renderList.value.splice(innerDragElementIndex.value, 1)
+            draggedItem.value = null;
+            dragOverIndex.value = null;
+            innerDragElement.value = null;
+            innerDragElementIndex.value = null;
+        }
+    }
+
 
     const onDragLeave = () => {
-        // console.log('onDragLeave', $event)
-        // dragOverIndex.value = null;
         dragOverDropZone.value = false;
         dragOverIndex.value = null;
     }
@@ -76,24 +84,18 @@ export function usePageBuilder() {
     const startDragItem = ($event: DragEvent, item: Block, index: number) => {
         innerDragElement.value = item
         innerDragElementIndex.value = index
-        // renderList.value.splice(index, 1)
-        // console.log(item);
-        // console.log(index)
         $event.dataTransfer?.setData('text/plain', JSON.stringify(item));
     }
 
     const onDragOverItem = ($event: DragEvent, index: number) => {
-        console.log('on drag over parent')
         $event.preventDefault();
         $event.stopPropagation();
-        // console.log('onDragOverItem', $event)
         dragOverIndex.value = index;
     }
 
     const onDragOver = ($event: DragEvent) => {
         dragOverIndex.value = null;
         dragOverDropZone.value = true;
-        // console.log("on drag over");
         $event.stopPropagation();
     }
 
@@ -150,6 +152,7 @@ export function usePageBuilder() {
         selectedOptionComponent,
         startDrag,
         onDrop,
+        onDropChildElement,
         startDragItem,
         onDragOverItem,
         onDragOver,
