@@ -69,13 +69,13 @@ export function usePageBuilder() {
     const onDropChildElement = () => {
         if (innerDragElementIndex.value != null) {
             renderList.value.splice(innerDragElementIndex.value, 1)
-            draggedItem.value = null;
-            dragOverIndex.value = null;
-            innerDragElement.value = null;
-            innerDragElementIndex.value = null;
-            dragOverDropZone.value = false;
-            dragOverChildElement.value = false;
         }
+        draggedItem.value = null;
+        dragOverIndex.value = null;
+        innerDragElement.value = null;
+        dragOverDropZone.value = false;
+        dragOverChildElement.value = true;
+        innerDragElementIndex.value = null;
     }
 
 

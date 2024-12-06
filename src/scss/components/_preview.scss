@@ -53,6 +53,8 @@
       margin-right: -350px;
       transition: all 0.3s;
       display: none;
+      height: calc(100vh - 40px);
+      overflow: auto;
 
       &.open {
         display: block;

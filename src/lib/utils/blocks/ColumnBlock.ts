@@ -14,13 +14,22 @@ export class ColumnBlock implements Block {
         styles: '',
         columnStyles: {
             0: {
-                padding: '5px'
+                cssClasses: '',
+                backgroundColor: '',
+                backgroundImage: '',
+                styles: 'padding: 10px'
             },
             1: {
-                padding: '5px'
+                cssClasses: '',
+                backgroundColor: '',
+                backgroundImage: '',
+                styles: 'padding: 10px'
             },
             2: {
-                padding: '5px'
+                cssClasses: '',
+                backgroundColor: '',
+                backgroundImage: '',
+                styles: 'padding: 10px'
             }
         }
     }

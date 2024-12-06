@@ -61,6 +61,7 @@ const onDragOverColumn = ($event: DragEvent, index: number): void => {
 }
 
 const onDragLeave = (): void => {
+  dragOverRow.value = null
   emit('onDragOverChildElement', false)
 }
 
@@ -114,7 +115,6 @@ const onDragStart = ($event: DragEvent, block: Block): void => {
   padding: 10px 0;
   position: relative;
   z-index: 10;
-
 
 
   &:not(:last-child) {
