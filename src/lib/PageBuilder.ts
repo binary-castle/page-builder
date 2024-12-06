@@ -2,7 +2,7 @@ import {ref, Ref} from "vue";
 import {v4 as uuidv4} from 'uuid';
 import {ButtonBlock} from "./utils/blocks/ButtonBlock.ts";
 import {ColumnBlock} from "./utils/blocks/ColumnBlock.ts";
-import {ListBlock} from "./utils/blocks/ListBlock.ts";
+// import {ListBlock} from "./utils/blocks/ListBlock.ts";
 import {Block} from "./utils/types.ts";
 import {HtmlBlock} from "./utils/blocks/HtmlBlock.ts";
 import {TextBlock} from "./utils/blocks/TextBlock.ts";
@@ -23,7 +23,7 @@ export function usePageBuilder() {
         new ButtonBlock(),
         new TextBlock(),
         new ColumnBlock(),
-        new ListBlock(),
+        // new ListBlock(),
         new HtmlBlock()
     ])
 

@@ -1,0 +1,11 @@
+input, textarea, select {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  border-radius: 4px;
+  padding: 2px 7px;
+  font-size: 10px;
+
+  &:focus {
+    border-color: rgba(0, 0, 0, 0.55);
+  }
+}

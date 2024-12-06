@@ -2,6 +2,8 @@ export type VueComponent = {
     new(): import("vue").Component;
 }
 
+export type BlockType = 'block' | 'component';
+
 export interface Block {
     /**
      *  ID is not required for creating a draggable block,
@@ -52,4 +54,6 @@ export interface Block {
      * Preview will appear on hover on block
      */
     previewImg?: string;
+
+    type: BlockType
 }
