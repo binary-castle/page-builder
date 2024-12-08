@@ -1,7 +1,10 @@
 {
   "name": "bc-page-builder",
-  "private": true,
+  "description": "Page Builder",
+  "private": false,
+  "homepage": "https://github.com/binary-castle/page-builder",
   "version": "0.0.4",
+  "license": "LGPL-3.0-only",
   "type": "module",
   "main": "./dist/index.umd.js",
   "types": "./dist/index.d.ts",
