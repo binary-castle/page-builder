@@ -1,12 +1,23 @@
 <script setup lang="ts">
 import {Block} from "./utils/types.ts";
 import {previewComponentMap} from "./utils/registry.ts";
+import {useLoadCSS} from "./useLoadCSS.ts";
+import {onMounted} from "vue";
 
 interface Props {
   renderList: Block[]
+  cssUrl: string
 }
 
-defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  cssUrl: ''
+})
+
+const {loadCSS} = useLoadCSS()
+
+onMounted(() => {
+  loadCSS(props.cssUrl)
+})
 </script>
 
 <template>
