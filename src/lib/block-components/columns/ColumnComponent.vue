@@ -21,6 +21,9 @@ const emit = defineEmits<{
 
 const dragOverRow: Ref<number | null> = ref(null)
 const dragOverColumn: Ref<number | null> = ref(null)
+const innerDragElement: Ref<Block | null> = ref(null)
+const innerDragColumn: Ref<number | null> = ref(null)
+const innerDragElementInbox: Ref<number | null> = ref(null)
 
 const onDrop = ($event: DragEvent, index: number): void => {
   $event.preventDefault();
@@ -31,6 +34,24 @@ const onDrop = ($event: DragEvent, index: number): void => {
     const parsedItem: Block = JSON.parse(droppedItem);
     if (parsedItem.children) {
       return
+    }
+
+    if (innerDragElement.value && innerDragColumn.value != null && innerDragElementInbox.value != null) {
+      console.log("it's a inner drag item dropped")
+      if (!props.blockInfo.children[index]) {
+        props.blockInfo.children[index] = [];
+      }
+      props.blockInfo.children[innerDragColumn.value].splice(innerDragElementInbox.value, 1)
+
+      if (dragOverColumn.value === null) {
+        props.blockInfo.children[index].push(parsedItem);
+      } else {
+        props.blockInfo.children[index].splice(dragOverColumn.value, 0, parsedItem);
+      }
+      innerDragElement.value = null
+      innerDragColumn.value = null
+      innerDragElementInbox.value = null
+      return;
     }
 
     parsedItem.id = uuidv4()
@@ -71,10 +92,12 @@ const onRenderItemClick = ($event: Event, block: Block): void => {
   emit('onSelectChildElement', block)
 }
 
-const onDragStart = ($event: DragEvent, block: Block): void => {
+const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, blockIndex: number): void => {
   $event.stopPropagation();
   if (block) {
-    console.log('drag start inner element')
+    innerDragElement.value = block
+    innerDragColumn.value = columnIndex
+    innerDragElementInbox.value = blockIndex
     $event.dataTransfer?.setData('text/plain', JSON.stringify(block))
   }
 }
@@ -98,7 +121,7 @@ const onDragStart = ($event: DragEvent, block: Block): void => {
                      :inEditor="inEditor"
                      :draggable="!!inEditor"
                      @dragover="onDragOverColumn($event, columnIndex)"
-                     @dragstart="onDragStart($event, item)"
+                     @dragstart="onDragStart($event, item, index, columnIndex)"
                      @click="onRenderItemClick($event, item)"></component>
         </template>
 

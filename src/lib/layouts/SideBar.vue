@@ -46,7 +46,7 @@ const toggleSideItem = (key: keyof typeof sideItems.value): void => {
     </div>
 
     <div class="bc-page-builder--blocks-sidebar--blocks" v-if="sideItems.blocks">
-      <div v-for="(item, index) of blockRegistry.filter(el => el.type == 'block')" draggable="true"
+      <div v-for="(item, index) of blockRegistry.filter(el => el.type == 'element')" draggable="true"
            class="block"
            @dragstart="startDrag($event, item)"
            :key="`item_${index}`">
@@ -56,10 +56,11 @@ const toggleSideItem = (key: keyof typeof sideItems.value): void => {
     </div>
 
     <div class="bc-page-builder--blocks-sidebar--blocks" v-if="sideItems.components">
-      <div v-for="(item, index) of blockRegistry.filter(el => el.type == 'component')" draggable="true"
+      <div v-for="(item, index) of blockRegistry.filter(el => el.type === 'ui-component')" draggable="true"
            class="block"
            @dragstart="startDrag($event, item)"
            :key="`item_${index}`">
+        asd
         <div class="icon" v-html="item.icon"></div>
         <div class="title">{{ item.title }}</div>
       </div>

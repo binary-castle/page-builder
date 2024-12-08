@@ -6,6 +6,7 @@ import {ColumnBlock} from "./utils/blocks/ColumnBlock.ts";
 import {Block} from "./utils/types.ts";
 import {HtmlBlock} from "./utils/blocks/HtmlBlock.ts";
 import {TextBlock} from "./utils/blocks/TextBlock.ts";
+import {CardUiComponent} from "./utils/ui-components/CardUiComponent.ts";
 
 
 export function usePageBuilder() {
@@ -24,7 +25,8 @@ export function usePageBuilder() {
         new TextBlock(),
         new ColumnBlock(),
         // new ListBlock(),
-        new HtmlBlock()
+        new HtmlBlock(),
+        new CardUiComponent(),
     ])
 
     const startDrag = ($event: DragEvent, item: Block) => {

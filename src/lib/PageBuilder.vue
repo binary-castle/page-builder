@@ -14,6 +14,10 @@ const props = defineProps({
   }
 })
 
+const emit = defineEmits<{
+  (event: 'onSave', value: any): void,
+}>()
+
 const {
   renderList,
   dragOverIndex,
@@ -41,7 +45,7 @@ onMounted(() => {
 
 const exportPage = ($event: Event) => {
   $event.preventDefault();
-  console.log(renderList.value)
+  emit('onSave', {'renderList': renderList})
 }
 
 const isPreview: Ref<boolean> = ref(false);
