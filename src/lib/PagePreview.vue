@@ -6,7 +6,7 @@ import {onMounted} from "vue";
 
 interface Props {
   renderList: Block[]
-  cssUrl: string
+  cssUrl?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
