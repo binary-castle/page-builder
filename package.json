@@ -1,7 +1,7 @@
 {
   "name": "bc-page-builder",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1 - alpha",
   "type": "module",
   "main": "./dist/index.umd.js",
   "types": "./dist/index.d.ts",
@@ -13,7 +13,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "release": "standard-version",
+    "publish": "npm publish"
   },
   "dependencies": {
     "uuid": "^11.0.3",
@@ -30,9 +32,13 @@
     "codemirror-editor-vue3": "^2.8.0",
     "rollup-plugin-scss": "^4.0.0",
     "sass": "^1.77.1",
+    "standard-version": "^9.5.0",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vite-plugin-dts": "^3.9.1",
     "vue-tsc": "^2.0.6"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.12"
   }
 }
