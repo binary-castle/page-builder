@@ -19,7 +19,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "lts/*"
-      - run: npm ci
+      - run: |
+          rm -rf node_modules package-lock.json
+          npm ci --include=optional --build-from-source
       - run: npm run build
       - run: npm audit signatures
       - name: Release
