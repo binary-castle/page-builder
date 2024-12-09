@@ -3,9 +3,11 @@ import OptionWidget from "./widgets/OptionWidget.vue";
 import RichTextEditor from "./editors/RichTextEditor.vue";
 import CodeMirrorEditor from "./editors/CodeMirrorEditor.vue";
 import PagePreview from "./PagePreview.vue";
+import BasePreview from "./block-components/BasePreview.vue";
+import BaseOption from "./block-components/BaseOption.vue";
 
-export * as types from "./utils/types";
-export * as registry from "./utils/registry";
+export * from "./utils/types";
+export * from "./utils/registry";
 
 
-export {PageBuilder, PagePreview, OptionWidget, RichTextEditor, CodeMirrorEditor}
+export {PageBuilder, PagePreview, OptionWidget, RichTextEditor, CodeMirrorEditor, BasePreview, BaseOption}
