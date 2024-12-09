@@ -3,7 +3,7 @@
   "description": "Page Builder",
   "private": false,
   "homepage": "https://github.com/binary-castle/page-builder",
-  "version": "0.0.4",
+  "version": "0.0.9",
   "license": "LGPL-3.0-only",
   "type": "module",
   "main": "./dist/index.umd.js",
@@ -11,7 +11,7 @@
   "module": "./dist/index.es.js",
   "css": "./dist/bc-page-builder.css",
   "files": [
-    "lib"
+    "dist"
   ],
   "scripts": {
     "dev": "vite",
