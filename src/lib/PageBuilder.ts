@@ -8,27 +8,27 @@ import {HtmlBlock} from "./utils/blocks/HtmlBlock.ts";
 import {TextBlock} from "./utils/blocks/TextBlock.ts";
 import {CardUiComponent} from "./utils/ui-components/CardUiComponent.ts";
 
+const draggedItem: Ref<Block | null> = ref(null)
+const renderList: Ref<Array<Block>> = ref([])
+const meta: Ref<Array<Record<string, string>>> = ref([])
+const activeComponent: Ref<String | null> = ref('MetaComponent')
+const dragOverIndex: Ref<number | null> = ref(null)
+const dragOverDropZone: Ref<boolean> = ref(false)
+const innerDragElement: Ref<Block | null> = ref(null)
+const innerDragElementIndex: Ref<number | null> = ref(null)
+const selectedOptionComponent: Ref<Block | null> = ref(null)
+const dragOverChildElement: Ref<boolean> = ref(false)
+
+const blocks: Ref<Array<Block>> = ref([
+    new ButtonBlock(),
+    new TextBlock(),
+    new ColumnBlock(),
+    // new ListBlock(),
+    new HtmlBlock(),
+    new CardUiComponent(),
+])
 
 export function usePageBuilder() {
-
-    const draggedItem: Ref<Block | null> = ref(null)
-    const renderList: Ref<Array<Block>> = ref([])
-    const dragOverIndex: Ref<number | null> = ref(null)
-    const dragOverDropZone: Ref<boolean> = ref(false)
-    const innerDragElement: Ref<Block | null> = ref(null)
-    const innerDragElementIndex: Ref<number | null> = ref(null)
-    const selectedOptionComponent: Ref<Block | null> = ref(null)
-    const dragOverChildElement: Ref<boolean> = ref(false)
-
-    const blocks: Ref<Array<Block>> = ref([
-        new ButtonBlock(),
-        new TextBlock(),
-        new ColumnBlock(),
-        // new ListBlock(),
-        new HtmlBlock(),
-        new CardUiComponent(),
-    ])
-
     const startDrag = ($event: DragEvent, item: Block) => {
         $event.dataTransfer?.setData('text/plain', JSON.stringify(item));
     }
@@ -151,6 +151,10 @@ export function usePageBuilder() {
         }
     }
 
+    const setActiveComponent = (component: string) => {
+        activeComponent.value = component;
+    }
+
 
     return {
         blocks,
@@ -170,6 +174,10 @@ export function usePageBuilder() {
         onDragLeave,
         onItemSelect,
         onSelectFormChildElement,
-        onDelete
+        onDelete,
+        //
+        activeComponent,
+        meta,
+        setActiveComponent
     }
 }
