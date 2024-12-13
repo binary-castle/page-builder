@@ -6,26 +6,24 @@ import {Block} from "./utils/types.ts";
 import {HtmlBlock} from "./utils/blocks/HtmlBlock.ts";
 import {TextBlock} from "./utils/blocks/TextBlock.ts";
 
+const draggedItem: Ref<Block | null> = ref(null)
+const renderList: Ref<Array<Block>> = ref([])
+const meta: Ref<Array<Record<string, string>>> = ref([])
+const dragOverIndex: Ref<number | null> = ref(null)
+const dragOverDropZone: Ref<boolean> = ref(false)
+const innerDragElement: Ref<Block | null> = ref(null)
+const innerDragElementIndex: Ref<number | null> = ref(null)
+const activeComponent: Ref<String | null> = ref('MetaComponent')
+
+const blocks: Ref<Array<Block>> = ref([
+    new ButtonBlock(),
+    new TextBlock(),
+    new ColumnBlock(),
+    new ListBlock(),
+    new HtmlBlock()
+])
+
 export function usePageBuilder() {
-
-    const draggedItem: Ref<Block | null> = ref(null)
-    const renderList: Ref<Array<Block>> = ref([])
-    const meta: Ref<Array<Record<string, string>>> = ref([])
-    const singleMeta: Ref<Object<Record<string, string>>> = ref({})
-    const dragOverIndex: Ref<number | null> = ref(null)
-    const dragOverDropZone: Ref<boolean> = ref(false)
-    const innerDragElement: Ref<Block | null> = ref(null)
-    const innerDragElementIndex: Ref<number | null> = ref(null)
-    const activeComponent: Ref<String | null> = ref('MetaComponent')
-
-    const blocks: Ref<Array<Block>> = ref([
-        new ButtonBlock(),
-        new TextBlock(),
-        new ColumnBlock(),
-        new ListBlock(),
-        new HtmlBlock()
-    ])
-
     const startDrag = ($event: DragEvent, item: Block) => {
         $event.dataTransfer?.setData('text/plain', JSON.stringify(item));
     }
@@ -100,24 +98,10 @@ export function usePageBuilder() {
         activeComponent.value = component;
     }
 
-    const addMoreMeta = () => {
-        meta.value.push(singleMeta.value);
-        singleMeta.value = {}
-    }
-
-    const editMeta = () => {
-        //TODO::working
-    }
-
-    const deleteMeta = () => {
-        //TODO::working
-    }
-
     return {
         blocks,
         renderList,
         meta,
-        singleMeta,
         draggedItem,
         dragOverIndex,
         dragOverDropZone,
@@ -128,9 +112,6 @@ export function usePageBuilder() {
         onDragOverItem,
         onDragOver,
         onDragLeave,
-        setActiveComponent,
-        addMoreMeta,
-        editMeta,
-        deleteMeta,
+        setActiveComponent
     }
 }
