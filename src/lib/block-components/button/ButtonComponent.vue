@@ -3,7 +3,8 @@ import {ButtonBlock} from "../../utils/blocks/ButtonBlock.ts";
 import BasePreview from "../BasePreview.vue";
 
 interface Props {
-  blockInfo: ButtonBlock
+  blockInfo: ButtonBlock;
+  inEditor?: boolean
 }
 
 defineProps<Props>()
@@ -13,7 +14,7 @@ defineProps<Props>()
 
 <template>
 
-  <BasePreview>
+  <BasePreview :inEditor="inEditor">
     <button :class="blockInfo.options.styleClass"
             :style="blockInfo.options.styles">
       {{ blockInfo.options.text }}

@@ -5,6 +5,7 @@ import { onBeforeUnmount, onMounted, ref, watchEffect } from "vue";
 
 interface Props {
   blockInfo: HtmlBlock;
+  inEditor?: boolean;
 }
 
 const props = defineProps<Props>();
@@ -48,7 +49,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <BasePreview>
+  <BasePreview :inEditor="inEditor">
     <div :class="instanceId" v-html="props.blockInfo.options.html"></div>
   </BasePreview>
 </template>

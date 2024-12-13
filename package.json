@@ -1,21 +1,30 @@
 {
-  "name": "bc-page-builder",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@binarycastle/page-builder",
+  "description": "Page Builder",
+  "private": false,
+  "homepage": "https://github.com/binary-castle/page-builder",
+  "version": "0.0.10",
+  "license": "LGPL-3.0-only",
   "type": "module",
   "main": "./dist/index.umd.js",
   "types": "./dist/index.d.ts",
   "module": "./dist/index.es.js",
   "css": "./dist/bc-page-builder.css",
   "files": [
-    "lib"
+    "dist",
+    "README.md"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
+    "uuid": "^11.0.3",
     "vue": "^3.5.12"
   },
   "devDependencies": {
@@ -29,9 +38,13 @@
     "codemirror-editor-vue3": "^2.8.0",
     "rollup-plugin-scss": "^4.0.0",
     "sass": "^1.77.1",
+    "semantic-release": "^24.2.0",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vite-plugin-dts": "^3.9.1",
     "vue-tsc": "^2.0.6"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.12"
   }
 }

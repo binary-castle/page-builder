@@ -50,12 +50,17 @@ const toggleExpand = ($event: Event) => {
 .bc-page-builder-option-widget {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 24px 0;
   border-bottom: 1px solid rgb(238, 238, 238);
 
   &.vertical {
     flex-direction: column;
     align-items: stretch;
+
+    .bc-page-builder-option-widget-label {
+      width: 95%;
+    }
 
     .bc-page-builder-option-widget-control {
       padding: 10px;
@@ -71,7 +76,7 @@ const toggleExpand = ($event: Event) => {
     font-weight: 500;
     color: rgb(81, 81, 81);
     padding-left: 5px;
-    width: 90%;
+    width: 35%;
     display: flex;
     justify-content: space-between;
 
@@ -93,6 +98,7 @@ const toggleExpand = ($event: Event) => {
       top: 10%;
       bottom: 10%;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      z-index: 10;
     }
   }
 

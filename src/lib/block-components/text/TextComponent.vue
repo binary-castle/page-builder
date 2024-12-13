@@ -6,6 +6,7 @@ import {TextBlock} from "../../utils/blocks/TextBlock.ts";
 
 interface Props {
   blockInfo: TextBlock
+  inEditor?: boolean
 }
 
 defineProps<Props>()
@@ -13,7 +14,7 @@ defineProps<Props>()
 </script>
 
 <template>
-  <BasePreview>
+  <BasePreview :inEditor="inEditor">
     <RichTextEditor v-model="blockInfo.options.text"></RichTextEditor>
   </BasePreview>
 </template>

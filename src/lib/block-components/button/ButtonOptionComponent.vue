@@ -16,21 +16,21 @@ defineProps<Props>()
   <BaseOption title="Button">
     <div class="options">
       <option-widget title="Text">
-        <input type="text" class="form-control" v-model="blockInfo.options.text">
+        <input type="text" v-model="blockInfo.options.text">
       </option-widget>
 
       <option-widget title="Style Class" align="vertical">
-        <textarea class="form-control" v-model="blockInfo.options.styleClass">
+        <textarea v-model="blockInfo.options.styleClass">
 
         </textarea>
       </option-widget>
 
       <option-widget title="Align">
-
-      </option-widget>
-
-      <option-widget title="Styles" align="vertical">
-        <CodeMirrorEditor v-model="blockInfo.options.styles" language="text/css"></CodeMirrorEditor>
+        <div class="bc-button-group">
+          <button class="bc-button">left</button>
+          <button class="bc-button">middle</button>
+          <button class="bc-button">right</button>
+        </div>
       </option-widget>
 
       <option-widget title="Has Container">
@@ -38,6 +38,11 @@ defineProps<Props>()
           <input type="checkbox">
         </div>
       </option-widget>
+
+      <option-widget title="Styles" align="vertical" :is-expandable="true">
+        <CodeMirrorEditor v-model="blockInfo.options.styles" language="text/css"></CodeMirrorEditor>
+      </option-widget>
+
 
     </div>
   </BaseOption>

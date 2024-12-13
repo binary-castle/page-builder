@@ -4,6 +4,7 @@ import BaseOption from "../BaseOption.vue";
 import OptionWidget from "../../widgets/OptionWidget.vue";
 import {ColumnBlock} from "../../utils/blocks/ColumnBlock.ts";
 import {ref} from "vue";
+import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 
 interface Props {
   blockInfo: ColumnBlock
@@ -12,6 +13,10 @@ interface Props {
 defineProps<Props>()
 
 const selectedColumn = ref(1);
+
+const onSelectColumn = (columnIndex: number) => {
+  selectedColumn.value = columnIndex
+}
 
 </script>
 
@@ -32,11 +37,15 @@ const selectedColumn = ref(1);
       <input type="number" v-model="blockInfo.options.columns" min="1" max="12" class="form-control">
     </option-widget>
 
+    <option-widget title="Styles" align="vertical" :is-expandable="true">
+      <CodeMirrorEditor></CodeMirrorEditor>
+    </option-widget>
+
 
     <div class="columns-tab">
       <div v-for="column of blockInfo.options.columns" class="tab"
            :class="{'selected': selectedColumn === column}"
-           @click="selectedColumn = column"
+           @click="onSelectColumn(column)"
       >
         <p>Column {{ column }}</p>
       </div>
@@ -48,6 +57,12 @@ const selectedColumn = ref(1);
       </option-widget>
       <option-widget title="Background Color">
         <input type="color">
+      </option-widget>
+      <option-widget title="Background Image" align="vertical">
+        <input type="url" class="form-control" placeholder="Apply Image URL">
+      </option-widget>
+      <option-widget title="Style" align="vertical" :is-expandable="true">
+        <CodeMirrorEditor></CodeMirrorEditor>
       </option-widget>
     </div>
 
