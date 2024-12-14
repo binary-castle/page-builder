@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {usePageBuilder} from "../PageBuilder.ts";
+import {usePageBuilder} from "../../PageBuilder.ts";
 import {reactive, ref, Ref} from "vue";
 
 const singleMeta: Ref<Object<Record<string, string>>> = ref({})

@@ -11,7 +11,6 @@ import {CardUiComponent} from "./utils/ui-components/CardUiComponent.ts";
 const draggedItem: Ref<Block | null> = ref(null)
 const renderList: Ref<Array<Block>> = ref([])
 const meta: Ref<Array<Record<string, string>>> = ref([])
-const activeComponent: Ref<String | null> = ref('MetaComponent')
 const dragOverIndex: Ref<number | null> = ref(null)
 const dragOverDropZone: Ref<boolean> = ref(false)
 const innerDragElement: Ref<Block | null> = ref(null)
@@ -151,13 +150,10 @@ export function usePageBuilder() {
         }
     }
 
-    const setActiveComponent = (component: string) => {
-        activeComponent.value = component;
-    }
-
 
     return {
         blocks,
+        meta,
         renderList,
         draggedItem,
         dragOverIndex,
@@ -175,9 +171,5 @@ export function usePageBuilder() {
         onItemSelect,
         onSelectFormChildElement,
         onDelete,
-        //
-        activeComponent,
-        meta,
-        setActiveComponent
     }
 }
