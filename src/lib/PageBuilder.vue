@@ -2,16 +2,20 @@
 
 import {usePageBuilder} from "./PageBuilder.ts";
 import {previewComponentMap, previewOptionMap} from "./utils/registry.ts";
-import {onMounted, ref, Ref} from "vue";
+import {onMounted, ref, Ref, watchEffect} from "vue";
 import {useLoadCSS} from "./useLoadCSS.ts";
 import SideBar from "./layouts/SideBar.vue";
 import PagePreview from "./PagePreview.vue";
+import {Block} from "./utils/types.ts";
 
-const props = defineProps({
-  cssUrl: {
-    type: String,
-    default: '',
-  }
+interface Props {
+  cssUrl?: string;
+  renderList?: Block[],
+  meta?: Array<Record<string, string>>
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  cssUrl: '',
 })
 
 const emit = defineEmits<{
@@ -42,6 +46,11 @@ const {loadCSS} = useLoadCSS()
 
 onMounted(() => {
   loadCSS(props.cssUrl)
+})
+
+watchEffect(() => {
+  renderList.value = props.renderList ? [...props.renderList] : []
+  meta.value = props.meta ? [...props.meta] : []
 })
 
 const exportPage = ($event: Event) => {
