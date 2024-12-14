@@ -19,6 +19,7 @@ const emit = defineEmits<{
 }>()
 
 const {
+  meta,
   renderList,
   dragOverIndex,
   dragOverDropZone,
@@ -45,7 +46,7 @@ onMounted(() => {
 
 const exportPage = ($event: Event) => {
   $event.preventDefault();
-  emit('onSave', {'renderList': renderList})
+  emit('onSave', {'renderList': renderList.value, 'meta': meta.value})
 }
 
 const isPreview: Ref<boolean> = ref(false);

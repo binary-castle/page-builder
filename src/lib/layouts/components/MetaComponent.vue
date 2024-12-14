@@ -1,24 +1,23 @@
 <script setup lang="ts">
-import {usePageBuilder} from "../PageBuilder.ts";
-import {reactive, ref, Ref} from "vue";
+import {usePageBuilder} from "../../PageBuilder.ts";
+import {ref, Ref} from "vue";
 
-const singleMeta: Ref<Object<Record<string, string>>> = ref({})
+const singleMeta: Ref<Record<string, string>> = ref({})
 const {meta} = usePageBuilder();
 
-const editIndex = reactive({value: null}); // Track the index being edited
-
+const editIndex: Ref<number | null> = ref(null);
 const addMoreMeta = () => {
   meta.value.push({...singleMeta.value});
   singleMeta.value = {};
 }
 
 const editMeta = (index: number) => {
-  editIndex.value = index; // Set the index being edited
-  singleMeta.value = {...meta.value[index]}; // Populate `singleMeta` with the data to edit
+  editIndex.value = index;
+  singleMeta.value = {...meta.value[index]};
 };
 
 const deleteMeta = (index: number) => {
-  meta.value.splice(index, 1); // Remove the item from the meta array
+  meta.value.splice(index, 1);
   if (editIndex.value === index) {
     editIndex.value = null;
     singleMeta.value = {};
@@ -67,7 +66,7 @@ const handleSubmit = () => {
         />
         <div class="d-flex justify-content-between">
           <button class="btn btn-sm btn-success" type="submit">
-            {{ editIndex.value !== null ? "Update" : "Submit" }}
+            {{ editIndex !== null ? "Update" : "Submit" }}
           </button>
         </div>
       </form>
