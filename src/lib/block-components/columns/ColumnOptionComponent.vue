@@ -49,32 +49,18 @@ const onSelectColumn = (columnIndex: number) => {
       <input v-model="blockInfo.options.hasContainer" type="checkbox">
     </option-widget>
     <option-widget title="Background Color" align="vertical">
-      <div
-          class="d-flex justify-content-between align-items-center gap-2"
-      >
-        <input
-            v-model="blockInfo.options.bgColor"
-            type="color"
-            class="form-control"
-        />
-        <div
-            class="fs-12"
-            type="button"
-            @click="blockInfo.options.bgColor = ''"
-        >
+      <div class="d-flex justify-content-between align-items-center gap-2">
+        <input v-model="blockInfo.options.bgColor" type="color" class="form-control"/>
+        <div class="fs-12" type="button" @click="blockInfo.options.bgColor = ''">
           Reset
         </div>
       </div>
     </option-widget>
     <option-widget title="CSS Class" align="vertical">
-          <textarea
-              v-model="blockInfo.options.cssClasses"
-              class="form-control"></textarea>
+      <textarea v-model="blockInfo.options.cssClasses" class="form-control"/>
     </option-widget>
     <option-widget title="Column Gap" align="vertical">
-      <div
-          class="d-flex justify-content-between align-items-center gap-2"
-      >
+      <div class="d-flex justify-content-between align-items-center gap-2">
         <select v-model="blockInfo.options.gapClass">
           <option value="1">1</option>
           <option value="2">2</option>
@@ -121,19 +107,10 @@ const onSelectColumn = (columnIndex: number) => {
               class="form-control"></textarea>
         </option-widget>
         <option-widget title="Background Color" align="vertical">
-          <div
-              class="d-flex justify-content-between align-items-center gap-2"
-          >
-            <input
-                v-model="blockInfo.options.columnStyles[columnIndex].backgroundColor"
-                type="color"
-                class="form-control"
-            />
-            <div
-                class="fs-12"
-                type="button"
-                @click="blockInfo.options.columnStyles[columnIndex].backgroundColor = ''"
-            >
+          <div class="d-flex justify-content-between align-items-center gap-2">
+            <input v-model="blockInfo.options.columnStyles[columnIndex].backgroundColor" type="color"
+                   class="form-control"/>
+            <div class="fs-12" type="button" @click="blockInfo.options.columnStyles[columnIndex].backgroundColor = ''">
               Reset
             </div>
           </div>
