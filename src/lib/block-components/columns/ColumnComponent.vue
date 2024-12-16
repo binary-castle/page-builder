@@ -129,9 +129,10 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
 
 <template>
   <BasePreview :inEditor="inEditor">
-    <div class="row" style="min-height: 200px; margin: 20px 0">
+    <div class="row row-section" :class="[`gap-${blockInfo.options.gapClass}`, blockInfo.options.cssClasses, {'container': blockInfo.options.hasContainer}]" style="min-height: 200px; margin: 20px 0">
       <div v-for="(index) in blockInfo.options.columns" class="col"
-           :class="{'column-item': inEditor, 'column-dragged-over':  dragOverRow === index}"
+           :style="{backgroundColor: `${blockInfo.options.columnStyles[index] ? blockInfo.options.columnStyles[index].backgroundColor : ''} !important`}"
+           :class="[blockInfo.options.columnStyles[index].cssClasses, {'column-item': inEditor, 'column-dragged-over':  dragOverRow === index}]"
            @drop="onDrop($event, index)"
            @dragenter.prevent
            @dragleave="onDragLeave"
@@ -156,6 +157,12 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
 </template>
 
 <style scoped lang="scss">
+.row-section {
+  background: v-bind(
+          'blockInfo.options.bgColor ? blockInfo.options.bgColor : "linear-gradient(180deg, #e9f2ff 0%, #e0edff 100%)"'
+  );
+}
+
 .column-item {
   min-height: 40px;
   border: none;

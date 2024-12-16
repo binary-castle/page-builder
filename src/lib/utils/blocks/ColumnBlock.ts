@@ -10,15 +10,12 @@ export class ColumnBlock implements Block {
     optionComponent: VueComponent = markRaw(ColumnOptionComponent);
     options: Record<string, any> = {
         columns: 3,
-        styleClass: '',
+        cssClasses: '',
         styles: '',
+        hasContainer: false,
+        bgColor: '',
+        gapClass: 1,
         columnStyles: {
-            0: {
-                cssClasses: '',
-                backgroundColor: '',
-                backgroundImage: '',
-                styles: 'padding: 10px'
-            },
             1: {
                 cssClasses: '',
                 backgroundColor: '',
@@ -26,6 +23,12 @@ export class ColumnBlock implements Block {
                 styles: 'padding: 10px'
             },
             2: {
+                cssClasses: '',
+                backgroundColor: '',
+                backgroundImage: '',
+                styles: 'padding: 10px'
+            },
+            3: {
                 cssClasses: '',
                 backgroundColor: '',
                 backgroundImage: '',

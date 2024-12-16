@@ -9,6 +9,7 @@ import PagePreview from "./PagePreview.vue";
 import {Block} from "./utils/types.ts";
 
 interface Props {
+  pageTitle: string;
   cssUrl?: string;
   renderList?: Block[],
   meta?: Array<Record<string, string>>
@@ -72,7 +73,7 @@ const isPreview: Ref<boolean> = ref(false);
 
         <div class="bc-page-builder--preview--header">
           <div class="main-title" style="text-align: left">
-            BC - Page builder
+            BC - Page builder - {{pageTitle}}
           </div>
 
           <div class="item">
