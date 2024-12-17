@@ -1,16 +1,26 @@
 <script setup lang="ts">
 interface Props {
-  inEditor?: boolean
+  inEditor?: boolean,
+  hasContainer?: boolean,
+  backgroundColor?: string,
+  backgroundImage?: string,
 }
 
 withDefaults(defineProps<Props>(), {
-  inEditor: true
+  inEditor: true,
+  hasContainer: true,
 })
 
 </script>
 
 <template>
-  <div class="base-preview-item" :class="{'editor': inEditor}">
+  <div class="base-preview-item"
+       :class="{'editor': inEditor, 'container': hasContainer, 'has-background-image': backgroundImage}"
+       :style="{
+      backgroundColor: backgroundColor || '',
+      backgroundImage: backgroundImage ? `url('${backgroundImage}')` : ''
+    }"
+  >
     <slot></slot>
   </div>
 

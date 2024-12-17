@@ -9,3 +9,16 @@ input, textarea, select {
     border-color: rgba(0, 0, 0, 0.55);
   }
 }
+
+.form-control-color {
+  width: 3rem;
+  height: calc(1.5em + .75rem + calc(var(--bs-border-width)* 2));
+  padding: .375rem;
+}
+
+.has-background-image {
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}

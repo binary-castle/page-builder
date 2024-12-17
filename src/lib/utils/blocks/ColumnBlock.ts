@@ -13,7 +13,8 @@ export class ColumnBlock implements Block {
         cssClasses: '',
         styles: '',
         hasContainer: false,
-        bgColor: '',
+        backgroundColor: '',
+        backgroundImage: '',
         gapClass: 1,
         columnStyles: {
             1: {

@@ -5,6 +5,7 @@ import OptionWidget from "../../widgets/OptionWidget.vue";
 import {ColumnBlock} from "../../utils/blocks/ColumnBlock.ts";
 import {ref, watch} from "vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
+import ColorWidget from "../../widgets/ColorWidget.vue";
 
 interface Props {
   blockInfo: ColumnBlock
@@ -19,10 +20,10 @@ watch(() => props.blockInfo.options.columns, (newColumnNumber, oldColumnNumber) 
         Array.from({length: newColumnNumber - oldColumnNumber}, (_, i) => oldColumnNumber + 1 + i)
             .forEach((index) => {
               columnStyles[index] = {
-                cssClasses: "",
-                backgroundColor: "",
-                backgroundImage: "",
-                styles: "padding: 10px",
+                cssClasses: '',
+                backgroundColor: '',
+                backgroundImage: '',
+                styles: 'padding: 10px'
               };
             });
       }
@@ -45,20 +46,15 @@ const onSelectColumn = (columnIndex: number) => {
 
 <template>
   <BaseOption title="Column">
+
     <option-widget title="Has Container">
       <input v-model="blockInfo.options.hasContainer" type="checkbox">
     </option-widget>
-    <option-widget title="Background Color" align="vertical">
-      <div class="d-flex justify-content-between align-items-center gap-2">
-        <input v-model="blockInfo.options.bgColor" type="color" class="form-control"/>
-        <div class="fs-12" type="button" @click="blockInfo.options.bgColor = ''">
-          Reset
-        </div>
-      </div>
+    <color-widget title="Background Color" v-model="blockInfo.options.backgroundColor"/>
+    <option-widget title="Background image" align="vertical">
+      <input type="url" v-model="blockInfo.options.backgroundImage" class="form-control" placeholder="Apply Image URL">
     </option-widget>
-    <option-widget title="CSS Class" align="vertical">
-      <textarea v-model="blockInfo.options.cssClasses" class="form-control"/>
-    </option-widget>
+
     <option-widget title="Column Gap" align="vertical">
       <div class="d-flex justify-content-between align-items-center gap-2">
         <select v-model="blockInfo.options.gapClass">
@@ -70,17 +66,15 @@ const onSelectColumn = (columnIndex: number) => {
         </select>
       </div>
     </option-widget>
-    <option-widget title="Background image" align="vertical">
-      <input type="url" class="form-control" placeholder="Apply Image URL">
+    <option-widget title="Styles" align="vertical" :is-expandable="true">
+      <CodeMirrorEditor v-model="blockInfo.options.styles"/>
     </option-widget>
-
+    <option-widget title="CSS Class" align="vertical">
+      <textarea v-model="blockInfo.options.cssClasses" class="form-control"/>
+    </option-widget>
 
     <option-widget title="Columns">
       <input type="number" v-model="blockInfo.options.columns" min="1" max="12" class="form-control">
-    </option-widget>
-
-    <option-widget title="Styles" align="vertical" :is-expandable="true">
-      <CodeMirrorEditor v-model="blockInfo.options.styles"/>
     </option-widget>
 
     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -106,17 +100,9 @@ const onSelectColumn = (columnIndex: number) => {
               v-model="blockInfo.options.columnStyles[columnIndex].cssClasses"
               class="form-control"></textarea>
         </option-widget>
-        <option-widget title="Background Color" align="vertical">
-          <div class="d-flex justify-content-between align-items-center gap-2">
-            <input v-model="blockInfo.options.columnStyles[columnIndex].backgroundColor" type="color"
-                   class="form-control"/>
-            <div class="fs-12" type="button" @click="blockInfo.options.columnStyles[columnIndex].backgroundColor = ''">
-              Reset
-            </div>
-          </div>
-        </option-widget>
+        <color-widget title="Background Color" v-model="blockInfo.options.columnStyles[columnIndex].backgroundColor"/>
         <option-widget title="Background Image" align="vertical">
-          <input type="url" class="form-control" placeholder="Apply Image URL">
+          <input type="url" v-model="blockInfo.options.columnStyles[columnIndex].backgroundImage" class="form-control" placeholder="Apply Image URL">
         </option-widget>
         <option-widget title="Style" align="vertical" :is-expandable="true">
           <CodeMirrorEditor v-model="blockInfo.options.columnStyles[columnIndex].styles"/>
