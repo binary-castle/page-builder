@@ -3,6 +3,7 @@ import {ButtonBlock} from "../../utils/blocks/ButtonBlock.ts";
 import OptionWidget from "../../widgets/OptionWidget.vue";
 import BaseOption from "../BaseOption.vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
+import TextAlignWidget from "../../widgets/utils/TextAlignWidget.vue";
 
 interface Props {
   blockInfo: ButtonBlock
@@ -25,13 +26,7 @@ defineProps<Props>()
         </textarea>
       </option-widget>
 
-      <option-widget title="Align">
-        <div class="bc-button-group">
-          <button class="bc-button">left</button>
-          <button class="bc-button">middle</button>
-          <button class="bc-button">right</button>
-        </div>
-      </option-widget>
+      <text-align-widget v-model="blockInfo.options.textAlign"/>
 
       <option-widget title="Has Container">
         <div style="text-align: left">

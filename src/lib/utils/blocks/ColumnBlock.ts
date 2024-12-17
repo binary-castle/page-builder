@@ -15,6 +15,14 @@ export class ColumnBlock implements Block {
         hasContainer: false,
         backgroundColor: '',
         backgroundImage: '',
+        padding: {
+            allSide: '10',
+            moreOption: false,
+            top: '10',
+            right: '10',
+            left: '10',
+            bottom: '10'
+        },
         gapClass: 1,
         columnStyles: {
             1: {

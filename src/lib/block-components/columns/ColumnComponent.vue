@@ -132,6 +132,7 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
       :has-container="blockInfo.options.hasContainer"
       :background-color="blockInfo.options.backgroundColor"
       :background-image="blockInfo.options.backgroundImage"
+      :padding="blockInfo.options.padding"
       :inEditor="inEditor">
     <div class="row row-section" :class="[`gap-${blockInfo.options.gapClass}`, blockInfo.options.cssClasses]"
          style="min-height: 200px; margin: 20px 0">

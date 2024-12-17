@@ -4,11 +4,20 @@ interface Props {
   hasContainer?: boolean,
   backgroundColor?: string,
   backgroundImage?: string,
+  padding?: {
+    top?: number,
+    bottom?: number,
+    left?: number,
+    right?: number,
+  },
 }
 
 withDefaults(defineProps<Props>(), {
   inEditor: true,
   hasContainer: true,
+  backgroundColor: 'transparent',
+  backgroundImage: 'none',
+  padding: {}
 })
 
 </script>
@@ -17,6 +26,10 @@ withDefaults(defineProps<Props>(), {
   <div class="base-preview-item"
        :class="{'editor': inEditor, 'container': hasContainer, 'has-background-image': backgroundImage}"
        :style="{
+      paddingLeft: padding.left + 'px',
+      paddingRight: padding.right + 'px',
+      paddingTop: padding.top + 'px',
+      paddingBottom: padding.bottom + 'px',
       backgroundColor: backgroundColor || '',
       backgroundImage: backgroundImage ? `url('${backgroundImage}')` : ''
     }"

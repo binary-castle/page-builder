@@ -16,7 +16,7 @@ defineProps<Props>()
 
   <BasePreview :inEditor="inEditor">
     <button :class="blockInfo.options.styleClass"
-            :style="blockInfo.options.styles">
+            :style="[blockInfo.options.styles, {textAlign: blockInfo.options.textAlign}]">
       {{ blockInfo.options.text }}
     </button>
   </BasePreview>

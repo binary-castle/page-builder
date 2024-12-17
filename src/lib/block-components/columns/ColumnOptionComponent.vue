@@ -5,7 +5,8 @@ import OptionWidget from "../../widgets/OptionWidget.vue";
 import {ColumnBlock} from "../../utils/blocks/ColumnBlock.ts";
 import {ref, watch} from "vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
-import ColorWidget from "../../widgets/ColorWidget.vue";
+import ColorWidget from "../../widgets/utils/ColorWidget.vue";
+import ContainerPaddingWidget from "../../widgets/utils/ContainerPaddingWidget.vue";
 
 interface Props {
   blockInfo: ColumnBlock
@@ -54,7 +55,7 @@ const onSelectColumn = (columnIndex: number) => {
     <option-widget title="Background image" align="vertical">
       <input type="url" v-model="blockInfo.options.backgroundImage" class="form-control" placeholder="Apply Image URL">
     </option-widget>
-
+    <container-padding-widget v-model="blockInfo.options.padding"/>
     <option-widget title="Column Gap" align="vertical">
       <div class="d-flex justify-content-between align-items-center gap-2">
         <select v-model="blockInfo.options.gapClass">

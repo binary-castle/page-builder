@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import OptionWidget from "./OptionWidget.vue";
+import OptionWidget from "../OptionWidget.vue";
 
 interface Props {
   title: string;
