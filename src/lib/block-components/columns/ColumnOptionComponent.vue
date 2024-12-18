@@ -7,6 +7,7 @@ import {ref, watch} from "vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import ColorWidget from "../../widgets/utils/ColorWidget.vue";
 import ContainerPaddingWidget from "../../widgets/utils/ContainerPaddingWidget.vue";
+import AcordionWidget from "../../widgets/AcordionWidget.vue";
 
 interface Props {
   blockInfo: ColumnBlock
@@ -48,14 +49,23 @@ const onSelectColumn = (columnIndex: number) => {
 <template>
   <BaseOption title="Column">
 
-    <option-widget title="Has Container">
-      <input v-model="blockInfo.options.hasContainer" type="checkbox">
-    </option-widget>
-    <color-widget title="Background Color" v-model="blockInfo.options.backgroundColor"/>
-    <option-widget title="Background image" align="vertical">
-      <input type="url" v-model="blockInfo.options.backgroundImage" class="form-control" placeholder="Apply Image URL">
-    </option-widget>
-    <container-padding-widget v-model="blockInfo.options.padding"/>
+    <acordion-widget title="Container">
+      <option-widget title="Has Container">
+        <input v-model="blockInfo.options.hasContainer" type="checkbox" class="bc-checkbox">
+      </option-widget>
+
+      <color-widget title="Background Color" v-model="blockInfo.options.backgroundColor"/>
+
+      <option-widget title="Background image" align="vertical">
+        <input type="url" v-model="blockInfo.options.backgroundImage" class="bc-form-control"
+               placeholder="Apply Image URL">
+      </option-widget>
+
+    </acordion-widget>
+    <acordion-widget title="Padding">
+      <container-padding-widget v-model="blockInfo.options.padding"/>
+    </acordion-widget>
+
     <option-widget title="Column Gap" align="vertical">
       <div class="d-flex justify-content-between align-items-center gap-2">
         <select v-model="blockInfo.options.gapClass">
@@ -103,7 +113,8 @@ const onSelectColumn = (columnIndex: number) => {
         </option-widget>
         <color-widget title="Background Color" v-model="blockInfo.options.columnStyles[columnIndex].backgroundColor"/>
         <option-widget title="Background Image" align="vertical">
-          <input type="url" v-model="blockInfo.options.columnStyles[columnIndex].backgroundImage" class="form-control" placeholder="Apply Image URL">
+          <input type="url" v-model="blockInfo.options.columnStyles[columnIndex].backgroundImage" class="form-control"
+                 placeholder="Apply Image URL">
         </option-widget>
         <option-widget title="Style" align="vertical" :is-expandable="true">
           <CodeMirrorEditor v-model="blockInfo.options.columnStyles[columnIndex].styles"/>
@@ -116,33 +127,33 @@ const onSelectColumn = (columnIndex: number) => {
 
 <style scoped lang="scss">
 .columns-tab {
-  display: flex;
-  overflow-x: auto;
-  padding: 0;
-  gap: 0;
-  border-bottom: 1px solid #ddd;
+  display       : flex;
+  overflow-x    : auto;
+  padding       : 0;
+  gap           : 0;
+  border-bottom : 1px solid #ddd;
 
   .tab {
-    flex: 0 0 auto;
-    padding: 10px 20px;
-    background-color: #ffffff;
+    flex             : 0 0 auto;
+    padding          : 10px 20px;
+    background-color : #ffffff;
 
-    border-radius: 0;
-    text-align: center;
-    border-bottom: 1px solid transparent;
-    cursor: pointer;
+    border-radius    : 0;
+    text-align       : center;
+    border-bottom    : 1px solid transparent;
+    cursor           : pointer;
 
     &.selected {
-      border-bottom: 2px solid #ddd;
+      border-bottom : 2px solid #ddd;
     }
 
     &:hover {
-      border-bottom: 2px solid #ddd;
+      border-bottom : 2px solid #ddd;
     }
 
     p {
-      font-size: 14px;
-      margin-bottom: 0;
+      font-size     : 14px;
+      margin-bottom : 0;
     }
   }
 }

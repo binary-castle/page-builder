@@ -134,8 +134,7 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
       :background-image="blockInfo.options.backgroundImage"
       :padding="blockInfo.options.padding"
       :inEditor="inEditor">
-    <div class="row row-section" :class="[`gap-${blockInfo.options.gapClass}`, blockInfo.options.cssClasses]"
-         style="min-height: 200px; margin: 20px 0">
+    <div class="row row-section" :class="[`gap-${blockInfo.options.gapClass}`, blockInfo.options.cssClasses]">
       <div v-for="(index) in blockInfo.options.columns" class="col"
            :style="{
                     backgroundColor: blockInfo.options.columnStyles[index]?.backgroundColor || '',
@@ -151,8 +150,7 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
            @dragover="onDragOverRow(index)">
 
         <template v-for="(item, columnIndex) of blockInfo.children[index]">
-          <div style="height: 10px; width: 100%"
-               :class="{'bg-secondary': dragOverRow === index && dragOverColumn === columnIndex}"></div>
+          <div :class="{'bg-secondary': dragOverRow === index && dragOverColumn === columnIndex}"></div>
           <component :is="previewComponentMap[item.name]"
                      :blockInfo="item"
                      :inEditor="inEditor"
@@ -170,12 +168,9 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
 
 <style scoped lang="scss">
 .column-item {
-  min-height: 40px;
+  min-height: 140px;
   border: none;
-  padding: 10px 0;
-  position: relative;
   z-index: 10;
-
 
   &:not(:last-child) {
     border-right: 1px dashed blue;
