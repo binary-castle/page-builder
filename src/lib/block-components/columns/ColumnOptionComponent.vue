@@ -92,46 +92,86 @@ const onSelectColumn = (columnIndex: number) => {
       <option-widget title="Columns">
         <input type="number" v-model="blockInfo.options.columns" min="1" max="12" class="bc-form-control">
       </option-widget>
-    </acordion-widget>
 
-
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li v-for="(column) of blockInfo.options.columns"
-          class="nav-item" role="presentation">
-        <button :class="{'active': selectedColumn == column}"
-                @click="onSelectColumn(column)" class="nav-link" :id="`column-item-${column}-tab`" data-bs-toggle="pill"
-                :data-bs-target="`#column-item-${column}`" type="button" role="tab"
-                :aria-controls="`column-item-${column}`"
-                aria-selected="true">
+      <div class="bc-nav-tabs">
+        <div v-for="(column) of blockInfo.options.columns"
+             @click="onSelectColumn(column)"
+             class="bc-nav-item"
+             :class="{'active': selectedColumn == column}">
           Col {{ column }}
-        </button>
-      </li>
-    </ul>
+        </div>
+      </div>
 
-    <div class="tab-content" id="myTabContent">
-      <div v-for="(columnIndex) of blockInfo.options.columns" class="tab-pane fade show"
-           :class="{'active': selectedColumn == columnIndex}" :id="`column-item-${columnIndex}`" role="tabpanel"
-           :aria-labelledby="`column-item-${columnIndex}-tab`"
-           tabindex="0">
-        <option-widget title="CSS Class" align="vertical">
+      <div class="bc-tab-content">
+          <div v-for="(columnIndex) of blockInfo.options.columns"
+               class="bc-tab-pane"
+               :class="{'active': selectedColumn == columnIndex}">
+
+            <div>
+              <div>
+                <option-widget title="CSS Class" align="vertical">
           <textarea
               v-model="blockInfo.options.columnStyles[columnIndex].cssClasses"
-              class="form-control"></textarea>
-        </option-widget>
-        <color-widget title="Background Color" v-model="blockInfo.options.columnStyles[columnIndex].backgroundColor"/>
-        <option-widget title="Background Image" align="vertical">
-          <input type="url" v-model="blockInfo.options.columnStyles[columnIndex].backgroundImage" class="form-control"
-                 placeholder="Apply Image URL">
-        </option-widget>
-        <option-widget title="Style" align="vertical" :is-expandable="true">
-          <CodeMirrorEditor v-model="blockInfo.options.columnStyles[columnIndex].styles"/>
-        </option-widget>
+              class="bc-form-control"></textarea>
+                </option-widget>
+
+                <color-widget title="Background Color" v-model="blockInfo.options.columnStyles[columnIndex].backgroundColor"/>
+
+                <option-widget title="Background Image" align="vertical">
+                  <input type="url" v-model="blockInfo.options.columnStyles[columnIndex].backgroundImage" class="bc-form-control"
+                         placeholder="Apply Image URL">
+                </option-widget>
+
+                <option-widget title="Style" align="vertical" :is-expandable="true">
+                  <CodeMirrorEditor v-model="blockInfo.options.columnStyles[columnIndex].styles"/>
+                </option-widget>
+              </div>
+            </div>
+        </div>
       </div>
-    </div>
+
+    </acordion-widget>
 
   </BaseOption>
 </template>
 
 <style scoped lang="scss">
+.bc-nav-tabs{
+  display : grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  text-align: center;
+  gap:8px;
+  flex-wrap: wrap;
+  padding-left : 8px;
+  margin-top : 8px;
+  margin-bottom : 8px;
+  .bc-nav-item{
+    cursor: pointer;
+    border:1px solid rgba(0, 0, 0, 0.35);;
+    border-radius: 6px;
+    padding : 8px 0;
+    font-size: 13px;
+    &.active,&:hover{
+      background : #ff4500;
+      border-color: #ff4500;
+      color: #ffffff;
+    }
+  }
+}
 
+.bc-tab-content{
+  .bc-tab-pane{
+    display:grid;
+    grid-template-rows: 0fr;
+    opacity: 1;
+    transition: all .3s;
+    &.active{
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+    :first-child{
+      overflow: hidden;
+    }
+  }
+}
 </style>
