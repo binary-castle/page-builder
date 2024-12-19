@@ -66,27 +66,34 @@ const onSelectColumn = (columnIndex: number) => {
       <container-padding-widget v-model="blockInfo.options.padding"/>
     </acordion-widget>
 
-    <option-widget title="Column Gap" align="vertical">
-      <div class="d-flex justify-content-between align-items-center gap-2">
-        <select v-model="blockInfo.options.gapClass">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </div>
-    </option-widget>
-    <option-widget title="Styles" align="vertical" :is-expandable="true">
-      <CodeMirrorEditor v-model="blockInfo.options.styles"/>
-    </option-widget>
-    <option-widget title="CSS Class" align="vertical">
-      <textarea v-model="blockInfo.options.cssClasses" class="form-control"/>
-    </option-widget>
+    <acordion-widget title="Style">
+      <option-widget title="Column Gap" align="vertical">
+          <select v-model="blockInfo.options.gapClass" class="bc-form-control">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+      </option-widget>
 
-    <option-widget title="Columns">
-      <input type="number" v-model="blockInfo.options.columns" min="1" max="12" class="form-control">
-    </option-widget>
+      <option-widget title="CSS Class" align="vertical">
+        <textarea v-model="blockInfo.options.cssClasses" class="bc-form-control"/>
+      </option-widget>
+
+      <option-widget title="Styles" align="vertical" :is-expandable="true">
+        <CodeMirrorEditor v-model="blockInfo.options.styles"/>
+      </option-widget>
+
+    </acordion-widget>
+
+
+    <acordion-widget title="Columns">
+      <option-widget title="Columns">
+        <input type="number" v-model="blockInfo.options.columns" min="1" max="12" class="bc-form-control">
+      </option-widget>
+    </acordion-widget>
+
 
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li v-for="(column) of blockInfo.options.columns"
@@ -126,35 +133,5 @@ const onSelectColumn = (columnIndex: number) => {
 </template>
 
 <style scoped lang="scss">
-.columns-tab {
-  display       : flex;
-  overflow-x    : auto;
-  padding       : 0;
-  gap           : 0;
-  border-bottom : 1px solid #ddd;
 
-  .tab {
-    flex             : 0 0 auto;
-    padding          : 10px 20px;
-    background-color : #ffffff;
-
-    border-radius    : 0;
-    text-align       : center;
-    border-bottom    : 1px solid transparent;
-    cursor           : pointer;
-
-    &.selected {
-      border-bottom : 2px solid #ddd;
-    }
-
-    &:hover {
-      border-bottom : 2px solid #ddd;
-    }
-
-    p {
-      font-size     : 14px;
-      margin-bottom : 0;
-    }
-  }
-}
 </style>
