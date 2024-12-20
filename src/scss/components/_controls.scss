@@ -10,11 +10,31 @@ input, textarea, select {
   }
 }
 
-.form-control-color {
-  width: 3rem;
-  height: calc(1.5em + .75rem + calc(var(--bs-border-width)* 2));
-  padding: .375rem;
+.bc{
+  &-form-control {
+    padding: 8px;
+    font-size: 12px;
+  }
+  &-form-control-color {
+    width: 2.5rem;
+    height: 2rem;
+    padding: 2px;
+  }
+  &-input-label-widget{
+    display: flex;
+    input{
+      width: 60px;
+      border-radius: 4px 0 0 4px;
+      border-color: #ccc;
+    }
+    span{
+      background : #ccc;
+      padding: 6px 12px;
+      border-radius: 0 4px 4px 0;
+    }
+  }
 }
+
 
 .has-background-image {
   background-repeat: no-repeat;
@@ -22,3 +42,34 @@ input, textarea, select {
   width: 100%;
   height: 100%;
 }
+
+
+/*START CUSTOM CHECKBOX DESIGN*/
+.bc-checkbox {
+  appearance         : none;
+  -webkit-appearance : none;
+  width              : 20px;
+  height             : 20px;
+  border             : 2px solid #999;
+  border-radius      : 4px;
+  cursor             : pointer;
+  position           : relative;
+  outline            : none;
+  transition         : all 0.2s ease;
+}
+
+.bc-checkbox:checked {
+  //border-color: #4caf50;
+}
+
+.bc-checkbox:checked::after {
+  content     : '\2713';
+  position    : absolute;
+  top         : -4px;
+  left        : 2px;
+  font-size   : 16px;
+  font-weight : bold;
+  //color: #4caf50;
+}
+
+/*END CUSTOM CHECKBOX DESIGN*/

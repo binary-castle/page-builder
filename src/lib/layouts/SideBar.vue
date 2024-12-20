@@ -50,7 +50,9 @@ const toggleSideItem = (key: keyof typeof sideItems.value): void => {
       <div v-for="(item, index) of blockRegistry.filter(el => el.type == 'element')" draggable="true"
            class="block"
            @dragstart="startDrag($event, item)"
-           :key="`item_${index}`">
+           :key="`item_${index}`"
+           :title="item.title"
+      >
         <div class="icon" v-html="item.icon"></div>
         <div class="title">{{ item.title }}</div>
       </div>

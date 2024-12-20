@@ -168,6 +168,7 @@ const isPreview: Ref<boolean> = ref(false);
   right: 0;
   background-color: #ffffff;
   z-index: 1000;
+  overflow-y: auto;
 
   .close-button {
     position: absolute;

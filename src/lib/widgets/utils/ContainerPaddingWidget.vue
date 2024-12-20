@@ -30,59 +30,67 @@ const onChangeAllSide = () => {
 </script>
 
 <template>
-  <option-widget title="Container Padding" class="border-bottom-0">
-    <div class="form-check form-switch form-check-reverse">
-      <input class="form-check-input" @change="onMoreOptionChange()" type="checkbox" role="switch"
-             id="flexSwitchCheckDefault">
-      <label class="form-check-label" for="flexSwitchCheckDefault">More Options</label>
+  <option-widget title="Container Padding">
+    <div class="bc-item-center bc-gap-2">
+      <input class="bc-checkbox" @change="onMoreOptionChange()" type="checkbox" id="flexSwitchCheckDefault">
+      <label class="bc-pointer" for="flexSwitchCheckDefault" style="font-size: 13px">More Options</label>
     </div>
   </option-widget>
 
-  <div class="row">
-    <div v-if="!props.modelValue.moreOption" class="col-6">
-      <div class="option-widget-label">All Side</div>
-      <div class="input-group mb-3">
-        <input type="number" v-model="props.modelValue.allSide" @input="onChangeAllSide()" class="form-control"
+  <div>
+    <div v-if="!props.modelValue.moreOption" class="d-flex align-items-center justify-content-between bc-gap-2 bc-mb-3"
+         style="padding-left: 5px;font-size: 13px">
+      <div>All Side</div>
+      <div class="bc-input-label-widget">
+        <input type="number" min="0" v-model="props.modelValue.allSide" @input="onChangeAllSide()" class="bc-form-control"
                aria-label="Recipient's username"
                aria-describedby="basic-addon2">
-        <span class="input-group-text" id="basic-addon2">px</span>
+        <span class="" id="basic-addon2">px</span>
       </div>
     </div>
 
-    <template v-else>
-      <div class="col-6">
-        <div class="option-widget-label">Top</div>
-        <div class="input-group mb-3">
-          <input type="number" v-model="props.modelValue.top" class="form-control" aria-label="Recipient's username"
-                 aria-describedby="basic-addon2">
-          <span class="input-group-text" id="basic-addon2">px</span>
+    <div v-else class="bc-mb-3" style="padding-left: 5px;font-size: 13px">
+      <div class="d-flex align-items-center justify-content-between bc-gap-2 bc-mb-2">
+        <div class="">
+          <div class="option-widget-label">Top</div>
+          <div class="bc-input-label-widget">
+            <input type="number" min="0" v-model="props.modelValue.top" class="bc-form-control"
+                   aria-label="Recipient's username"
+                   aria-describedby="basic-addon2">
+            <span id="basic-addon2">px</span>
+          </div>
+        </div>
+        <div class="">
+          <div class="option-widget-label">Right</div>
+          <div class="bc-input-label-widget">
+            <input type="number" min="0" v-model="props.modelValue.right" class="bc-form-control"
+                   aria-label="Recipient's username"
+                   aria-describedby="basic-addon2">
+            <span id="basic-addon2">px</span>
+          </div>
         </div>
       </div>
-      <div class="col-6">
-        <div class="option-widget-label">Right</div>
-        <div class="input-group mb-3">
-          <input type="number" v-model="props.modelValue.right" class="form-control" aria-label="Recipient's username"
-                 aria-describedby="basic-addon2">
-          <span class="input-group-text" id="basic-addon2">px</span>
+      <div class="d-flex align-items-center justify-content-between bc-gap-2">
+        <div class="">
+          <div class="option-widget-label">Left</div>
+          <div class="bc-input-label-widget">
+            <input type="number" min="0" v-model="props.modelValue.left" class="bc-form-control"
+                   aria-label="Recipient's username"
+                   aria-describedby="basic-addon2">
+            <span id="basic-addon2">px</span>
+          </div>
+        </div>
+        <div class="">
+          <div class="option-widget-label">Bottom</div>
+          <div class="bc-input-label-widget">
+            <input type="number" min="0" v-model="props.modelValue.bottom" class="bc-form-control"
+                   aria-label="Recipient's username"
+                   aria-describedby="basic-addon2">
+            <span id="basic-addon2">px</span>
+          </div>
         </div>
       </div>
-      <div class="col-6">
-        <div class="option-widget-label">Left</div>
-        <div class="input-group mb-3">
-          <input type="number" v-model="props.modelValue.left" class="form-control" aria-label="Recipient's username"
-                 aria-describedby="basic-addon2">
-          <span class="input-group-text" id="basic-addon2">px</span>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="option-widget-label">Bottom</div>
-        <div class="input-group mb-3">
-          <input type="number" v-model="props.modelValue.bottom" class="form-control" aria-label="Recipient's username"
-                 aria-describedby="basic-addon2">
-          <span class="input-group-text" id="basic-addon2">px</span>
-        </div>
-      </div>
-    </template>
+    </div>
   </div>
 
 
@@ -90,20 +98,20 @@ const onChangeAllSide = () => {
 
 <style scoped lang="scss">
 .form-check-label {
-  font-size: 12px;
-  font-weight: 500;
+  font-size   : 12px;
+  font-weight : 500;
 }
 
 .input-group {
   .input-group-text {
-    font-size: 13px;
-    font-weight: 500;
+    font-size   : 13px;
+    font-weight : 500;
   }
 }
 
 .form-control {
   &:focus {
-    box-shadow: none;
+    box-shadow : none;
   }
 }
 </style>

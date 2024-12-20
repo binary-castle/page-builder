@@ -6,7 +6,12 @@
 *, ::after, ::before {
   box-sizing: border-box;
 }
+input:focus, textarea:focus,select:focus {
+  outline: none;
+  box-shadow: none;
+}
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
 }

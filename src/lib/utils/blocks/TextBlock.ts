@@ -9,6 +9,10 @@ export class TextBlock implements Block {
     component: VueComponent = markRaw(TextComponent);
     optionComponent: VueComponent = markRaw(TextOptionComponent);
     options: Record<string, any> = {
+        hasContainer: false,
+        backgroundColor: '',
+        backgroundImage: '',
+        cssClasses: '',
         text: "<p>I’m running Tiptap with Vue.js. 🎉, Rifat ul alom</p>"
     }
     description: string = 'Paragraph Block';

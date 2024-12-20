@@ -16,12 +16,12 @@ export class ColumnBlock implements Block {
         backgroundColor: '',
         backgroundImage: '',
         padding: {
-            allSide: '10',
+            allSide: '0',
             moreOption: false,
-            top: '10',
-            right: '10',
-            left: '10',
-            bottom: '10'
+            top: '0',
+            right: '0',
+            left: '0',
+            bottom: '0'
         },
         gapClass: 1,
         columnStyles: {

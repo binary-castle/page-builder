@@ -24,7 +24,7 @@ withDefaults(defineProps<Props>(), {
 
 <template>
   <div class="base-preview-item"
-       :class="{'editor': inEditor, 'container': hasContainer, 'has-background-image': backgroundImage}"
+       :class="{'editor': inEditor, 'container': hasContainer,'container-fluid': !hasContainer, 'has-background-image': backgroundImage}"
        :style="{
       paddingLeft: padding.left + 'px',
       paddingRight: padding.right + 'px',
@@ -40,6 +40,11 @@ withDefaults(defineProps<Props>(), {
 </template>
 
 <style lang="scss" scoped>
+
+.has-background-image {
+  background-repeat: round;
+  background-size: cover;
+}
 .base-preview-item {
   background-color: white;
 }

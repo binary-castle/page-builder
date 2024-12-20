@@ -15,9 +15,9 @@ const model = defineModel()
 
 <template>
   <option-widget :title="title" :align="align">
-    <div class="d-flex justify-content-between align-items-center gap-2">
-      <input v-model="model" type="color" class="form-control form-control-color" value="#ffffff"/>
-      <div class="fs-12" type="button" @click="model = '#ffffff'">
+    <div class="bc-item-center bc-gap-2">
+      <input v-model="model" type="color" class="bc-form-control-color" value="#ffffff"/>
+      <div class="bc-fs-12 bc-pointer" @click="model = '#ffffff'">
         Reset
       </div>
     </div>
