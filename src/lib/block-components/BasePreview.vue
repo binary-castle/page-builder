@@ -26,10 +26,10 @@ withDefaults(defineProps<Props>(), {
   <div class="base-preview-item"
        :class="{'editor': inEditor, 'container': hasContainer,'container-fluid': !hasContainer, 'has-background-image': backgroundImage}"
        :style="{
-      /*paddingLeft: padding.left + 'px',
+      paddingLeft: padding.left + 'px',
       paddingRight: padding.right + 'px',
       paddingTop: padding.top + 'px',
-      paddingBottom: padding.bottom + 'px',*/
+      paddingBottom: padding.bottom + 'px',
       backgroundColor: backgroundColor || '',
       backgroundImage: backgroundImage ? `url('${backgroundImage}')` : ''
     }"
@@ -40,6 +40,11 @@ withDefaults(defineProps<Props>(), {
 </template>
 
 <style lang="scss" scoped>
+
+.has-background-image {
+  background-repeat: round;
+  background-size: cover;
+}
 .base-preview-item {
   background-color: white;
 }

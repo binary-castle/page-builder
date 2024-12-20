@@ -14,30 +14,37 @@ interface Props {
 }
 
 const props = defineProps<Props>()
-watch(() => props.blockInfo.options.columns, (newColumnNumber, oldColumnNumber) => {
+
+watch(
+    () => props.blockInfo.options.columns,
+    (newColumnNumber, oldColumnNumber) => {
       if (newColumnNumber === oldColumnNumber) return;
+
       const columnStyles = props.blockInfo.options.columnStyles;
 
+      // Add new columns
       if (newColumnNumber > oldColumnNumber) {
-        Array.from({length: newColumnNumber - oldColumnNumber}, (_, i) => oldColumnNumber + 1 + i)
-            .forEach((index) => {
-              columnStyles[index] = {
-                cssClasses: '',
-                backgroundColor: '',
-                backgroundImage: '',
-                styles: 'padding: 10px'
-              };
-            });
+        for (let i = oldColumnNumber + 1; i <= newColumnNumber; i++) {
+          if (!columnStyles[i]) {
+            columnStyles[i] = {
+              cssClasses: '',
+              backgroundColor: '',
+              backgroundImage: '',
+              styles: 'padding: 10px',
+            };
+          }
+        }
       }
 
+      // Remove extra columns
       if (newColumnNumber < oldColumnNumber) {
-        Array.from({length: oldColumnNumber - newColumnNumber}, (_, i) => oldColumnNumber - i)
-            .forEach((index) => {
-              delete columnStyles[index];
-            });
+        for (let i = oldColumnNumber; i > newColumnNumber; i--) {
+          delete columnStyles[i];
+        }
       }
     }
 );
+
 
 const selectedColumn = ref(1);
 const onSelectColumn = (columnIndex: number) => {

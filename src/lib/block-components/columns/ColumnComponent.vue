@@ -135,15 +135,22 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
       :padding="blockInfo.options.padding"
       :inEditor="inEditor">
     <div class="row row-section" :class="[`gap-${blockInfo.options.gapClass}`, blockInfo.options.cssClasses]">
-      <div v-for="(index) in blockInfo.options.columns" class="col"
-           :style="{
-                    backgroundColor: blockInfo.options.columnStyles[index]?.backgroundColor || '',
-                    backgroundImage: blockInfo.options.columnStyles[index]?.backgroundImage ? `url('${blockInfo.options.columnStyles[index]?.backgroundImage}')` : ''
-                  }"
-           :class="[
-                   blockInfo.options.columnStyles[index]?.cssClasses,
-                   {'column-item': inEditor, 'column-dragged-over':  dragOverRow === index, 'has-background-image': backgroundImage}
-               ]"
+      <div
+          v-for="index in blockInfo.options.columns"
+          :key="index"
+          class="col"
+          :style="{
+              backgroundColor: blockInfo.options.columnStyles[index]?.backgroundColor || '',
+              backgroundImage: blockInfo.options.columnStyles[index]?.backgroundImage ? `url('${blockInfo.options.columnStyles[index]?.backgroundImage}')` : ''
+            }"
+                    :class="[
+              blockInfo.options.columnStyles[index]?.cssClasses,
+              {
+                'column-item': inEditor,
+                'column-dragged-over': dragOverRow === index,
+                'has-background-image': !!blockInfo.options.columnStyles[index]?.backgroundImage,
+              }
+            ]"
            @drop="onDrop($event, index)"
            @dragenter.prevent
            @dragleave="onDragLeave"
@@ -167,6 +174,11 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
 </template>
 
 <style scoped lang="scss">
+.has-background-image {
+  background-repeat: round;
+  background-size: cover;
+}
+
 .column-item {
   min-height: 140px;
   border: none;
