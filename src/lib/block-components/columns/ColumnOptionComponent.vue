@@ -7,7 +7,7 @@ import {ref, watch} from "vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import ColorWidget from "../../widgets/utils/ColorWidget.vue";
 import ContainerPaddingWidget from "../../widgets/utils/ContainerPaddingWidget.vue";
-import AcordionWidget from "../../widgets/AcordionWidget.vue";
+import AccordionWidget from "../../widgets/AccordionWidget.vue";
 
 interface Props {
   blockInfo: ColumnBlock
@@ -49,7 +49,7 @@ const onSelectColumn = (columnIndex: number) => {
 <template>
   <BaseOption title="Column">
 
-    <acordion-widget title="Container">
+    <accordion-widget title="Container">
       <option-widget title="Has Container">
         <input v-model="blockInfo.options.hasContainer" type="checkbox" class="bc-checkbox">
       </option-widget>
@@ -61,12 +61,12 @@ const onSelectColumn = (columnIndex: number) => {
                placeholder="Apply Image URL">
       </option-widget>
 
-    </acordion-widget>
-    <acordion-widget title="Padding">
+    </accordion-widget>
+    <accordion-widget title="Padding">
       <container-padding-widget v-model="blockInfo.options.padding"/>
-    </acordion-widget>
+    </accordion-widget>
 
-    <acordion-widget title="Style">
+    <accordion-widget title="Style">
       <option-widget title="Column Gap" align="vertical">
           <select v-model="blockInfo.options.gapClass" class="bc-form-control">
             <option value="1">1</option>
@@ -85,10 +85,10 @@ const onSelectColumn = (columnIndex: number) => {
         <CodeMirrorEditor v-model="blockInfo.options.styles"/>
       </option-widget>
 
-    </acordion-widget>
+    </accordion-widget>
 
 
-    <acordion-widget title="Columns">
+    <accordion-widget title="Columns">
       <option-widget title="Columns">
         <input type="number" v-model="blockInfo.options.columns" min="1" max="12" class="bc-form-control">
       </option-widget>
@@ -130,7 +130,7 @@ const onSelectColumn = (columnIndex: number) => {
         </div>
       </div>
 
-    </acordion-widget>
+    </accordion-widget>
 
   </BaseOption>
 </template>

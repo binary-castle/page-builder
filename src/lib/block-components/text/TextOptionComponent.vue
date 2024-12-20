@@ -5,7 +5,7 @@ import OptionWidget from "../../widgets/OptionWidget.vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import {TextBlock} from "../../utils/blocks/TextBlock.ts";
 import ColorWidget from "../../widgets/utils/ColorWidget.vue";
-import AcordionWidget from "../../widgets/AcordionWidget.vue";
+import AccordionWidget from "../../widgets/AccordionWidget.vue";
 
 interface Props {
   blockInfo: TextBlock
@@ -17,7 +17,7 @@ defineProps<Props>()
 
 <template>
   <BaseOption title="Text">
-    <acordion-widget title="Text">
+    <accordion-widget title="Text">
       <option-widget title="Has Container">
         <input v-model="blockInfo.options.hasContainer" type="checkbox" class="bc-checkbox">
       </option-widget>
@@ -36,7 +36,7 @@ defineProps<Props>()
       <option-widget title="Style" align="vertical" :is-expandable="true">
         <CodeMirrorEditor></CodeMirrorEditor>
       </option-widget>
-    </acordion-widget>
+    </accordion-widget>
   </BaseOption>
 </template>
 

@@ -15,10 +15,12 @@ defineProps<Props>()
 <template>
 
   <BasePreview :inEditor="inEditor">
-    <button :class="blockInfo.options.styleClass"
-            :style="[blockInfo.options.styles, {textAlign: blockInfo.options.textAlign}]">
-      {{ blockInfo.options.text }}
-    </button>
+    <div :class="[`d-flex justify-content-${blockInfo.options.contentAlign}`]">
+      <button :class="blockInfo.options.styleClass"
+              :style="[blockInfo.options.styles]">
+        {{ blockInfo.options.text }}
+      </button>
+    </div>
   </BasePreview>
 
 
