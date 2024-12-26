@@ -81,17 +81,17 @@ const isPreview: Ref<boolean> = ref(false);
           </div>
 
           <div class="item">
-            <div class="devices bc-button-group">
-              <button>
-                <span class="icon-laptop"></span>
-              </button>
-              <button>
-                <span class="icon-tablet"></span>
-              </button>
-              <button>
-                <span class="icon-phone"></span>
-              </button>
-            </div>
+<!--            <div class="devices bc-button-group">-->
+<!--              <button>-->
+<!--                <span class="icon-laptop"></span>-->
+<!--              </button>-->
+<!--              <button>-->
+<!--                <span class="icon-tablet"></span>-->
+<!--              </button>-->
+<!--              <button>-->
+<!--                <span class="icon-phone"></span>-->
+<!--              </button>-->
+<!--            </div>-->
           </div>
 
           <div class="item" style="text-align: right">
