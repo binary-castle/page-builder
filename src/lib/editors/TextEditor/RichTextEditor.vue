@@ -8,7 +8,6 @@ import {TextStyle} from "@tiptap/extension-text-style";
 import {Color} from "@tiptap/extension-color";
 import EditorMenu from "./EditorMenu.vue";
 import {TextAlign} from "@tiptap/extension-text-align";
-import {Heading} from "@tiptap/extension-heading";
 
 interface Props {
   bubbleMenu?: boolean
@@ -29,9 +28,6 @@ const editor = new Editor({
     emptyEditorClass: 'is-editor-empty',
     emptyNodeClass: 'my-custom-is-empty-class',
   }), TextStyle, Color,
-    Heading.configure({
-      levels: [1, 2, 3]
-    }),
     TextAlign.configure({
       types: ['heading', 'paragraph']
     })],
