@@ -3,7 +3,7 @@
 import BaseOption from "../BaseOption.vue";
 import OptionWidget from "../../widgets/OptionWidget.vue";
 import {ColumnBlock} from "../../utils/blocks/ColumnBlock.ts";
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import SliderToggle from "../../controls/SliderToggle.vue";
 
@@ -19,22 +19,20 @@ const onSelectColumn = (columnIndex: number) => {
   selectedColumn.value = columnIndex
 }
 
-onMounted(() => {
-
-})
+const test = ref(false)
 
 </script>
 
 <template>
   <BaseOption title="Column">
     <option-widget title="Has Container">
-      <SliderToggle v-model="blockInfo.options.hasContainer"></SliderToggle>
+      <SliderToggle v-model="test"></SliderToggle>
     </option-widget>
     <option-widget title="Background Color">
-      <input type="color" v-model="blockInfo.options.backgroundColor">
+      <input type="color">
     </option-widget>
     <option-widget title="Background image" align="vertical">
-      <input type="url" placeholder="Apply Image URL" v-model="blockInfo.options.backgroundImage">
+      <input type="url" placeholder="Apply Image URL">
     </option-widget>
 
 
@@ -43,7 +41,7 @@ onMounted(() => {
     </option-widget>
 
     <option-widget title="Styles" align="vertical" :is-expandable="true">
-      <CodeMirrorEditor v-model="blockInfo.options.styles"></CodeMirrorEditor>
+      <CodeMirrorEditor></CodeMirrorEditor>
     </option-widget>
 
 
@@ -58,17 +56,16 @@ onMounted(() => {
 
     <div class="column-content">
       <option-widget title="CSS Class" align="vertical">
-        <textarea v-model="blockInfo.options.columnStyles[selectedColumn].styleClass"></textarea>
+        <textarea></textarea>
       </option-widget>
       <option-widget title="Background Color">
-        <input type="color" v-model="blockInfo.options.columnStyles[selectedColumn].backgroundColor">
+        <input type="color">
       </option-widget>
       <option-widget title="Background Image" align="vertical">
-        <input type="url" placeholder="Apply Image URL"
-               v-model="blockInfo.options.columnStyles[selectedColumn].backgroundImage">
+        <input type="url" placeholder="Apply Image URL">
       </option-widget>
       <option-widget title="Style" align="vertical" :is-expandable="true">
-        <CodeMirrorEditor v-model="blockInfo.options.columnStyles[selectedColumn].styles"></CodeMirrorEditor>
+        <CodeMirrorEditor></CodeMirrorEditor>
       </option-widget>
     </div>
 
