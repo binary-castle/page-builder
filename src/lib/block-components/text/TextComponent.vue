@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import BasePreview from "../BasePreview.vue";
-import RichTextEditor from "../../editors/RichTextEditor.vue";
+import RichTextEditor from "../../editors/TextEditor/RichTextEditor.vue";
 import {TextBlock} from "../../utils/blocks/TextBlock.ts";
 
 interface Props {
