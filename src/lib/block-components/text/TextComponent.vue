@@ -19,10 +19,13 @@ defineProps<Props>()
                :background-color="blockInfo.options.backgroundColor"
                :background-image="blockInfo.options.backgroundImage">
     <template v-if="inEditor">
-      <RichTextEditor v-model="blockInfo.options.text"></RichTextEditor>
+      <div :class="blockInfo.options.cssClasses" :style="blockInfo.options.styles">
+        <RichTextEditor v-model="blockInfo.options.text"></RichTextEditor>
+      </div>
     </template>
     <template v-else>
-      <div v-html="blockInfo.options.text"></div>
+      <div :class="blockInfo.options.cssClasses" :style="blockInfo.options.styles"
+           v-html="blockInfo.options.text"></div>
     </template>
   </BasePreview>
 </template>
