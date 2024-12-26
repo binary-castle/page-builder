@@ -39,9 +39,9 @@ const onDrop = ($event: DragEvent, index: number): void => {
   // If the dropped item has children, exit early
   if (parsedItem.children) return;
 
-  const { value: innerElement } = innerDragElement;
-  const { value: innerColumn } = innerDragColumn;
-  const { value: innerElementInbox } = innerDragElementInbox;
+  const {value: innerElement} = innerDragElement;
+  const {value: innerColumn} = innerDragColumn;
+  const {value: innerElementInbox} = innerDragElementInbox;
 
   // Handle inner drag item
   if (innerElement && innerColumn != null && innerElementInbox != null) {
@@ -128,8 +128,10 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
 </script>
 
 <template>
-  <BasePreview :inEditor="inEditor">
-    <div class="row" style="min-height: 200px; margin: 20px 0">
+  <BasePreview :inEditor="inEditor" :has-container="blockInfo.options.hasContainer"
+               :background-image="blockInfo.options.backgroundImage"
+               :background-color="blockInfo.options.backgroundColor">
+    <div class="row" :style="inEditor ? { minHeight: '200px', margin: '20px 0' } : {}">
       <div v-for="(index) in blockInfo.options.columns" class="col"
            :class="{'column-item': inEditor, 'column-dragged-over':  dragOverRow === index}"
            @drop="onDrop($event, index)"
@@ -138,7 +140,7 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
            @dragover="onDragOverRow(index)">
 
         <template v-for="(item, columnIndex) of blockInfo.children[index]">
-          <div style="height: 10px; width: 100%"
+          <div :style="inEditor ? {height: '10px', width: '100%'} : {}"
                :class="{'bg-secondary': dragOverRow === index && dragOverColumn === columnIndex}"></div>
           <component :is="previewComponentMap[item.name]"
                      :blockInfo="item"
