@@ -19,20 +19,18 @@ const onSelectColumn = (columnIndex: number) => {
   selectedColumn.value = columnIndex
 }
 
-const test = ref(false)
-
 </script>
 
 <template>
   <BaseOption title="Column">
     <option-widget title="Has Container">
-      <SliderToggle v-model="test"></SliderToggle>
+      <SliderToggle v-model="blockInfo.options.hasContainer"></SliderToggle>
     </option-widget>
     <option-widget title="Background Color">
-      <input type="color">
+      <input type="color" v-model="blockInfo.options.backgroundColor">
     </option-widget>
     <option-widget title="Background image" align="vertical">
-      <input type="url" placeholder="Apply Image URL">
+      <input type="url" placeholder="Apply Image URL" v-model="blockInfo.options.backgroundImage">
     </option-widget>
 
 
