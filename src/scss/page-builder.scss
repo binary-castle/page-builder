@@ -9,9 +9,15 @@
 @import './components/sidebar';
 @import './components/preview';
 @import "./components/controls";
+@import "./components/slider-toggle";
 
 // Import layout
 @import './layout/builder';
+
+body {
+  overflow: hidden;
+  height: 100%;
+}
 
 
 .tiptap {

@@ -1,0 +1,51 @@
+$slider-width: 50px;
+$slider-height: 24px;
+$slider-thumb-size: 20px;
+$slider-background: #ccc;
+$slider-checked-background: $primary-color;
+$slider-thumb-color: white;
+$slider-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+.slider {
+  position: relative;
+  display: inline-block;
+  width: $slider-width;
+  height: $slider-height;
+
+  input {
+    display: none; // Hide the checkbox
+  }
+
+  .slider-track {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $slider-background;
+    border-radius: $slider-height;
+    transition: background-color 0.3s;
+
+    &::before {
+      content: '';
+      position: absolute;
+      height: $slider-thumb-size;
+      width: $slider-thumb-size;
+      background-color: $slider-thumb-color;
+      border-radius: 50%;
+      top: ($slider-height - $slider-thumb-size) / 2; // Center the thumb vertically
+      left: ($slider-height - $slider-thumb-size) / 2; // Align thumb to the left
+      transition: transform 0.3s;
+      box-shadow: $slider-shadow;
+    }
+  }
+
+  input:checked + .slider-track {
+    background-color: $slider-checked-background;
+
+    &::before {
+      transform: translateX($slider-width - $slider-height);
+    }
+  }
+}

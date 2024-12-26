@@ -4,6 +4,7 @@ import BaseOption from "../BaseOption.vue";
 import OptionWidget from "../../widgets/OptionWidget.vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import {TextBlock} from "../../utils/blocks/TextBlock.ts";
+import SliderToggle from "../../controls/SliderToggle.vue";
 
 interface Props {
   blockInfo: TextBlock
@@ -17,23 +18,23 @@ defineProps<Props>()
   <BaseOption title="Text">
 
     <option-widget title="Has Container">
-      <input type="checkbox">
+      <SliderToggle v-model="blockInfo.options.hasContainer"></SliderToggle>
     </option-widget>
 
     <option-widget title="Background Color">
-      <input type="color">
+      <input type="color" v-model="blockInfo.options.backgroundColor">
     </option-widget>
 
-    <option-widget title="Background Image">
-      <input type="url" class="form-control" placeholder="Apply Image URL">
+    <option-widget title="Background Image" align="vertical">
+      <input type="url" v-model="blockInfo.options.backgroundImage" placeholder="Apply Image URL">
     </option-widget>
 
     <option-widget title="CSS Class" align="vertical" :is-expandable="true">
-      <textarea class="form-control"></textarea>
+      <textarea v-model="blockInfo.options.cssClasses"></textarea>
     </option-widget>
 
     <option-widget title="Style" align="vertical" :is-expandable="true">
-      <CodeMirrorEditor></CodeMirrorEditor>
+      <CodeMirrorEditor v-model="blockInfo.options.styles"></CodeMirrorEditor>
     </option-widget>
   </BaseOption>
 </template>

@@ -1,4 +1,6 @@
-input, textarea, select {
+input,
+textarea,
+select {
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.35);
   border-radius: 4px;
@@ -7,5 +9,38 @@ input, textarea, select {
 
   &:focus {
     border-color: rgba(0, 0, 0, 0.55);
+  }
+
+  /* Specific styling for input[type="color"] */
+  &[type="color"] {
+    width: 30px; /* Adjust size */
+    height: 30px;
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 0;
+    cursor: pointer;
+
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+
+    &::-webkit-color-swatch {
+      border-radius: 5px;
+      border: none;
+    }
+
+    &::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+
+    &:focus {
+      border-color: rgba(0, 0, 0, 0.55); /* Match focus style */
+      outline: none;
+    }
+
+    &:hover {
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Optional hover effect */
+    }
   }
 }

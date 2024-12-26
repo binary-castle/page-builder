@@ -9,7 +9,12 @@ export class TextBlock implements Block {
     component: VueComponent = markRaw(TextComponent);
     optionComponent: VueComponent = markRaw(TextOptionComponent);
     options: Record<string, any> = {
-        text: "<p>I’m running Tiptap with Vue.js. 🎉, Rifat ul alom</p>"
+        text: "",
+        hasContainer: false,
+        backgroundColor: "#ffffff",
+        backgroundImage: "",
+        cssClasses: "",
+        styles: ""
     }
     description: string = 'Paragraph Block';
     icon: string = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-fonts" viewBox="0 0 16 16">\n' +

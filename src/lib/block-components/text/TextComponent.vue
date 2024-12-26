@@ -14,8 +14,16 @@ defineProps<Props>()
 </script>
 
 <template>
-  <BasePreview :inEditor="inEditor">
-    <RichTextEditor v-model="blockInfo.options.text"></RichTextEditor>
+  <BasePreview :inEditor="inEditor"
+               :has-container="blockInfo.options.hasContainer"
+               :background-color="blockInfo.options.backgroundColor"
+               :background-image="blockInfo.options.backgroundImage">
+    <template v-if="inEditor">
+      <RichTextEditor v-model="blockInfo.options.text"></RichTextEditor>
+    </template>
+    <template v-else>
+      <div v-html="blockInfo.options.text"></div>
+    </template>
   </BasePreview>
 </template>
 

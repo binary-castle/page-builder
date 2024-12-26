@@ -5,6 +5,7 @@ import OptionWidget from "../../widgets/OptionWidget.vue";
 import {ColumnBlock} from "../../utils/blocks/ColumnBlock.ts";
 import {ref} from "vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
+import SliderToggle from "../../controls/SliderToggle.vue";
 
 interface Props {
   blockInfo: ColumnBlock
@@ -18,23 +19,25 @@ const onSelectColumn = (columnIndex: number) => {
   selectedColumn.value = columnIndex
 }
 
+const test = ref(false)
+
 </script>
 
 <template>
   <BaseOption title="Column">
     <option-widget title="Has Container">
-      <input type="checkbox">
+      <SliderToggle v-model="test"></SliderToggle>
     </option-widget>
     <option-widget title="Background Color">
       <input type="color">
     </option-widget>
     <option-widget title="Background image" align="vertical">
-      <input type="url" class="form-control" placeholder="Apply Image URL">
+      <input type="url" placeholder="Apply Image URL">
     </option-widget>
 
 
     <option-widget title="Columns">
-      <input type="number" v-model="blockInfo.options.columns" min="1" max="12" class="form-control">
+      <input type="number" v-model="blockInfo.options.columns" min="1" max="12">
     </option-widget>
 
     <option-widget title="Styles" align="vertical" :is-expandable="true">
@@ -53,13 +56,13 @@ const onSelectColumn = (columnIndex: number) => {
 
     <div class="column-content">
       <option-widget title="CSS Class" align="vertical">
-        <textarea class="form-control"></textarea>
+        <textarea></textarea>
       </option-widget>
       <option-widget title="Background Color">
         <input type="color">
       </option-widget>
       <option-widget title="Background Image" align="vertical">
-        <input type="url" class="form-control" placeholder="Apply Image URL">
+        <input type="url" placeholder="Apply Image URL">
       </option-widget>
       <option-widget title="Style" align="vertical" :is-expandable="true">
         <CodeMirrorEditor></CodeMirrorEditor>

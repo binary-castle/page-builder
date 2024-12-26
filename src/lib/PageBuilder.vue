@@ -151,7 +151,7 @@ const isPreview: Ref<boolean> = ref(false);
   </div>
 
   <div v-if="isPreview" class="preview-popup">
-    <button class="bc-button close-button" @click="isPreview = false">
+    <button class="bc-button bg-white close-button" @click="isPreview = false">
       <span class="icon-x-lg"></span>
     </button>
     <PagePreview :renderList="renderList"></PagePreview>
