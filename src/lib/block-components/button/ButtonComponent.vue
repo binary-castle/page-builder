@@ -14,11 +14,16 @@ defineProps<Props>()
 
 <template>
 
-  <BasePreview :inEditor="inEditor">
-    <button :class="blockInfo.options.styleClass"
-            :style="blockInfo.options.styles">
-      {{ blockInfo.options.text }}
-    </button>
+  <BasePreview :inEditor="inEditor" :has-container="blockInfo.options.hasContainer"
+               :background-color="blockInfo.options.backgroundColor"
+               :background-image="blockInfo.options.backgroundImage">
+    <div :style="{'text-align':blockInfo.options.buttonAlign}">
+      <button :class="blockInfo.options.styleClass"
+              :style="blockInfo.options.styles">
+        {{ blockInfo.options.text }}
+      </button>
+    </div>
+
   </BasePreview>
 
 

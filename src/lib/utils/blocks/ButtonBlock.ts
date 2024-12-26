@@ -11,8 +11,12 @@ export class ButtonBlock implements Block {
     options: Record<string, any> = {
         style: "",
         text: "Button",
+        hasContainer: false,
+        backgroundColor: "#ffffff",
+        backgroundImage: "",
         styleClass: "btn btn-primary",
         styles: "font-size: 50px;",
+        buttonAlign: "left",
         endPoint: ""
     }
     description: string = 'This is a button';
