@@ -50,6 +50,19 @@ defineProps<Props>()
         <input type="text" v-model="blockInfo.options.text">
       </option-widget>
 
+      <option-widget title="On Click Action" align="vertical">
+        <select v-model="blockInfo.options.buttonAction.type">
+          <option :value="null">Select One</option>
+          <option value="external_link">Visit an external link</option>
+          <option value="internal_link">Visit an internal link</option>
+        </select>
+
+        <input v-if="blockInfo.options.buttonAction.type"
+               type="url"
+               v-model="blockInfo.options.buttonAction.url"
+               placeholder="URL" style="margin-top: 10px">
+      </option-widget>
+
       <option-widget title="Style Class" align="vertical">
         <textarea v-model="blockInfo.options.styleClass">
 
