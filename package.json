@@ -24,6 +24,11 @@
     "semantic-release": "semantic-release"
   },
   "dependencies": {
+    "@tiptap/extension-color": "^2.10.4",
+    "@tiptap/extension-heading": "^2.10.4",
+    "@tiptap/extension-highlight": "^2.10.4",
+    "@tiptap/extension-text-align": "^2.10.4",
+    "@tiptap/extension-text-style": "^2.10.4",
     "uuid": "^11.0.3",
     "vue": "^3.5.12"
   },

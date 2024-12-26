@@ -24,6 +24,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-text-center:before {
+  content: "\e91b";
+}
+.icon-text-right:before {
+  content: "\e91c";
+}
+.icon-text-left:before {
+  content: "\e91d";
+}
 .icon-type-bold:before {
   content: "\e915";
 }

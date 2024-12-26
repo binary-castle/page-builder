@@ -11,7 +11,8 @@ import {Block} from "./utils/types.ts";
 interface Props {
   cssUrl?: string;
   renderList?: Block[],
-  meta?: Array<Record<string, string>>
+  meta?: Array<Record<string, string>>,
+  pageTitle?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -73,20 +74,24 @@ const isPreview: Ref<boolean> = ref(false);
         <div class="bc-page-builder--preview--header">
           <div class="main-title" style="text-align: left">
             BC - Page builder
+
+            <span v-if="pageTitle">
+              - [{{ pageTitle }}]
+            </span>
           </div>
 
           <div class="item">
-            <div class="devices bc-button-group">
-              <button>
-                <span class="icon-laptop"></span>
-              </button>
-              <button>
-                <span class="icon-tablet"></span>
-              </button>
-              <button>
-                <span class="icon-phone"></span>
-              </button>
-            </div>
+<!--            <div class="devices bc-button-group">-->
+<!--              <button>-->
+<!--                <span class="icon-laptop"></span>-->
+<!--              </button>-->
+<!--              <button>-->
+<!--                <span class="icon-tablet"></span>-->
+<!--              </button>-->
+<!--              <button>-->
+<!--                <span class="icon-phone"></span>-->
+<!--              </button>-->
+<!--            </div>-->
           </div>
 
           <div class="item" style="text-align: right">
@@ -151,7 +156,7 @@ const isPreview: Ref<boolean> = ref(false);
   </div>
 
   <div v-if="isPreview" class="preview-popup">
-    <button class="bc-button close-button" @click="isPreview = false">
+    <button class="bc-button bg-white close-button" @click="isPreview = false">
       <span class="icon-x-lg"></span>
     </button>
     <PagePreview :renderList="renderList"></PagePreview>

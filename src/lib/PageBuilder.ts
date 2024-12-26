@@ -6,7 +6,7 @@ import {ColumnBlock} from "./utils/blocks/ColumnBlock.ts";
 import {Block} from "./utils/types.ts";
 import {HtmlBlock} from "./utils/blocks/HtmlBlock.ts";
 import {TextBlock} from "./utils/blocks/TextBlock.ts";
-import {CardUiComponent} from "./utils/ui-components/CardUiComponent.ts";
+// import {CardUiComponent} from "./utils/ui-components/CardUiComponent.ts";
 
 const draggedItem: Ref<Block | null> = ref(null)
 const renderList: Ref<Array<Block>> = ref([])
@@ -24,7 +24,7 @@ const blocks: Ref<Array<Block>> = ref([
     new ColumnBlock(),
     // new ListBlock(),
     new HtmlBlock(),
-    new CardUiComponent(),
+    // new CardUiComponent(),
 ])
 
 export function usePageBuilder() {
