@@ -7,7 +7,6 @@ import {onBeforeUnmount} from "vue";
 import {TextStyle} from "@tiptap/extension-text-style";
 import {Color} from "@tiptap/extension-color";
 import EditorMenu from "./EditorMenu.vue";
-import {TextAlign} from "@tiptap/extension-text-align";
 
 interface Props {
   bubbleMenu?: boolean
@@ -27,10 +26,7 @@ const editor = new Editor({
     placeholder: "Write something ...",
     emptyEditorClass: 'is-editor-empty',
     emptyNodeClass: 'my-custom-is-empty-class',
-  }), TextStyle, Color,
-    TextAlign.configure({
-      types: ['heading', 'paragraph']
-    })],
+  }), TextStyle, Color],
   onUpdate: ({editor}) => {
     model.value = editor.getHTML()
   }

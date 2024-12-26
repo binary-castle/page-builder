@@ -3,7 +3,7 @@
 import BaseOption from "../BaseOption.vue";
 import OptionWidget from "../../widgets/OptionWidget.vue";
 import {ColumnBlock} from "../../utils/blocks/ColumnBlock.ts";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import SliderToggle from "../../controls/SliderToggle.vue";
 
@@ -18,6 +18,10 @@ const selectedColumn = ref(1);
 const onSelectColumn = (columnIndex: number) => {
   selectedColumn.value = columnIndex
 }
+
+onMounted(() => {
+
+})
 
 </script>
 
@@ -39,7 +43,7 @@ const onSelectColumn = (columnIndex: number) => {
     </option-widget>
 
     <option-widget title="Styles" align="vertical" :is-expandable="true">
-      <CodeMirrorEditor></CodeMirrorEditor>
+      <CodeMirrorEditor v-model="blockInfo.options.styles"></CodeMirrorEditor>
     </option-widget>
 
 
@@ -54,16 +58,17 @@ const onSelectColumn = (columnIndex: number) => {
 
     <div class="column-content">
       <option-widget title="CSS Class" align="vertical">
-        <textarea></textarea>
+        <textarea v-model="blockInfo.options.columnStyles[selectedColumn].styleClass"></textarea>
       </option-widget>
       <option-widget title="Background Color">
-        <input type="color">
+        <input type="color" v-model="blockInfo.options.columnStyles[selectedColumn].backgroundColor">
       </option-widget>
       <option-widget title="Background Image" align="vertical">
-        <input type="url" placeholder="Apply Image URL">
+        <input type="url" placeholder="Apply Image URL"
+               v-model="blockInfo.options.columnStyles[selectedColumn].backgroundImage">
       </option-widget>
       <option-widget title="Style" align="vertical" :is-expandable="true">
-        <CodeMirrorEditor></CodeMirrorEditor>
+        <CodeMirrorEditor v-model="blockInfo.options.columnStyles[selectedColumn].styles"></CodeMirrorEditor>
       </option-widget>
     </div>
 
