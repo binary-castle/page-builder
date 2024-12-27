@@ -29,14 +29,17 @@ watch(
       if (newColumnNumber === oldColumnNumber) return;
 
       const columnStyles = props.blockInfo.options.columnStyles;
-      console.log("new column number", newColumnNumber);
-      // Add new columns
+
       if (newColumnNumber > oldColumnNumber) {
-        props.blockInfo.options.columnStyles[newColumnNumber] = {
-          styleClass: 'col',
-          backgroundColor: '#ffffff',
-          backgroundImage: '',
-          styles: 'padding: 10px'
+        for (let i = oldColumnNumber + 1; i <= newColumnNumber; i++) {
+          if (!columnStyles[i]) {
+            columnStyles[i] = {
+              styleClass: 'col',
+              backgroundColor: '#ffffff',
+              backgroundImage: '',
+              styles: 'padding: 10px'
+            };
+          }
         }
       }
 
