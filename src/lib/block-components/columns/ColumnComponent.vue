@@ -134,11 +134,11 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
     <div class="row" :style="inEditor ? { minHeight: '200px', margin: '20px 0' } : {}">
       <div v-for="(index) in blockInfo.options.columns"
            :style="[
-               blockInfo.options.columnStyles[index].styles,
-               {'background-color': blockInfo.options.columnStyles[index].backgroundColor},
-               {'background-image': blockInfo.options.columnStyles[index].backgroundImage},
+               blockInfo.options.columnStyles[index]?.styles,
+               {'background-color': blockInfo.options.columnStyles[index]?.backgroundColor},
+               {'background-image': blockInfo.options.columnStyles[index]?.backgroundImage},
                ]"
-           :class="[{'column-item': inEditor, 'column-dragged-over':  dragOverRow === index && inEditor}, blockInfo.options.columnStyles[index].styleClass]"
+           :class="[{'column-item': inEditor, 'column-dragged-over':  dragOverRow === index && inEditor}, blockInfo.options.columnStyles[index]?.styleClass]"
            @drop="onDrop($event, index)"
            @dragenter.prevent
            @dragleave="onDragLeave"
