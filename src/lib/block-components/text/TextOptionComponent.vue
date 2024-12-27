@@ -5,6 +5,7 @@ import OptionWidget from "../../widgets/OptionWidget.vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import {TextBlock} from "../../utils/blocks/TextBlock.ts";
 import SliderToggle from "../../controls/SliderToggle.vue";
+import ColorInput from "../../controls/ColorInput.vue";
 
 interface Props {
   blockInfo: TextBlock
@@ -22,7 +23,7 @@ defineProps<Props>()
     </option-widget>
 
     <option-widget title="Background Color">
-      <input type="color" v-model="blockInfo.options.backgroundColor">
+      <ColorInput v-model="blockInfo.options.backgroundColor"></ColorInput>
     </option-widget>
 
     <option-widget title="Background Image" align="vertical">

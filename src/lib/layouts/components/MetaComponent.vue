@@ -94,6 +94,7 @@ const handleSubmit = () => {
     border-radius: 4px;
     padding: 10px;
     margin-bottom: 5px;
+    overflow: hidden;
 
     .actions {
       position: absolute;
