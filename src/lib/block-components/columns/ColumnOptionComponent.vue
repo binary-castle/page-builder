@@ -3,7 +3,7 @@
 import BaseOption from "../BaseOption.vue";
 import OptionWidget from "../../widgets/OptionWidget.vue";
 import {ColumnBlock} from "../../utils/blocks/ColumnBlock.ts";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import SliderToggle from "../../controls/SliderToggle.vue";
 
@@ -11,7 +11,7 @@ interface Props {
   blockInfo: ColumnBlock
 }
 
-defineProps<Props>()
+const props = defineProps<Props>()
 
 const selectedColumn = ref(1);
 
@@ -22,6 +22,36 @@ const onSelectColumn = (columnIndex: number) => {
 onMounted(() => {
 
 })
+
+watch(
+    () => props.blockInfo.options.columns,
+    (newColumnNumber, oldColumnNumber) => {
+      if (newColumnNumber === oldColumnNumber) return;
+
+      const columnStyles = props.blockInfo.options.columnStyles;
+
+      if (newColumnNumber > oldColumnNumber) {
+        for (let i = oldColumnNumber + 1; i <= newColumnNumber; i++) {
+          if (!columnStyles[i]) {
+            columnStyles[i] = {
+              styleClass: 'col',
+              backgroundColor: '#ffffff',
+              backgroundImage: '',
+              styles: 'padding: 10px'
+            };
+          }
+        }
+      }
+
+      // Remove extra columns
+      if (newColumnNumber < oldColumnNumber) {
+        for (let i = oldColumnNumber; i > newColumnNumber; i--) {
+          delete columnStyles[i];
+        }
+      }
+    }
+);
+
 
 </script>
 
