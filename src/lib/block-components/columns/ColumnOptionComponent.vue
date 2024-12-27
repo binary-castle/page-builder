@@ -6,6 +6,7 @@ import {ColumnBlock} from "../../utils/blocks/ColumnBlock.ts";
 import {onMounted, ref, watch} from "vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import SliderToggle from "../../controls/SliderToggle.vue";
+import ColorInput from "../../controls/ColorInput.vue";
 
 interface Props {
   blockInfo: ColumnBlock
@@ -61,7 +62,7 @@ watch(
       <SliderToggle v-model="blockInfo.options.hasContainer"></SliderToggle>
     </option-widget>
     <option-widget title="Background Color">
-      <input type="color" v-model="blockInfo.options.backgroundColor">
+      <ColorInput v-model="blockInfo.options.backgroundColor"></ColorInput>
     </option-widget>
     <option-widget title="Background image" align="vertical">
       <input type="url" placeholder="Apply Image URL" v-model="blockInfo.options.backgroundImage">
@@ -91,7 +92,7 @@ watch(
         <textarea v-model="blockInfo.options.columnStyles[selectedColumn].styleClass"></textarea>
       </option-widget>
       <option-widget title="Background Color">
-        <input type="color" v-model="blockInfo.options.columnStyles[selectedColumn].backgroundColor">
+        <ColorInput v-model="blockInfo.options.columnStyles[selectedColumn].backgroundColor"></ColorInput>
       </option-widget>
       <option-widget title="Background Image" align="vertical">
         <input type="url" placeholder="Apply Image URL"

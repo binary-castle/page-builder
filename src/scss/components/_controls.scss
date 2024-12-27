@@ -44,3 +44,25 @@ select {
     }
   }
 }
+
+.color-control-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  .btn-reset {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    transition: all 0.6s;
+
+    &:hover {
+      color: $primary-color;
+      transform: rotate(-45deg);
+    }
+
+    &:active {
+      transform: rotate(-145deg);
+    }
+  }
+}
