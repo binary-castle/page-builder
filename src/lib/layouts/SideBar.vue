@@ -61,7 +61,6 @@ const toggleSideItem = (key: keyof typeof sideItems.value): void => {
            class="block"
            @dragstart="startDrag($event, item)"
            :key="`item_${index}`">
-        asd
         <div class="icon" v-html="item.icon"></div>
         <div class="title">{{ item.title }}</div>
       </div>
