@@ -73,7 +73,11 @@ const isPreview: Ref<boolean> = ref(false);
 
         <div class="bc-page-builder--preview--header">
           <div class="main-title" style="text-align: left">
-            BC - Page builder
+            <span class="icon-binary-castle-icon" title="BinaryCastle">
+              <span class="path1"></span>
+              <span class="path2"></span>
+              <span class="path3"></span>
+            </span> - Page builder
 
             <span v-if="pageTitle">
               - [{{ pageTitle }}]
@@ -81,17 +85,17 @@ const isPreview: Ref<boolean> = ref(false);
           </div>
 
           <div class="item">
-<!--            <div class="devices bc-button-group">-->
-<!--              <button>-->
-<!--                <span class="icon-laptop"></span>-->
-<!--              </button>-->
-<!--              <button>-->
-<!--                <span class="icon-tablet"></span>-->
-<!--              </button>-->
-<!--              <button>-->
-<!--                <span class="icon-phone"></span>-->
-<!--              </button>-->
-<!--            </div>-->
+            <!--            <div class="devices bc-button-group">-->
+            <!--              <button>-->
+            <!--                <span class="icon-laptop"></span>-->
+            <!--              </button>-->
+            <!--              <button>-->
+            <!--                <span class="icon-tablet"></span>-->
+            <!--              </button>-->
+            <!--              <button>-->
+            <!--                <span class="icon-phone"></span>-->
+            <!--              </button>-->
+            <!--            </div>-->
           </div>
 
           <div class="item" style="text-align: right">
@@ -178,6 +182,7 @@ const isPreview: Ref<boolean> = ref(false);
     right: 10px;
     top: 10px;
     transition: all 0.3s ease-in-out;
+    z-index: 9999999999;
 
     &:hover {
       box-shadow: -7px 3px 28px -10px rgba(0, 0, 0, 0.75);

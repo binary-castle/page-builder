@@ -87,6 +87,7 @@ const dropDownMenus = ref({
   background-color: #ffffff;
   box-shadow: 3px 3px 16px -7px rgba(0, 0, 0, 0.75);
   display: flex;
+  z-index: 10;
 
   &.fixed-menu {
     box-shadow: none;
