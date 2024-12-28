@@ -2,7 +2,7 @@
 
 import {usePageBuilder} from "./PageBuilder.ts";
 import {previewComponentMap, previewOptionMap} from "./utils/registry.ts";
-import {onMounted, ref, Ref, watchEffect} from "vue";
+import {onMounted, onUnmounted, ref, Ref, watchEffect} from "vue";
 import {useLoadCSS} from "./useLoadCSS.ts";
 import SideBar from "./layouts/SideBar.vue";
 import PagePreview from "./PagePreview.vue";
@@ -42,7 +42,7 @@ const {
   onDelete
 } = usePageBuilder()
 
-const {loadCSS} = useLoadCSS()
+const {loadCSS, removeCSS} = useLoadCSS()
 
 
 onMounted(() => {
@@ -52,6 +52,10 @@ onMounted(() => {
 watchEffect(() => {
   renderList.value = props.renderList ? [...props.renderList] : []
   meta.value = props.meta ? [...props.meta] : []
+})
+
+onUnmounted(() => {
+  removeCSS(props.cssUrl)
 })
 
 const exportPage = ($event: Event) => {
