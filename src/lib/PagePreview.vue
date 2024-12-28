@@ -2,7 +2,7 @@
 import {Block} from "./utils/types.ts";
 import {previewComponentMap} from "./utils/registry.ts";
 import {useLoadCSS} from "./useLoadCSS.ts";
-import {onMounted} from "vue";
+import {onMounted, onUnmounted} from "vue";
 
 interface Props {
   renderList: Block[]
@@ -13,10 +13,14 @@ const props = withDefaults(defineProps<Props>(), {
   cssUrl: ''
 })
 
-const {loadCSS} = useLoadCSS()
+const {loadCSS, removeCSS} = useLoadCSS()
 
 onMounted(() => {
   loadCSS(props.cssUrl)
+})
+
+onUnmounted(() => {
+  removeCSS(props.cssUrl)
 })
 </script>
 
