@@ -24,6 +24,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-binary-castle-icon .path1:before {
+  content: "\e91e";
+  color: rgb(255, 69, 0);
+}
+.icon-binary-castle-icon .path2:before {
+  content: "\e91f";
+  margin-left: -1.2900390625em;
+  color: rgb(10, 1, 103);
+}
+.icon-binary-castle-icon .path3:before {
+  content: "\e920";
+  margin-left: -1.2900390625em;
+  color: rgb(10, 1, 103);
+}
 .icon-text-center:before {
   content: "\e91b";
 }
