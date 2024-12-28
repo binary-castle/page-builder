@@ -180,9 +180,10 @@ const isPreview: Ref<boolean> = ref(false);
   right: 0;
   background-color: #ffffff;
   z-index: 1000;
+  overflow: auto;
 
   .close-button {
-    position: absolute;
+    position: fixed;
     right: 10px;
     top: 10px;
     transition: all 0.3s ease-in-out;
