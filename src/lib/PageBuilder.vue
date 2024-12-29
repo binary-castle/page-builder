@@ -47,6 +47,8 @@ const {loadCSS, removeCSS} = useLoadCSS()
 
 onMounted(() => {
   loadCSS(props.cssUrl)
+  document.body.style.height = '100%';
+  document.body.style.overflow = 'hidden';
 })
 
 watchEffect(() => {
@@ -56,6 +58,8 @@ watchEffect(() => {
 
 onUnmounted(() => {
   removeCSS(props.cssUrl)
+  document.body.style.height = 'auto';
+  document.body.style.overflow = 'auto';
 })
 
 const exportPage = ($event: Event) => {

@@ -14,11 +14,6 @@
 // Import layout
 @import './layout/builder';
 
-body {
-  overflow: hidden;
-  height: 100%;
-}
-
 
 .tiptap {
   padding: 15px;
@@ -43,5 +38,5 @@ body {
 }
 
 .tippy-box {
-  max-width: 450px!important;
+  max-width: 450px !important;
 }
