@@ -27,6 +27,7 @@
       background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
       border: 1px solid transparent;
       overflow: auto;
+      padding-bottom: 4rem;
 
       &.drag-over {
         border: 1px dashed $primary-color;
