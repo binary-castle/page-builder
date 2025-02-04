@@ -2,13 +2,13 @@
 import {usePageBuilder} from "../../PageBuilder.ts";
 import {ref, Ref} from "vue";
 
-const singleMeta: Ref<Record<string, string>> = ref({})
+const singleMeta: Ref<Record<string, string>> = ref({attitude:'property'})
 const {meta} = usePageBuilder();
 
 const editIndex: Ref<number | null> = ref(null);
 const addMoreMeta = () => {
   meta.value.push({...singleMeta.value});
-  singleMeta.value = {};
+  singleMeta.value = {attitude:'property'};
 }
 
 const editMeta = (index: number) => {
@@ -27,7 +27,7 @@ const deleteMeta = (index: number) => {
 const handleSubmit = () => {
   if (editIndex.value !== null) {
     meta.value[editIndex.value] = {...singleMeta.value};
-    singleMeta.value = {};
+    singleMeta.value = {attitude:'property'};
     return editIndex.value = null; // Reset the edit index
   }
 
@@ -40,7 +40,7 @@ const handleSubmit = () => {
     <!-- List existing meta -->
     <div class="meta-list">
       <div v-for="(metaData, index) in meta" :key="index" class="meta-item">
-        <h6>{{ metaData.property }}</h6>
+        <h6>{{ metaData.attitude }}="{{ metaData.property }}"</h6>
         <p>{{ metaData.content }}</p>
         <div class="actions">
           <span role="button" @click="editMeta(index)" class="icon-highlighter"></span>
@@ -53,12 +53,16 @@ const handleSubmit = () => {
     <!-- Form to add/edit meta -->
     <div class="meta-form">
       <form @submit.prevent="handleSubmit">
+        <select v-model="singleMeta.attitude">
+          <option value="property">property</option>
+          <option value="name">name</option>
+        </select>
         <input
             required
             v-model="singleMeta.property"
             type="text"
 
-            placeholder="Meta Property"
+            :placeholder="`Mata ${singleMeta.attitude}`"
         />
         <textarea
             required
@@ -108,7 +112,7 @@ const handleSubmit = () => {
 .meta-form {
   margin-bottom: 60px;
 
-  input {
+  input, select {
     margin-bottom: 10px;
   }
 }
