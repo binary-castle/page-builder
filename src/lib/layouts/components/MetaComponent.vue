@@ -61,7 +61,6 @@ const handleSubmit = () => {
             required
             v-model="singleMeta.property"
             type="text"
-
             :placeholder="`Mata ${singleMeta.attitude}`"
         />
         <textarea
