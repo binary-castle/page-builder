@@ -32,12 +32,12 @@ const onDeleteItem = ($event: Event) => {
         <button @click="showDeletePopup = true">
           <span class="icon-trash"></span>
         </button>
-        <button>
+<!--        <button>
           <span class="icon-chevron-up"></span>
         </button>
         <button>
           <span class="icon-chevron-down"></span>
-        </button>
+        </button>-->
         <button @click="closeOptionDrawer($event)">
           <span class="icon-x-lg"></span>
         </button>
