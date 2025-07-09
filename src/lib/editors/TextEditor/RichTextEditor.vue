@@ -3,7 +3,7 @@
 import {BubbleMenu, Editor, EditorContent} from "@tiptap/vue-3";
 import {StarterKit} from "@tiptap/starter-kit";
 import {Placeholder} from "@tiptap/extension-placeholder";
-import {onBeforeUnmount, onMounted} from "vue";
+import {onBeforeUnmount} from "vue";
 import {TextStyle} from "@tiptap/extension-text-style";
 import {Color} from "@tiptap/extension-color";
 import EditorMenu from "./EditorMenu.vue";
