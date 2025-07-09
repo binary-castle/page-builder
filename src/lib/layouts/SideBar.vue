@@ -42,7 +42,7 @@ const toggleSideItem = (key: keyof typeof sideItems.value): void => {
 
   <div class="bc-page-builder--blocks-sidebar">
 
-    <div class="bc-page-builder--blocks-sidebar--blocks" v-if="sideItems.tags">
+    <div class="bc-page-builder--blocks-sidebar--blocks" style="grid-template-columns: none" v-if="sideItems.tags">
       <MetaComponent></MetaComponent>
     </div>
 

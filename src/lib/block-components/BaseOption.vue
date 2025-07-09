@@ -43,7 +43,9 @@ const onDeleteItem = ($event: Event) => {
         </button>
       </div>
     </div>
-    <slot></slot>
+    <div style="max-height: calc(100vh - 150px); overflow-y: auto;" >
+      <slot></slot>
+    </div>
   </div>
 
   <div class="confirm-dialog" v-if="showDeletePopup">

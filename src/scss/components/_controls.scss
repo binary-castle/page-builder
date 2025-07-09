@@ -1,68 +1,177 @@
+// Modern Form Controls
 input,
 textarea,
 select {
   width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.35);
-  border-radius: 4px;
-  padding: 2px 7px;
-  font-size: 10px;
+  border: 1px solid $border-color;
+  border-radius: $radius-sm;
+  padding: $space-2 $space-3;
+  font-size: $font-size-sm;
+  font-family: $font-family;
+  background-color: $white;
+  color: $text-color;
+  transition: all $transition-base;
+  line-height: 1.5;
 
-  &:focus {
-    border-color: rgba(0, 0, 0, 0.55);
+  &::placeholder {
+    color: $text-color-light;
   }
 
-  /* Specific styling for input[type="color"] */
+  &:hover {
+    border-color: $border-color-hover;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $border-color-focus;
+    box-shadow: 0 0 0 3px rgba($primary-500, 0.1);
+  }
+
+  &:disabled {
+    background-color: $neutral-100;
+    border-color: $neutral-200;
+    color: $text-color-light;
+    cursor: not-allowed;
+  }
+
+  // Textarea specific
+  &[type="textarea"] {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  // Select specific
+  &[type="select"] {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right $space-2 center;
+    background-repeat: no-repeat;
+    background-size: 16px 12px;
+    padding-right: $space-8;
+    appearance: none;
+  }
+
+  // Number input specific
+  &[type="number"] {
+    -moz-appearance: textfield;
+    
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  // URL input specific
+  &[type="url"] {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: $font-size-xs;
+  }
+
+  // Color input styling
   &[type="color"] {
-    width: 30px; /* Adjust size */
-    height: 30px;
-    background-color: transparent;
-    border: 1px solid black;
-    border-radius: 6px;
-    padding: 0;
+    width: 44px;
+    height: 44px;
+    padding: $space-1;
+    background-color: $white;
+    border: 2px solid $border-color;
+    border-radius: $radius;
     cursor: pointer;
+    transition: all $transition-base;
 
     -webkit-appearance: none;
     appearance: none;
     outline: none;
 
     &::-webkit-color-swatch {
-      border-radius: 5px;
+      border-radius: calc($radius - 2px);
       border: none;
     }
 
     &::-webkit-color-swatch-wrapper {
       padding: 0;
+      border-radius: calc($radius - 2px);
     }
 
-    &:focus {
-      border-color: rgba(0, 0, 0, 0.55); /* Match focus style */
-      outline: none;
+    &::-moz-color-swatch {
+      border-radius: calc($radius - 2px);
+      border: none;
     }
 
     &:hover {
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Optional hover effect */
+      border-color: $border-color-hover;
+      transform: translateY(-1px);
+      box-shadow: $shadow;
+    }
+
+    &:focus {
+      border-color: $border-color-focus;
+      box-shadow: 0 0 0 3px rgba($primary-500, 0.1);
+      transform: translateY(-1px);
+    }
+
+    &:active {
+      transform: translateY(0);
     }
   }
 }
 
+// Enhanced Color Control Wrapper
 .color-control-wrapper {
   display: flex;
   align-items: center;
-  gap: 5px;
-
+  gap: $space-3;
+  
   .btn-reset {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
     outline: none;
-    background-color: transparent;
-    border: none;
-    transition: all 0.6s;
+    background-color: $neutral-100;
+    border: 1px solid $border-color;
+    border-radius: $radius-sm;
+    color: $text-color-light;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all $transition-base;
 
     &:hover {
-      color: $primary-color;
+      background-color: $neutral-200;
+      border-color: $border-color-hover;
+      color: $text-color;
       transform: rotate(-45deg);
     }
 
-    &:active {
-      transform: rotate(-145deg);
+    &:focus {
+      outline: none;
+      border-color: $border-color-focus;
+      box-shadow: 0 0 0 2px rgba($primary-500, 0.1);
     }
+
+    &:active {
+      transform: rotate(-145deg) scale(0.95);
+      background-color: $neutral-300;
+    }
+  }
+}
+
+// Form Groups and Labels
+.form-group {
+  margin-bottom: $space-4;
+
+  label {
+    display: block;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $text-color-dark;
+    margin-bottom: $space-2;
+  }
+
+  .help-text {
+    font-size: $font-size-xs;
+    color: $text-color-light;
+    margin-top: $space-1;
   }
 }

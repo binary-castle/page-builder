@@ -1,42 +1,332 @@
 @import "./icons/icomoon";
+
 // Import variables and mixins first
 @import './variables/colors';
 @import './mixins/utilities';
 @import "./mixins/reset";
 
-// Import layouts
+// Import component styles
 @import './components/button';
 @import './components/sidebar';
 @import './components/preview';
 @import "./components/controls";
 @import "./components/slider-toggle";
 
-// Import layout
+// Import layout styles
 @import './layout/builder';
 
-
-.tiptap {
-  padding: 15px;
-
-  outline: none;
-
-  p.is-editor-empty:first-child::before {
-    color: #adb5bd;
-    content: attr(data-placeholder);
-    float: left;
-    height: 0;
-    pointer-events: none;
+// Global base styles for the page builder
+.bc-page-builder {
+  // Reset and base typography
+  * {
+    box-sizing: border-box;
   }
 
-  p.is-empty::before {
-    color: #adb5bd;
-    content: attr(data-placeholder);
-    float: left;
-    height: 0;
-    pointer-events: none;
+  // Base typography
+  font-family: $font-family;
+  font-size: $font-size-base;
+  line-height: 1.5;
+  color: $text-color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  // Headings
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.25;
+    margin: 0 0 $space-4 0;
+    color: $text-color-dark;
+  }
+
+  h1 { font-size: $font-size-xl * 2; }
+  h2 { font-size: $font-size-xl * 1.5; }
+  h3 { font-size: $font-size-xl; }
+  h4 { font-size: $font-size-lg; }
+  h5 { font-size: $font-size-base; }
+  h6 { font-size: $font-size-sm; }
+
+  // Paragraphs and text
+  p {
+    margin: 0 0 $space-4 0;
+    line-height: 1.6;
+  }
+
+  // Links
+  a {
+    color: $primary-600;
+    text-decoration: none;
+    transition: color $transition-base;
+
+    &:hover {
+      color: $primary-700;
+      text-decoration: underline;
+    }
+
+    &:focus {
+      outline: none;
+      color: $primary-700;
+      text-decoration: underline;
+    }
+  }
+
+  // Lists
+  ul, ol {
+    margin: 0 0 $space-4 0;
+    padding-left: $space-6;
+  }
+
+  li {
+    margin-bottom: $space-1;
+  }
+
+  // Code
+  code {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: $font-size-sm;
+    background-color: $neutral-100;
+    color: $text-color-dark;
+    padding: $space-1 $space-2;
+    border-radius: $radius-sm;
+  }
+
+  pre {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: $font-size-sm;
+    background-color: $neutral-100;
+    color: $text-color-dark;
+    padding: $space-4;
+    border-radius: $radius;
+    overflow-x: auto;
+    margin: 0 0 $space-4 0;
+
+    code {
+      background: none;
+      padding: 0;
+      border-radius: 0;
+    }
+  }
+
+  // Form elements baseline
+  label {
+    font-weight: 500;
+    color: $text-color-dark;
+  }
+
+  // Selection styles
+  ::selection {
+    background-color: rgba($primary-500, 0.2);
+    color: $text-color-dark;
+  }
+
+  ::-moz-selection {
+    background-color: rgba($primary-500, 0.2);
+    color: $text-color-dark;
   }
 }
 
+// Rich text editor specific styles
+.tiptap {
+  padding: $space-4;
+  outline: none;
+  min-height: 100px;
+  border: 1px solid $border-color;
+  border-radius: $radius;
+  background-color: $white;
+  transition: all $transition-base;
+
+  &:focus {
+    border-color: $border-color-focus;
+    box-shadow: 0 0 0 3px rgba($primary-500, 0.1);
+  }
+
+  // Placeholder styling
+  p.is-editor-empty:first-child::before {
+    color: $text-color-light;
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+    font-style: italic;
+  }
+
+  p.is-empty::before {
+    color: $text-color-light;
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+    font-style: italic;
+  }
+
+  // Rich text content styling
+  h1, h2, h3, h4, h5, h6 {
+    margin: $space-4 0 $space-2 0;
+    
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  p {
+    margin: $space-2 0;
+    
+    &:first-child {
+      margin-top: 0;
+    }
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ul, ol {
+    padding-left: $space-6;
+    margin: $space-2 0;
+  }
+
+  li {
+    margin: $space-1 0;
+  }
+
+  blockquote {
+    border-left: 4px solid $primary-300;
+    padding-left: $space-4;
+    margin: $space-4 0;
+    font-style: italic;
+    color: $text-color-light;
+  }
+
+  strong {
+    font-weight: 600;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  // Text alignment
+  .has-text-align-left {
+    text-align: left;
+  }
+
+  .has-text-align-center {
+    text-align: center;
+  }
+
+  .has-text-align-right {
+    text-align: right;
+  }
+
+  .has-text-align-justify {
+    text-align: justify;
+  }
+}
+
+// Tooltip styling for better UX
 .tippy-box {
   max-width: 450px !important;
+  background-color: white !important;
+  padding: 0!important;
+  color: $white !important;
+  border-radius: $radius !important;
+  box-shadow: $shadow-lg !important;
+  font-size: $font-size-sm !important;
+  
+  .tippy-content {
+    padding: 0 !important;
+  }
+
+  .tippy-arrow {
+    color: $neutral-800 !important;
+  }
+}
+
+// Loading states
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid $primary-300;
+    border-top-color: $primary-600;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+// Animations
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Utility animations
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.3s ease-out;
+}
+
+// Focus management for accessibility
+.bc-page-builder {
+  &:focus-within {
+    // Enhanced focus styles when any element within has focus
+  }
+}
+
+// Print styles
+@media print {
+  .bc-page-builder {
+    &--main-sidebar,
+    &--blocks-sidebar {
+      display: none !important;
+    }
+
+    &--preview--header {
+      display: none !important;
+    }
+
+    &--preview--builder--options {
+      display: none !important;
+    }
+
+    &--preview--builder--drop-zone {
+      background: white !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+  }
 }

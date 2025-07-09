@@ -97,7 +97,10 @@ const dropDownMenus = ref({
 
   .bc-dropdown-button {
     position: relative;
-    padding: 7px 10px 0 10px;
+    padding: 0 10px 0 10px;
+    color: black;
+    display: flex;
+    align-items: center;
 
     .bc-pg-dropdown-items {
       position: absolute;

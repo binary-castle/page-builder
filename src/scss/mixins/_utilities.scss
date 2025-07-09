@@ -15,3 +15,200 @@
     border-color: $color;
   }
 }
+
+// Modern Utility Mixins and Classes
+
+// Flexbox utilities
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Focus states
+@mixin focus-ring($color: $primary-500) {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba($color, 0.1);
+  border-color: $color;
+}
+
+@mixin focus-ring-inset($color: $primary-500) {
+  outline: none;
+  box-shadow: inset 0 0 0 2px rgba($color, 0.2);
+}
+
+// Button states
+@mixin button-hover-lift {
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: $shadow;
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: $shadow-sm;
+  }
+}
+
+// Transitions
+@mixin smooth-transition($properties: all) {
+  transition: #{$properties} $transition-base;
+}
+
+// Scrollbar styling
+@mixin custom-scrollbar($width: 6px, $track-color: $neutral-100, $thumb-color: $neutral-300) {
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $track-color;
+    border-radius: calc($width / 2);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $thumb-color;
+    border-radius: calc($width / 2);
+    
+    &:hover {
+      background: darken($thumb-color, 10%);
+    }
+  }
+}
+
+// Card styling
+@mixin card {
+  background-color: $white;
+  border: 1px solid $border-color;
+  border-radius: $radius;
+  box-shadow: $shadow-sm;
+}
+
+@mixin card-hover {
+  @include card;
+  transition: all $transition-base;
+
+  &:hover {
+    border-color: $border-color-hover;
+    box-shadow: $shadow;
+    transform: translateY(-1px);
+  }
+}
+
+// Text utilities
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// Spacing utilities
+.space-y-1 > * + * { margin-top: $space-1; }
+.space-y-2 > * + * { margin-top: $space-2; }
+.space-y-3 > * + * { margin-top: $space-3; }
+.space-y-4 > * + * { margin-top: $space-4; }
+.space-y-6 > * + * { margin-top: $space-6; }
+
+.space-x-1 > * + * { margin-left: $space-1; }
+.space-x-2 > * + * { margin-left: $space-2; }
+.space-x-3 > * + * { margin-left: $space-3; }
+.space-x-4 > * + * { margin-left: $space-4; }
+
+// Display utilities
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-1 { gap: $space-1; }
+.gap-2 { gap: $space-2; }
+.gap-3 { gap: $space-3; }
+.gap-4 { gap: $space-4; }
+
+// Text utilities
+.text-xs { font-size: $font-size-xs; }
+.text-sm { font-size: $font-size-sm; }
+.text-base { font-size: $font-size-base; }
+.text-lg { font-size: $font-size-lg; }
+.text-xl { font-size: $font-size-xl; }
+
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+// Color utilities
+.text-primary { color: $primary-600; }
+.text-secondary { color: $text-color-light; }
+.text-muted { color: $text-color-light; }
+.text-dark { color: $text-color-dark; }
+
+.bg-primary { background-color: $primary-600; }
+.bg-primary-light { background-color: $primary-50; }
+.bg-white { background-color: $white; }
+.bg-neutral { background-color: $neutral-50; }
+
+// Border utilities
+.border { border: 1px solid $border-color; }
+.border-primary { border-color: $primary-500; }
+.border-dashed { border-style: dashed; }
+.rounded { border-radius: $radius; }
+.rounded-sm { border-radius: $radius-sm; }
+.rounded-md { border-radius: $radius-md; }
+.rounded-lg { border-radius: $radius-lg; }
+
+// Shadow utilities
+.shadow-sm { box-shadow: $shadow-sm; }
+.shadow { box-shadow: $shadow; }
+.shadow-md { box-shadow: $shadow-md; }
+.shadow-lg { box-shadow: $shadow-lg; }
+
+// Animation utilities
+.transition { transition: all $transition-base; }
+.transition-fast { transition: all $transition-fast; }
+.transition-slow { transition: all $transition-slow; }
+
+// Interactive states
+.hover-lift {
+  @include button-hover-lift;
+}
+
+.focus-ring {
+  &:focus {
+    @include focus-ring;
+  }
+}
+
+// Responsive utilities
+@mixin responsive($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+// Common breakpoints
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1024px;
+$large: 1200px;

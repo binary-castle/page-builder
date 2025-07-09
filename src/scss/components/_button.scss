@@ -1,29 +1,198 @@
+// Modern Button System
 .bc-button {
-  background-color: transparent;
-  border: 1px solid lighten($black, 80%);
-  padding: 5px 10px;
-  font-size: 14px;
-  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-2 $space-4;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  font-family: $font-family;
+  line-height: 1;
+  border-radius: $radius;
+  border: 1px solid $border-color;
+  background-color: $white;
+  color: $text-color;
+  cursor: pointer;
+  transition: all $transition-base;
+  text-decoration: none;
+  gap: $space-2;
+  white-space: nowrap;
+
+  &:hover {
+    background-color: $neutral-50;
+    border-color: $border-color-hover;
+    transform: translateY(-1px);
+    box-shadow: $shadow;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $border-color-focus;
+    box-shadow: 0 0 0 3px rgba($primary-500, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: $shadow-sm;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  // Size variants
+  &--sm {
+    padding: $space-1 $space-3;
+    font-size: $font-size-xs;
+  }
+
+  &--lg {
+    padding: $space-3 $space-6;
+    font-size: $font-size-base;
+  }
+
+  // Style variants
+  &--primary {
+    background-color: $primary-600;
+    border-color: $primary-600;
+    color: $white;
+
+    &:hover {
+      background-color: $primary-700;
+      border-color: $primary-700;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($primary-500, 0.2);
+    }
+  }
+
+  &--secondary {
+    background-color: $neutral-600;
+    border-color: $neutral-600;
+    color: $white;
+
+    &:hover {
+      background-color: $neutral-700;
+      border-color: $neutral-700;
+    }
+  }
+
+  &--success {
+    background-color: $success-600;
+    border-color: $success-600;
+    color: $white;
+
+    &:hover {
+      background-color: $success-700;
+      border-color: $success-700;
+    }
+  }
+
+  &--danger {
+    background-color: $danger-600;
+    border-color: $danger-600;
+    color: $white;
+
+    &:hover {
+      background-color: $danger-700;
+      border-color: $danger-700;
+    }
+  }
+
+  &--outline {
+    background-color: transparent;
+    border-color: $primary-600;
+    color: $primary-600;
+
+    &:hover {
+      background-color: $primary-50;
+      border-color: $primary-700;
+      color: $primary-700;
+    }
+  }
+
+  &--ghost {
+    background-color: transparent;
+    border-color: transparent;
+    color: $text-color;
+
+    &:hover {
+      background-color: $neutral-100;
+      border-color: $border-color;
+    }
+  }
+
+  // Icon handling
+  span[class*="icon-"] {
+    font-size: 1em;
+    line-height: 1;
+  }
 }
 
+// Button Groups
 .bc-button-group {
   display: inline-flex;
-  border: 1px solid lighten($black, 80%);
-  border-radius: 4px;
+  border-radius: $radius;
+  overflow: hidden;
+  border: 1px solid $border-color;
 
-  button {
-    background-color: transparent;
+  .bc-button {
+    border-radius: 0;
     border: none;
-    padding: 5px;
+    border-right: 1px solid $border-color;
+    margin: 0;
 
-    &:not(:last-child) {
-      border-right: 1px solid lighten($black, 80%);
+    &:last-child {
+      border-right: none;
+    }
+
+    &:first-child {
+      border-top-left-radius: calc($radius - 1px);
+      border-bottom-left-radius: calc($radius - 1px);
+    }
+
+    &:last-child {
+      border-top-right-radius: calc($radius - 1px);
+      border-bottom-right-radius: calc($radius - 1px);
     }
 
     &.active {
-      background-color: $primary-color;
-      border-color: $primary-color;
+      background-color: $primary-600;
       color: $white;
+      z-index: 1;
+
+      &:hover {
+        background-color: $primary-700;
+      }
     }
+  }
+}
+
+// Loading state
+.bc-button {
+  &--loading {
+    position: relative;
+    color: transparent !important;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border: 2px solid currentColor;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: button-spin 1s linear infinite;
+    }
+  }
+}
+
+@keyframes button-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
