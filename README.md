@@ -462,7 +462,6 @@ src/
 │   ├── layouts/             # Layout components
 │   ├── ui-components/       # UI component blocks
 │   ├── utils/               # Utilities and types
-│   ├── v2/                  # Modern UI components
 │   └── PageBuilder.vue      # Main component
 ├── scss/                    # SCSS styles
 └── main.ts                  # Entry point
