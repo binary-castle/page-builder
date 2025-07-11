@@ -108,6 +108,7 @@ export function usePageBuilder() {
     }
 
     const onItemSelect = (block: Block) => {
+        console.log('onItemSelect', block)
         selectedOptionComponent.value = block
     }
 

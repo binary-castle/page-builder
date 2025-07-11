@@ -15,7 +15,40 @@ export class ButtonBlock implements Block {
         backgroundColor: "#ffffff",
         backgroundImage: "",
         styleClass: "btn btn-primary",
-        styles: "font-size: 50px;",
+        styles: `
+font-size: 16px;
+font-weight: 600;
+border: none;
+border-radius: 8px;
+padding: 12px 24px;
+cursor: pointer;
+transition: all 0.2s ease;
+color: white;
+text-decoration: none;
+display: inline-block;
+text-align: center;
+line-height: 1.5;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+          
+&:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+}
+
+/* Active state */
+&:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+}
+
+/* Focus state for accessibility */
+&:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.5);
+}
+        `,
         buttonAlign: "left",
         buttonAction: {
             type: null,

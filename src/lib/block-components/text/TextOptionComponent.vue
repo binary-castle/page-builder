@@ -27,11 +27,12 @@ defineProps<Props>()
     </option-widget>
 
     <option-widget title="Background Image" align="vertical">
-      <input type="url" v-model="blockInfo.options.backgroundImage" placeholder="Apply Image URL">
+      <input type="url" class="bg-page-builder-input" v-model="blockInfo.options.backgroundImage"
+             placeholder="Apply Image URL">
     </option-widget>
 
     <option-widget title="CSS Class" align="vertical" :is-expandable="true">
-      <textarea v-model="blockInfo.options.cssClasses"></textarea>
+      <textarea class="bg-page-builder-input" v-model="blockInfo.options.cssClasses"></textarea>
     </option-widget>
 
     <option-widget title="Style" align="vertical" :is-expandable="true">

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {PageBuilder} from "./lib";
+import PageBuilderV2 from "./lib/PageBuilderV2.vue";
 // import RichTextEditor from "./lib/editors/RichTextEditor.vue";
 // import {registerBlock} from "./lib/utils/blocks/registry.ts";
 
@@ -12,8 +13,8 @@ const onSave = (value: any) => {
 
 <template>
   <!--  <RichTextEditor></RichTextEditor>-->
-  <PageBuilder css-url="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-               @onSave="onSave"></PageBuilder>
+  <PageBuilderV2
+               @onSave="onSave"></PageBuilderV2>
 </template>
 
 <style scoped>
