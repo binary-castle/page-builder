@@ -102,7 +102,7 @@ const filteredUIComponents = computed(() => {
                 <div class="bcpb:text-blue-600 group-hover:bcpb:text-blue-700 group-hover:bcpb:scale-110 bcpb:transition-all bcpb:duration-300" v-html="element.icon"></div>
               </div>
               <div class="bcpb:flex-1">
-                <p class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-blue-900 bcpb:transition-colors bcpb:duration-200">{{ element.name }}</p>
+                <p class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-blue-900 bcpb:transition-colors bcpb:duration-200">{{ element.title }}</p>
                 <p class="bcpb:text-xs bcpb:text-gray-500 group-hover:bcpb:text-blue-700 bcpb:transition-colors bcpb:duration-200">{{ element.description }} | {{
                     element.type
                   }}</p>
@@ -129,7 +129,7 @@ const filteredUIComponents = computed(() => {
                 </svg>
               </div>
               <div class="bcpb:flex-1">
-                <p class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-indigo-900 bcpb:transition-colors bcpb:duration-200">{{ element.name }}</p>
+                <p class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-indigo-900 bcpb:transition-colors bcpb:duration-200">{{ element.title }}</p>
                 <p class="bcpb:text-xs bcpb:text-gray-500 group-hover:bcpb:text-indigo-700 bcpb:transition-colors bcpb:duration-200">
                   {{ element.description }} | {{ element.type }}
                 </p>
@@ -155,7 +155,7 @@ const filteredUIComponents = computed(() => {
                 </svg>
               </div>
               <div class="bcpb:flex-1">
-                <p class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-teal-900 bcpb:transition-colors bcpb:duration-200">{{ element.name }}</p>
+                <p class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-900 group-hover:bcpb:text-teal-900 bcpb:transition-colors bcpb:duration-200">{{ element.title }}</p>
                 <p class="bcpb:text-xs bcpb:text-gray-500 group-hover:bcpb:text-teal-700 bcpb:transition-colors bcpb:duration-200">{{ element.description }}</p>
               </div>
             </div>
