@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import scss from "rollup-plugin-scss";
 import dts from 'vite-plugin-dts';
 import path from 'path';
+import tailwindcss from "@tailwindcss/vite";
 
 
 // https://vite.dev/config/
@@ -27,5 +28,5 @@ export default defineConfig({
             ]
         }
     },
-    plugins: [vue(), dts()]
+    plugins: [vue(), dts(), tailwindcss()]
 })

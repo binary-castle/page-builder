@@ -131,7 +131,7 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
   <BasePreview :inEditor="inEditor" :has-container="blockInfo.options.hasContainer"
                :background-image="blockInfo.options.backgroundImage"
                :background-color="blockInfo.options.backgroundColor">
-    <div class="row" :style="inEditor ? { minHeight: '200px', margin: '20px 0' } : {}">
+    <div class="bc--page-builder-row" :style="inEditor ? { minHeight: '200px', margin: '20px 0' } : {}">
       <div v-for="(index) in blockInfo.options.columns"
            :style="[
                blockInfo.options.columnStyles[index]?.styles,
@@ -163,6 +163,16 @@ const onDragStart = ($event: DragEvent, block: Block, columnIndex: number, block
 </template>
 
 <style scoped lang="scss">
+
+.bc--page-builder-row {
+  display: flex;
+}
+
+.bc--page-builder-row div {
+  width: 100%;
+}
+
+
 .column-item {
   min-height: 40px;
   border: none;

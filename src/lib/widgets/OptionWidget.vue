@@ -21,86 +21,78 @@ const toggleExpand = ($event: Event) => {
 </script>
 
 <template>
-  <div v-if="isExpanded" class="option-widget-backdrop" role="button" @click="toggleExpand"></div>
-  <div class="bc-page-builder-option-widget" :class="align">
-    <div class="bc-page-builder-option-widget-label">
-      {{ title }}
+  <!-- Backdrop for expanded state -->
+  <div
+      v-if="isExpanded"
+      class="bcpb:fixed bcpb:inset-0 bcpb:bg-black/40 bcpb:backdrop-blur-sm bcpb:z-40"
+      role="button"
+      @click="toggleExpand"
+  ></div>
 
-      <div class="expand-icon" role="button" @click="toggleExpand" v-if="isExpandable">
-        <i class="icon-arrows-angle-expand"></i>
+  <!-- Main Widget Container -->
+  <div
+      class="group bcpb:border-b bcpb:border-gray-100 last:bcpb:border-b-0 bcpb:transition-colors bcpb:duration-200 hover:bcpb:bg-gray-50/30"
+      :class="{
+      'bcpb:flex bcpb:items-start bcpb:justify-between bcpb:py-4 bcpb:px-1': align === 'horizontal',
+      'bcpb:flex bcpb:flex-col bcpb:space-y-3 bcpb:py-4 bcpb:px-1': align === 'vertical'
+    }"
+  >
+    <!-- Label Section -->
+    <div
+        class="bcpb:flex bcpb:items-center bcpb:justify-between bcpb:text-sm bcpb:font-medium bcpb:text-gray-700"
+        :class="{
+        'bcpb:w-2/5 bcpb:min-w-0': align === 'horizontal',
+        'bcpb:w-full': align === 'vertical'
+      }"
+    >
+      <span class="bcpb:truncate">{{ title }}</span>
+
+      <!-- Expand Icon -->
+      <button
+          v-if="isExpandable"
+          @click="toggleExpand"
+          class="bcpb:ml-2 bcpb:p-1 bcpb:text-gray-400 hover:bcpb:text-gray-600 hover:bcpb:bg-gray-100 bcpb:rounded bcpb:transition-colors bcpb:duration-200"
+          title="Expand"
+      >
+        <i class="icon-arrows-angle-expand bcpb:text-xs"></i>
+      </button>
+    </div>
+
+    <!-- Control Section -->
+    <div
+        class="bcpb:transition-all bcpb:duration-300 bcpb:ease-in-out"
+        :class="{
+        'bcpb:w-3/5 bcpb:min-w-0': align === 'horizontal' && !isExpanded,
+        'bcpb:w-full': align === 'vertical' && !isExpanded,
+        // Expanded state styles
+        'bcpb:fixed bcpb:left-1/2 bcpb:top-1/2 bcpb:-translate-x-1/2 bcpb:-translate-y-1/2 bcpb:w-[90vw] bcpb:max-w-4xl bcpb:max-h-[80vh] bcpb:bg-white bcpb:rounded-xl bcpb:shadow-2xl bcpb:border bcpb:border-gray-200 bcpb:z-50 bcpb:overflow-hidden': isExpanded
+      }"
+    >
+      <!-- Expanded Header (only shown when expanded) -->
+      <div v-if="isExpanded" class="bcpb:flex bcpb:items-center bcpb:justify-between bcpb:px-4 bcpb:border-b bcpb:border-gray-100 bcpb:bg-gray-50/50">
+        <h3 class="bcpb:text-lg bcpb:font-semibold bcpb:text-gray-900">{{ title }}</h3>
+        <button
+            @click="toggleExpand"
+            class="bcpb:p-2 bcpb:text-gray-400 hover:bcpb:text-gray-600 hover:bcpb:bg-gray-100 bcpb:rounded-lg bcpb:transition-colors bcpb:duration-200"
+            title="Close"
+        >
+          <i class="icon-x-lg bcpb:text-sm"></i>
+        </button>
       </div>
 
-    </div>
-    <div class="bc-page-builder-option-widget-control" :class="{'expanded': isExpanded}">
-      <slot></slot>
+      <!-- Content Container -->
+      <div
+          :class="{
+          'bcpb:p-1': !isExpanded,
+          'bcpb:p-4 bcpb:overflow-y-auto bcpb:max-h-[calc(80vh-80px)]': isExpanded
+        }"
+      >
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
 
-<style scoped lang="scss">
-.option-widget-backdrop {
-  background-color: #00000073;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
-.bc-page-builder-option-widget {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px 0;
-  border-bottom: 1px solid rgb(238, 238, 238);
-
-  &.vertical {
-    flex-direction: column;
-    align-items: stretch;
-
-    .bc-page-builder-option-widget-label {
-      width: 95%;
-    }
-
-    .bc-page-builder-option-widget-control {
-      padding: 10px;
-    }
-  }
-
-  &:last-child {
-    border-bottom: none;
-  }
-
-  &-label {
-    font-size: 13px;
-    font-weight: 500;
-    color: rgb(81, 81, 81);
-    padding-left: 5px;
-    width: 35%;
-    display: flex;
-    justify-content: space-between;
-
-    .expand-icon {
-      cursor: pointer;
-    }
-  }
-
-  &-control {
-    max-width: 100%;
-    padding-right: 5px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-
-    &.expanded {
-      position: fixed;
-      left: 20%;
-      width: 60%;
-      top: 10%;
-      bottom: 10%;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      z-index: 10;
-    }
-  }
-
-}
+<style scoped>
+/* Pure CSS only - no Tailwind utilities */
 </style>

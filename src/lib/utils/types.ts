@@ -2,7 +2,7 @@ export type VueComponent = {
     new(): import("vue").Component;
 }
 
-export type BlockType = 'element' | 'ui-component';
+export type BlockType = 'element' | 'ui-component' | 'layout';
 
 export interface Block {
     /**
