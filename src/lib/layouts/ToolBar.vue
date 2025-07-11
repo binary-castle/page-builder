@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref} from 'vue'
-import MetaComponent from "../layouts/components/MetaComponent.vue";
+import MetaComponent from "./components/MetaComponent.vue";
 
 defineProps({
   device: {

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {PageBuilder} from "./lib";
-import PageBuilderV2 from "./lib/PageBuilderV2.vue";
 // import RichTextEditor from "./lib/editors/RichTextEditor.vue";
 // import {registerBlock} from "./lib/utils/blocks/registry.ts";
 
@@ -13,8 +12,8 @@ const onSave = (value: any) => {
 
 <template>
   <!--  <RichTextEditor></RichTextEditor>-->
-  <PageBuilderV2
-               @onSave="onSave"></PageBuilderV2>
+  <PageBuilder
+               @onSave="onSave"></PageBuilder>
 </template>
 
 <style scoped>
