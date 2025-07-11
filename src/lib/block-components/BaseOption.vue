@@ -34,11 +34,9 @@ const onDeleteItem = ($event: Event) => {
         <button
             @click="closeOptionDrawer($event)"
             class="bcpb:p-2 bcpb:text-gray-400 hover:bcpb:text-gray-600 hover:bcpb:bg-gray-100 bcpb:rounded-md bcpb:transition-colors bcpb:duration-200"
-            title="Back"
+            title="Close"
         >
-          <svg class="bcpb:w-4 bcpb:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-          </svg>
+          <span class="icon-x-lg bcpb:text-sm"></span>
         </button>
         <h3 class="bcpb:text-md bcpb:font-semibold bcpb:text-gray-900 bcpb:truncate">
           {{ title }}
