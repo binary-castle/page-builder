@@ -29,7 +29,6 @@ const {
   meta,
   renderList,
   dragOverIndex,
-  dragOverDropZone,
   selectedOptionComponent,
   dragOverChildElement,
   onDrop,

@@ -9,7 +9,7 @@ interface Props {
   theme?: string;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   language: 'text/css',
   theme: 'dracula'
 })

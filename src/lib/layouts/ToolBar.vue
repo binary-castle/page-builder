@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from 'vue'
+import {PropType, ref} from 'vue'
 import MetaComponent from "./components/MetaComponent.vue";
 
 defineProps({
@@ -12,15 +12,6 @@ const emit = defineEmits(['onPreview', 'onSave', 'onBack', 'onDevice'])
 
 const showMetaModal = ref(false)
 
-const metaTags = ref({
-  title: '',
-  description: '',
-  keywords: '',
-  author: '',
-  robots: 'index, follow',
-  viewport: 'width=device-width, initial-scale=1.0'
-})
-
 const openMetaModal = () => {
   showMetaModal.value = true
 }
@@ -29,11 +20,6 @@ const closeMetaModal = () => {
   showMetaModal.value = false
 }
 
-const saveMetaTags = () => {
-  // Here you would typically emit the meta tags to the parent component
-  console.log('Saving meta tags:', metaTags.value)
-  closeMetaModal()
-}
 </script>
 
 <template>
