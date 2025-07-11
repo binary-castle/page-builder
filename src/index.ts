@@ -1,3 +1,3 @@
-import './scss/page-builder.scss'
+import './styles.css'
 
-export *  from "./lib"
+export * from "./lib"
