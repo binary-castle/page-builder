@@ -24,6 +24,7 @@
     "semantic-release": "semantic-release"
   },
   "dependencies": {
+    "@binarycastle/vue-html-editor": "^1.0.8",
     "@popperjs/core": "^2.11.8",
     "@tailwindcss/vite": "^4.1.11",
     "@tiptap/extension-color": "^2.10.4",

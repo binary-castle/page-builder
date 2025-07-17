@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import BasePreview from "../BasePreview.vue";
-import { HtmlBlock } from "../../utils/blocks/HtmlBlock.ts";
-import { onBeforeUnmount, onMounted, ref, watchEffect } from "vue";
+import {HtmlBlock} from "../../utils/blocks/HtmlBlock.ts";
+import {computed, onBeforeUnmount, onMounted, ref, watchEffect} from "vue";
+import {VHtmlEditor} from "@binarycastle/vue-html-editor"
+
+import '@binarycastle/vue-html-editor/dist/vue-html-editor.css'
 
 interface Props {
   blockInfo: HtmlBlock;
@@ -50,7 +53,9 @@ watchEffect(() => {
 
 <template>
   <BasePreview :inEditor="inEditor">
-    <div :class="instanceId" v-html="props.blockInfo.options.html"></div>
+    <VHtmlEditor v-if="inEditor" v-model="props.blockInfo.options.html"
+                 :css="props.blockInfo.options.css"></VHtmlEditor>
+    <div v-else :class="instanceId" v-html="props.blockInfo.options.html"></div>
   </BasePreview>
 </template>
 

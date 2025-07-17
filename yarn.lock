@@ -44,6 +44,13 @@
     "@babel/helper-string-parser" "^7.25.9"
     "@babel/helper-validator-identifier" "^7.25.9"
 
+"@binarycastle/vue-html-editor@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@binarycastle/vue-html-editor/-/vue-html-editor-1.0.8.tgz#08553632d3138552a64aa24d26177842228b5f68"
+  integrity sha512-LhfJWEM4m2f31Apd4KQsAJAqj2kbyOPrGmHQT4pf6qrG9m+dgu4u7R+4UpZkQ55f0qNTj1WHxUa5/aDf8Q6cSg==
+  dependencies:
+    "@popperjs/core" "^2.11.8"
+
 "@colors/colors@1.5.0":
   version "1.5.0"
   resolved "https://registry.npmjs.org/@colors/colors/-/colors-1.5.0.tgz"
