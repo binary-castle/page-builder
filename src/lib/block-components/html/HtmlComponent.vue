@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import BasePreview from "../BasePreview.vue";
 import {HtmlBlock} from "../../utils/blocks/HtmlBlock.ts";
-import {computed, onBeforeUnmount, onMounted, ref, watchEffect} from "vue";
+import {onBeforeUnmount, onMounted, ref, watchEffect} from "vue";
 import {VHtmlEditor} from "@binarycastle/vue-html-editor"
 
 import '@binarycastle/vue-html-editor/dist/vue-html-editor.css'
