@@ -6,6 +6,8 @@ import {onMounted, ref, watch} from "vue";
 import CodeMirrorEditor from "../../editors/CodeMirrorEditor.vue";
 import SliderToggle from "../../controls/SliderToggle.vue";
 import ColorInput from "../../controls/ColorInput.vue";
+import ResponsiveWidthControl from "../../controls/ResponsiveWidthControl.vue";
+import SpacingControl from "../../controls/SpacingControl.vue";
 
 interface Props {
   blockInfo: ColumnBlock
@@ -37,7 +39,12 @@ watch(
               styleClass: 'bc-page-builder-col',
               backgroundColor: '#ffffff',
               backgroundImage: '',
-              styles: 'padding: 10px'
+              styles: 'padding: 10px',
+              width: {
+                mobile: 'width-100',
+                tablet: 'width-100',
+                desktop: 'width-33'
+              }
             };
           }
         }
@@ -91,9 +98,121 @@ watch(
         </div>
       </option-widget>
 
+      <option-widget title="Container Width" align="vertical">
+        <ResponsiveWidthControl 
+          v-model="blockInfo.options.containerWidth"
+          title="Container Width"
+        />
+      </option-widget>
+
+      <option-widget title="Container Alignment" align="vertical">
+        <div class="bcpb:space-y-3">
+          <div class="bcpb:flex bcpb:items-center bcpb:justify-between">
+            <h4 class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-700">Alignment</h4>
+            
+            <!-- Breakpoint Tabs -->
+            <div class="bcpb:flex bcpb:bg-gray-100 bcpb:rounded-lg bcpb:p-1">
+              <button
+                v-for="breakpoint in (['mobile', 'tablet', 'desktop'] as const)"
+                :key="breakpoint"
+                class="bcpb:px-3 bcpb:py-1 bcpb:text-xs bcpb:font-medium bcpb:rounded-md bcpb:transition-colors bcpb:duration-200"
+                :class="{
+                  'bcpb:bg-white bcpb:text-gray-900 bcpb:shadow-sm': true,
+                  'bcpb:text-gray-600 hover:bcpb:text-gray-900': false
+                }"
+              >
+                {{ breakpoint.charAt(0).toUpperCase() + breakpoint.slice(1) }}
+              </button>
+            </div>
+          </div>
+
+          <!-- Alignment Options -->
+          <div class="bcpb:grid bcpb:grid-cols-3 bcpb:gap-2">
+            <button
+              v-for="alignment in ['margin-auto', 'margin-left-auto', 'margin-right-auto']"
+              :key="alignment"
+              @click="blockInfo.options.containerAlignment.desktop = alignment"
+              class="bcpb:px-3 bcpb:py-2 bcpb:text-xs bcpb:font-medium bcpb:rounded-md bcpb:border bcpb:transition-colors bcpb:duration-200"
+              :class="{
+                'bcpb:bg-blue-600 bcpb:text-white bcpb:border-blue-600': blockInfo.options.containerAlignment.desktop === alignment,
+                'bcpb:bg-white bcpb:text-gray-700 bcpb:border-gray-300 hover:bcpb:bg-gray-50 hover:bcpb:border-gray-400': blockInfo.options.containerAlignment.desktop !== alignment
+              }"
+            >
+              {{ alignment === 'margin-auto' ? 'Center' : alignment === 'margin-left-auto' ? 'Right' : 'Left' }}
+            </button>
+          </div>
+        </div>
+      </option-widget>
+
+      <option-widget title="Row Spacing" align="vertical">
+        <SpacingControl 
+          v-model="blockInfo.options.rowSpacing"
+          title="Row Spacing"
+          type="space-x"
+        />
+      </option-widget>
+
       <option-widget title="Styles" align="vertical" :is-expandable="true">
         <CodeMirrorEditor v-model="blockInfo.options.styles"></CodeMirrorEditor>
       </option-widget>
+    </div>
+
+    <!-- Responsive Behavior Settings -->
+    <div class="bcpb:mt-6 bcpb:border-t bcpb:border-gray-100 bcpb:pt-4">
+      <h3 class="bcpb:text-lg bcpb:font-semibold bcpb:text-gray-900 bcpb:mb-4">Responsive Behavior</h3>
+      
+      <div class="bcpb:space-y-4">
+        <!-- Mobile Settings -->
+        <div class="bcpb:space-y-3">
+          <h4 class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-700">Mobile (Default: Stack)</h4>
+          <div class="bcpb:grid bcpb:grid-cols-1 bcpb:gap-3">
+            <div>
+              <label class="bcpb:block bcpb:text-xs bcpb:font-medium bcpb:text-gray-600 bcpb:mb-1">Behavior</label>
+              <select 
+                v-model="blockInfo.options.columnResponsive.mobile.behavior"
+                class="bcpb:w-full bcpb:px-3 bcpb:py-2 bcpb:text-sm bcpb:border bcpb:border-gray-300 bcpb:rounded-md"
+              >
+                <option value="stack">Stack (Single Column)</option>
+                <option value="grid">Grid ({{ blockInfo.options.columns }} Columns)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tablet Settings -->
+        <div class="bcpb:space-y-3">
+          <h4 class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-700">Tablet</h4>
+          <div class="bcpb:grid bcpb:grid-cols-1 bcpb:gap-3">
+            <div>
+              <label class="bcpb:block bcpb:text-xs bcpb:font-medium bcpb:text-gray-600 bcpb:mb-1">Behavior</label>
+              <select 
+                v-model="blockInfo.options.columnResponsive.tablet.behavior"
+                class="bcpb:w-full bcpb:px-3 bcpb:py-2 bcpb:text-sm bcpb:border bcpb:border-gray-300 bcpb:rounded-md"
+              >
+                <option value="stack">Stack (Single Column)</option>
+                <option value="grid">Grid ({{ blockInfo.options.columns }} Columns)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop Settings -->
+        <div class="bcpb:space-y-3">
+          <h4 class="bcpb:text-sm bcpb:font-medium bcpb:text-gray-700">Desktop</h4>
+          <div class="bcpb:grid bcpb:grid-cols-1 bcpb:gap-3">
+            <div>
+              <label class="bcpb:block bcpb:text-xs bcpb:font-medium bcpb:text-gray-600 bcpb:mb-1">Behavior</label>
+              <select 
+                v-model="blockInfo.options.columnResponsive.desktop.behavior"
+                class="bcpb:w-full bcpb:px-3 bcpb:py-2 bcpb:text-sm bcpb:border bcpb:border-gray-300 bcpb:rounded-md"
+              >
+                <option value="stack">Stack (Single Column)</option>
+                <option value="grid">Grid ({{ blockInfo.options.columns }} Columns)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Column Tabs -->
@@ -140,6 +259,13 @@ watch(
           v-model="blockInfo.options.columnStyles[selectedColumn].backgroundImage"
           class="bg-page-builder-input"
         >
+      </option-widget>
+
+      <option-widget title="Column Width" align="vertical">
+        <ResponsiveWidthControl 
+          v-model="blockInfo.options.columnStyles[selectedColumn].width"
+          title="Column Width"
+        />
       </option-widget>
       
       <option-widget title="Style" align="vertical" :is-expandable="true">

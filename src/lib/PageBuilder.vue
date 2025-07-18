@@ -168,18 +168,32 @@ const devices: Record<'desktop' | 'tab' | 'mobile', string> = {
               @dragover.prevent="onDragOver($event)"
               class="drop-zone bcpb:min-h-[700px] bcpb:border-2 bcpb:border-dashed bcpb:border-gray-200 bcpb:rounded-xl bcpb:bg-gradient-to-br bcpb:from-blue-50/30 bcpb:via-white bcpb:to-purple-50/20 bcpb:relative bcpb:overflow-hidden bcpb:transition-all bcpb:duration-300 hover:bcpb:border-gray-300 hover:bcpb:bg-gradient-to-br hover:bcpb:from-blue-50/40 hover:bcpb:to-purple-50/30">
 
-            <div v-for="(block, index) of renderList" draggable="true" :key="`r_item_${index}`"
-                 @dragover="onDragOverItem($event, index)"
-                 @dragstart="startDragItem($event, block, index)">
+            <div v-for="(block, index) of renderList" :key="`r_item_${index}`"
+                 @dragover="onDragOverItem($event, index)">
               <div :class="{'drag-over': dragOverIndex == index && !dragOverChildElement}">
               </div>
-              <component :is="previewComponentMap[block.name]"
-                         :blockInfo="block"
-                         :inEditor="true"
-                         @onSelectChildElement="onSelectFormChildElement"
-                         @onDragOverChildElement="onDragOverChildElement"
-                         @onDropChildElement="onDropChildElement"
-                         @click="onItemSelect(block)"></component>
+              
+              <!-- Drag Handle Button -->
+              <div class="bcpb:relative bcpb:group">
+                <button
+                    @dragstart="startDragItem($event, block, index)"
+                    class="drag-handle bcpb:absolute bcpb:top-2 bcpb:right-2 bcpb:z-50 bcpb:w-8 bcpb:h-8 bcpb:bg-white bcpb:border bcpb:border-gray-300 bcpb:rounded-md bcpb:shadow-sm bcpb:flex bcpb:items-center bcpb:justify-center bcpb:opacity-0 bcpb:group-hover:opacity-100 bcpb:transition-all bcpb:duration-200 hover:bcpb:bg-gray-50 hover:bcpb:border-gray-400 hover:bcpb:shadow-md bcpb:cursor-grab active:bcpb:cursor-grabbing"
+                    title="Drag to reorder"
+                    draggable="true"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bcpb:text-gray-500" viewBox="0 0 16 16">
+                    <path d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M7 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+                  </svg>
+                </button>
+                
+                <component :is="previewComponentMap[block.name]"
+                           :blockInfo="block"
+                           :inEditor="true"
+                           @onSelectChildElement="onSelectFormChildElement"
+                           @onDragOverChildElement="onDragOverChildElement"
+                           @onDropChildElement="onDropChildElement"
+                           @click="onItemSelect(block)"></component>
+              </div>
             </div>
 
             <!-- Enhanced No Item State -->
@@ -306,6 +320,26 @@ const devices: Record<'desktop' | 'tab' | 'mobile', string> = {
 .preview-close-button {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+}
+
+/* Drag Handle Styles */
+.drag-handle {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.drag-handle:hover {
+  transform: scale(1.05);
+}
+
+.drag-handle:active {
+  transform: scale(0.95);
+}
+
+/* Show drag handle when component is selected */
+.group:hover .drag-handle,
+.group:focus-within .drag-handle {
+  opacity: 1 !important;
 }
 
 /* Floating Action Bar Animation */

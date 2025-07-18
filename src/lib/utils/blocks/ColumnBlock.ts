@@ -15,24 +15,69 @@ export class ColumnBlock implements Block {
         backgroundImage: '',
         styleClass: '',
         styles: '',
+        // Container width controls - using pure CSS
+        containerWidth: {
+            mobile: 'width-100',
+            tablet: 'width-100',
+            desktop: 'max-width-1200'
+        },
+        containerAlignment: {
+            mobile: 'margin-auto',
+            tablet: 'margin-auto', 
+            desktop: 'margin-auto'
+        },
+        // Row spacing controls - using pure CSS
+        rowSpacing: {
+            mobile: 'gap-16',
+            tablet: 'gap-16',
+            desktop: 'gap-16'
+        },
+        // Column responsive settings
+        columnResponsive: {
+            mobile: {
+                behavior: 'stack' // 'stack' or 'grid'
+            },
+            tablet: {
+                behavior: 'grid'
+            },
+            desktop: {
+                behavior: 'grid'
+            }
+        },
         columnStyles: {
             1: {
                 styleClass: 'col',
                 backgroundColor: '#ffffff',
                 backgroundImage: '',
-                styles: 'padding: 10px'
+                styles: 'padding: 10px',
+                // Individual column width controls - using pure CSS
+                width: {
+                    mobile: 'width-100',
+                    tablet: 'width-100',
+                    desktop: 'width-33'
+                }
             },
             2: {
                 styleClass: 'col',
                 backgroundColor: '#ffffff',
                 backgroundImage: '',
-                styles: 'padding: 10px'
+                styles: 'padding: 10px',
+                width: {
+                    mobile: 'width-100',
+                    tablet: 'width-100', 
+                    desktop: 'width-33'
+                }
             },
             3: {
                 styleClass: 'col',
                 backgroundColor: '#ffffff',
                 backgroundImage: '',
-                styles: 'padding: 10px'
+                styles: 'padding: 10px',
+                width: {
+                    mobile: 'width-100',
+                    tablet: 'width-100',
+                    desktop: 'width-33'
+                }
             }
         }
     }

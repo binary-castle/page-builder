@@ -85,10 +85,14 @@ export function usePageBuilder() {
         dragOverIndex.value = null;
     }
 
-    const startDragItem = ($event: DragEvent, item: Block, index: number) => {
+    const startDragItem = ($event: DragEvent | MouseEvent | TouchEvent, item: Block, index: number) => {
         innerDragElement.value = item
         innerDragElementIndex.value = index
-        $event.dataTransfer?.setData('text/plain', JSON.stringify(item));
+        
+        // Only set dataTransfer for DragEvent
+        if ('dataTransfer' in $event && $event.dataTransfer) {
+            $event.dataTransfer.setData('text/plain', JSON.stringify(item));
+        }
     }
 
     const onDragOverItem = ($event: DragEvent, index: number) => {
