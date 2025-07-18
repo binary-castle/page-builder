@@ -54,6 +54,7 @@ watchEffect(() => {
 <template>
   <BasePreview :inEditor="inEditor">
     <VHtmlEditor v-if="inEditor" v-model="props.blockInfo.options.html"
+                 :no-editor-classes="true"
                  :css="props.blockInfo.options.css"></VHtmlEditor>
     <div v-else :class="instanceId" v-html="props.blockInfo.options.html"></div>
   </BasePreview>

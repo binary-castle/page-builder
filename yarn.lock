@@ -44,10 +44,10 @@
     "@babel/helper-string-parser" "^7.25.9"
     "@babel/helper-validator-identifier" "^7.25.9"
 
-"@binarycastle/vue-html-editor@^1.0.9":
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/@binarycastle/vue-html-editor/-/vue-html-editor-1.0.9.tgz#0d3e13e7e935caef23ca78427c684e8b6bc6ed74"
-  integrity sha512-5SGUdwqOAFD2BzlvkHDNalpCNW4h/LyqnLLb5rhdmh1XEu7DyxBRC1BuxlHGG1aiS9Y8gXbtPAzP7dabglnbaA==
+"@binarycastle/vue-html-editor@^1.0.10":
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/@binarycastle/vue-html-editor/-/vue-html-editor-1.0.10.tgz#588a7c933200a16d4fab339ae1e1716ef49547e1"
+  integrity sha512-2Y+Tjdyz64fgT+P33jdaeZvixTrDKnMrqlqjVQX5lTEHFqk7yK+73tSZ3ePwrb+qMlVvd1i/LKysw3bS88epIg==
   dependencies:
     "@popperjs/core" "^2.11.8"
 
